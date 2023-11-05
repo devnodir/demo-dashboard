@@ -4,16 +4,13 @@ const { Content } = Layout;
 
 export default styled(Content)`
     background-color: #fafafa;
-    position: relative;
-    padding-bottom: 52px;
     overflow-y: auto;
+    display: grid;
+    grid-template-rows: 1fr 52px;
     .footer {
-        height: 52px;
         display: flex;
         align-items: center;
         justify-content: center;
-        position: absolute;
-        bottom: 0;
         width: 100%;
         opacity: 0.6;
     }
