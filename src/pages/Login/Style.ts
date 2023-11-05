@@ -1,16 +1,18 @@
 import styled from "styled-components";
 
 export default styled.div`
-    height: 100vh;
     display: grid;
     grid-template-columns: 1fr 500px;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    height: 100vh;
     .login {
         &-content {
-            width: 100%;
             max-width: 380px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             margin-bottom: 100px;
             &-logo {
                 display: flex;
@@ -32,14 +34,7 @@ export default styled.div`
         &-desc {
             display: flex;
             justify-content: center;
-            width: 100%;
-            height: 800px;
-            &-anim {
-                height: 100%;
-                svg {
-                    height: 100%;
-                }
-            }
+            height: 100vh;
         }
     }
 `;
