@@ -1,8 +1,10 @@
 {
-  "name": "antd-demo",
+  "name": "demo-dashboard",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "author": "Nodirbek Abdunazarov",
+  "description": "Powered by DEVNODIR",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
