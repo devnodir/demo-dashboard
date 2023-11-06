@@ -1,13 +1,12 @@
 import React, { Fragment, useEffect, useRef } from 'react'
 import StyleWrapper from './Style'
-import { Button, Input, Modal, Space, theme } from 'antd';
+import { Button, Input, Modal, Space } from 'antd';
 import { BsSearch } from "react-icons/bs"
 import useToggleState from '@/hooks/useToggleState';
 
 
 const HeadSearch: React.FC = () => {
 
-	const { token } = theme.useToken();
 	const [isOpen, toggle] = useToggleState(false)
 
 	const inputRef = useRef<any>(null)
@@ -18,9 +17,10 @@ const HeadSearch: React.FC = () => {
 		}, 0)
 	}, [isOpen])
 
+
 	return (
 		<Fragment>
-			<StyleWrapper token={token} className='search-button'>
+			<StyleWrapper className='search-button'>
 				<div className='keyboard' onClick={toggle}>
 					<BsSearch />
 					<div>
@@ -29,7 +29,7 @@ const HeadSearch: React.FC = () => {
 				</div>
 			</StyleWrapper>
 			<Modal open={isOpen} onCancel={toggle} footer={null} closeIcon={null} width={600} destroyOnClose>
-				<StyleWrapper token={token}>
+				<StyleWrapper>
 					<Space.Compact className='search-wrapper'>
 						<Input size="large" ref={inputRef} />
 						<Button type="primary" size="large">

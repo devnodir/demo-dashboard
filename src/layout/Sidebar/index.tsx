@@ -1,5 +1,5 @@
 import React from 'react'
-import { Menu, theme } from 'antd';
+import { Menu } from 'antd';
 import StyleWrapper from "./Style"
 import items from '@/routes/navItems'
 import useActivePath from '@/hooks/useActivePath';
@@ -10,11 +10,10 @@ const Sidebar: React.FC = () => {
 
 	const navigate = useNavigate()
 	const { active } = useActivePath(items)
-	const { token } = theme.useToken();
 
 
 	return (
-		<StyleWrapper token={token} width={120}>
+		<StyleWrapper width={120}>
 			<Menu
 				mode="inline"
 				items={items}

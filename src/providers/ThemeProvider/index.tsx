@@ -9,8 +9,6 @@ interface IProps {
 	children: IChildren
 }
 
-
-
 const ThemeProvider: React.FC<IProps> = ({ children }) => {
 
 	return (

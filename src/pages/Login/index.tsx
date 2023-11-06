@@ -35,6 +35,7 @@ const Login: React.FC = () => {
 	}
 
 	const submit = (data: IFormData) => {
+		setIsAuth(true)
 		mutateAsync(parseForm(data), {
 			onSuccess: (res: any) => {
 				console.log(res);
@@ -62,7 +63,6 @@ const Login: React.FC = () => {
 				</div>
 				<form onSubmit={handleSubmit(submit)} className="login-form">
 					<TextField
-						wrapperClass='login-form-item'
 						label='Phone number'
 						name="phone_number"
 						control={control}
@@ -71,10 +71,9 @@ const Login: React.FC = () => {
 						validation={PHONE_VALIDATE}
 					/>
 					<TextField
-						wrapperClass='login-form-item'
 						label='Password'
 						autoComplete="off"
-						name='password'
+						name="password"
 						isPassword
 						control={control}
 						addonBefore={<FaLock />}
@@ -83,7 +82,7 @@ const Login: React.FC = () => {
 						iconRender={(visible) => (visible ? <FaEye /> : <FaEyeSlash />)}
 
 					/>
-					<Button loading={isLoading} className='login-form-button' htmlType="submit" block size="large" type="primary" onClick={() => setIsAuth(true)}>SUBMIT</Button>
+					<Button loading={isLoading} className='login-form-button' htmlType="submit" block size="large" type="primary">SUBMIT</Button>
 				</form>
 			</div>
 		</StyleWrapper>

@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import { Layout, ThemeConfig } from "antd";
+import { Layout } from "antd";
+import { getToken } from "@/utils/theme";
 const { Sider } = Layout;
 
-export default styled(Sider)<{ token: ThemeConfig["token"] }>`
-    background-color: ${(p) => p.token?.colorBgLayout} !important;
+export default styled(Sider)`
+    background-color: ${getToken()?.colorBgLayout} !important;
     overflow: auto;
     .ant-menu {
         height: 100%;
@@ -22,7 +23,7 @@ export default styled(Sider)<{ token: ThemeConfig["token"] }>`
                 height: 0%;
                 top: 50%;
                 width: 6px;
-                background-color: ${(p) => p.token?.colorPrimary};
+                background-color: ${getToken()?.colorPrimary};
                 left: -3px;
                 transform: translateY(-50%);
                 transition: 0.3s ease;

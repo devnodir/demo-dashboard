@@ -1,7 +1,7 @@
-import { ThemeConfig } from "antd";
+import { getToken } from "@/utils/theme";
 import styled from "styled-components";
 
-export default styled.div<{ token: ThemeConfig["token"] }>`
+export default styled.div`
     &.search-button {
         position: relative;
         display: flex;
@@ -9,14 +9,14 @@ export default styled.div<{ token: ThemeConfig["token"] }>`
         user-select: none;
         cursor: pointer;
         width: 200px;
-        border: 1px solid ${(p) => p.token?.colorBorder};
+        border: 1px solid ${getToken()?.colorBorder};
         height: 36px;
         font-size: 16px;
-        border-radius: ${(p) => p.token?.borderRadius}px;
+        border-radius: ${getToken()?.borderRadius}px;
         transition: 0.2s ease;
         &:hover,
         &:active {
-            border-color: ${(p) => p.token?.colorPrimary};
+            border-color: ${getToken()?.colorPrimary};
         }
     }
     .keyboard {

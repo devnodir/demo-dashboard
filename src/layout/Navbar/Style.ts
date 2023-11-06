@@ -1,14 +1,12 @@
 import styled from "styled-components";
-import { Layout, ThemeConfig } from "antd";
+import { Layout } from "antd";
+import { getToken } from "@/utils/theme";
 const { Header } = Layout;
 
-export default styled(Header)<{
-    token: ThemeConfig["token"];
-    collapsed: boolean;
-}>`
+export default styled(Header)`
     padding: 0;
-    border-bottom: 1px solid ${(p) => p.token?.colorBorderSecondary};
-    background-color: ${(p) => p.token?.colorBgLayout};
+    border-bottom: 1px solid ${getToken()?.colorBorderSecondary};
+    background-color: ${getToken()?.colorBgLayout};
     box-shadow: 0 0 4px 4px rgb(0 0 0 / 2%);
     z-index: 111;
     display: grid;
@@ -29,11 +27,10 @@ export default styled(Header)<{
         justify-content: space-between;
         padding: 0 16px;
         .toggle {
-            background-color: ${(p) => p.token?.colorPrimaryBg};
-            color: ${(p) => p.token?.colorPrimary};
-            border-color: ${(p) => p.token?.colorPrimaryBg};
+            background-color: ${getToken()?.colorPrimaryBg};
+            color: ${getToken()?.colorPrimary};
+            border-color: ${getToken()?.colorPrimaryBg};
             svg {
-                transform: rotateY(${(p) => (p.collapsed ? "180deg" : "0deg")});
                 transition: 0.3s ease;
             }
         }
@@ -75,7 +72,7 @@ export default styled(Header)<{
                 &-img {
                     height: 42px;
                     width: 42px;
-                    background-color: ${(p) => p.token?.colorBorderSecondary};
+                    background-color: ${getToken()?.colorBorderSecondary};
                     border-radius: 50%;
                     display: flex;
                     align-items: center;
@@ -93,8 +90,8 @@ export default styled(Header)<{
                     span {
                         &:last-child {
                             position: relative;
-                            background-color: ${(p) => p.token?.green2};
-                            color: ${(p) => p.token?.green};
+                            background-color: ${getToken()?.green2};
+                            color: ${getToken()?.green};
                             padding: 0 6px;
                             border-radius: 6px;
                             opacity: 0.7;

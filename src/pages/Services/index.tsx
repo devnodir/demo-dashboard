@@ -1,19 +1,25 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import Table from '@/components/Table'
 import Box from '@/styles/Box'
 import TopBtns from '@/styles/TopBtns'
-import { Button } from 'antd'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { PlusOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 import MyCalendar from '@/components/MyCalendar'
+import Button from '@/components/form/Button';
+import { Drawer } from 'antd';
+import useToggleState from '@/hooks/useToggleState';
 
 const Services: React.FC = () => {
+
+	const [isOpen, toggle] = useToggleState(false)
+
 	return (
-		<div>
+		<Fragment>
 			<TopBtns>
 				<Button type="text" icon={<ArrowLeftOutlined />}>
 					Back
 				</Button>
-				<Button type="primary" icon={<PlusOutlined />}>
+				<Button type="primary" color="green6" icon={<PlusOutlined />} onClick={toggle}>
 					Create
 				</Button>
 			</TopBtns>
@@ -23,7 +29,10 @@ const Services: React.FC = () => {
 			<Box>
 				<MyCalendar />
 			</Box>
-		</div>
+			<Drawer title="Form" open={isOpen} onClose={toggle} width={600}>
+
+			</Drawer>
+		</Fragment>
 	)
 }
 

@@ -2,16 +2,19 @@ import FullScreenHandler from '@/components/shared/FullScreenHandler';
 import HeadSearch from '@/components/shared/HeadSearch';
 import LangSelect from '@/components/shared/LangSelect';
 import Notifications from '@/components/shared/Notifications';
-import { Dropdown, MenuProps, Typography, theme } from 'antd';
+import { Dropdown, MenuProps, Typography } from 'antd';
 import React from 'react';
 import { BsArrowLeftSquareFill, BsGearWide } from "react-icons/bs";
 import { FaUser } from "react-icons/fa6";
 import StyleWrapper from './Style';
+import { getToken } from '@/utils/theme';
 
 const Navbar: React.FC = () => {
-	const { token } = theme.useToken();
+
+	console.log(getToken()?.colorBorderSecondary);
+
 	return (
-		<StyleWrapper token={token} collapsed={false}>
+		<StyleWrapper>
 			<div className='logo'>
 				<img src='/logo.svg' alt='logo' />
 			</div>

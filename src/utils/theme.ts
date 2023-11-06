@@ -1,4 +1,4 @@
-import { ThemeConfig } from "antd";
+import { ThemeConfig, theme as antTheme } from "antd";
 
 export const theme: ThemeConfig = {
     token: {
@@ -17,3 +17,5 @@ export const theme: ThemeConfig = {
         },
     },
 };
+
+export const getToken = () => antTheme.getDesignToken(theme);
