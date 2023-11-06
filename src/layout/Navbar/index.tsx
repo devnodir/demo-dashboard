@@ -1,10 +1,12 @@
-import React from 'react'
-import { Dropdown, MenuProps, Typography, theme } from 'antd';
-import StyleWrapper from './Style';
+import FullScreenHandler from '@/components/shared/FullScreenHandler';
 import HeadSearch from '@/components/shared/HeadSearch';
-import { FaUser, FaBell, FaExpand } from "react-icons/fa6"
-import { BsGearWide, BsArrowLeftSquareFill } from "react-icons/bs"
 import LangSelect from '@/components/shared/LangSelect';
+import Notifications from '@/components/shared/Notifications';
+import { Dropdown, MenuProps, Typography, theme } from 'antd';
+import React from 'react';
+import { BsArrowLeftSquareFill, BsGearWide } from "react-icons/bs";
+import { FaUser } from "react-icons/fa6";
+import StyleWrapper from './Style';
 
 const Navbar: React.FC = () => {
 	const { token } = theme.useToken();
@@ -19,12 +21,8 @@ const Navbar: React.FC = () => {
 				</div>
 				<div className="content-right">
 					<div className="buttons">
-						<button>
-							<FaExpand />
-						</button>
-						<button>
-							<FaBell />
-						</button>
+						<FullScreenHandler />
+						<Notifications />
 						<LangSelect />
 					</div>
 					<UserMenu />

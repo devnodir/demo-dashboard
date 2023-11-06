@@ -6,7 +6,7 @@ import { Dropdown, MenuProps } from 'antd'
 
 const LangSelect: React.FC = () => {
 
-	const [lang, setLang] = useState<any>("ru")
+	const [lang, setLang] = useState<any>("uz")
 
 
 	const items: MenuProps["items"] = [

@@ -65,6 +65,7 @@ export default styled(Header)<{
                     }
                     svg {
                         opacity: 0.8;
+                        font-size: 18px;
                     }
                 }
             }
