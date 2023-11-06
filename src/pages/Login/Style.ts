@@ -12,8 +12,8 @@ export default styled.div`
             display: flex;
             flex-direction: column;
             justify-content: center;
-            margin-bottom: 100px;
             align-items: center;
+            transform: translateY(-10%);
             &-logo {
                 display: flex;
                 justify-content: center;
