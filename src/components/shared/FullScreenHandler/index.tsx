@@ -1,8 +1,13 @@
+import useWindowListener from '@/hooks/useWindowListener'
 import React, { useState } from 'react'
-import { FaExpand, FaCompress } from 'react-icons/fa6'
+import { FaCompress, FaExpand } from 'react-icons/fa6'
 
 const FullScreenHandler: React.FC = () => {
 	const [isFull, setFull] = useState<boolean>(false)
+
+	useWindowListener("fullscreenchange", () => {
+		setFull(Boolean(document.fullscreenElement))
+	})
 
 	const toggle = () => {
 		if (isFull) {

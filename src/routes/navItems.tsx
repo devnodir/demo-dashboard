@@ -7,7 +7,7 @@ const items: MenuItem[] = [
 	{
 		label: "Cabinet",
 		key: "/cabinet",
-		icon: <FaIdCard />
+		icon: <FaIdCard />,
 	},
 	{
 		label: "Services",

@@ -7,11 +7,8 @@ import React from 'react';
 import { BsArrowLeftSquareFill, BsGearWide } from "react-icons/bs";
 import { FaUser } from "react-icons/fa6";
 import StyleWrapper from './Style';
-import { getToken } from '@/utils/theme';
 
 const Navbar: React.FC = () => {
-
-	console.log(getToken()?.colorBorderSecondary);
 
 	return (
 		<StyleWrapper>
