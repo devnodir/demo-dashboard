@@ -8,7 +8,7 @@ type State = {
 
 // initial values of reducer
 const initialState: State = {
-    isAuth: true,
+    isAuth: false,
     userData: null,
 };
 
