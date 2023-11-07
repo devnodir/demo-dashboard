@@ -9,7 +9,7 @@ interface IProps {
 	children: IChildren
 }
 
-const FormElementWrapper: React.FC<IProps> = ({ label, error, children }) => {
+const InputWrapper: React.FC<IProps> = ({ label, error, children }) => {
 
 
 	return (
@@ -21,4 +21,4 @@ const FormElementWrapper: React.FC<IProps> = ({ label, error, children }) => {
 	)
 }
 
-export default FormElementWrapper
+export default InputWrapper

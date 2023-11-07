@@ -29,4 +29,16 @@ export default createGlobalStyle`
 			}
 		}
 	}
+	.ant-table{
+		.empty{
+			&-anim{
+				width: 150px;
+				margin: auto;
+			}
+			&-text{
+				display: inline-block;
+				transform: translateY(-20px);
+			}
+		}
+	}
   `;

@@ -1,17 +1,17 @@
-import { Button, message } from 'antd';
-import React from 'react'
-import TextField from '@/components/form/TextField';
-import { useForm } from 'react-hook-form';
+import doctor from "@/assets/lottie/doctor.json";
+import FormElement from '@/components/form/FormElement';
 import useApiMutation from '@/hooks/useApiMutation';
-import { setLocalStorage } from '@/utils/localStorage';
-import { LOGIN, USER_TOKEN } from '@/utils/variables';
 import { setIsAuth, setUserData } from '@/utils/dispatch';
-import { useNavigate } from 'react-router-dom';
+import { setLocalStorage } from '@/utils/localStorage';
 import { PASSWORD_VALIDATE, PHONE_VALIDATE } from '@/utils/validations';
-import StyleWrapper from './Style';
+import { LOGIN, USER_TOKEN } from '@/utils/variables';
+import { Button, message } from 'antd';
 import Lottie from "lottie-react";
-import doctor from "@/assets/lottie/doctor.json"
-import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa6"
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { FaLock } from "react-icons/fa6";
+import { useNavigate } from 'react-router-dom';
+import StyleWrapper from './Style';
 
 interface IFormData {
 	phone_number: string
@@ -55,32 +55,26 @@ const Login: React.FC = () => {
 		<StyleWrapper className='login'>
 			{contextHolder}
 			<div className="login-desc">
-				<Lottie className='login-desc-anim' animationData={doctor} loop={true} />
+				<Lottie className='login-desc-anim' animationData={doctor} loop />
 			</div>
 			<div className='login-content'>
 				<div className="login-content-logo">
 					<img src="/logo.svg" alt="" />
 				</div>
 				<form onSubmit={handleSubmit(submit)} className="login-form">
-					<TextField
+					<FormElement.TextInput
 						label='Phone number'
 						name="phone_number"
 						control={control}
 						addonBefore={"+998"}
-						required
-						validation={PHONE_VALIDATE}
+						rules={PHONE_VALIDATE}
 					/>
-					<TextField
+					<FormElement.PasswordInput
 						label='Password'
-						autoComplete="off"
 						name="password"
-						isPassword
 						control={control}
 						addonBefore={<FaLock />}
-						validation={PASSWORD_VALIDATE}
-						required
-						iconRender={(visible) => (visible ? <FaEye /> : <FaEyeSlash />)}
-
+						rules={PASSWORD_VALIDATE}
 					/>
 					<Button loading={isLoading} className='login-form-button' htmlType="submit" block size="large" type="primary">SUBMIT</Button>
 				</form>

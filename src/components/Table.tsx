@@ -1,6 +1,8 @@
 import { Table as AntTable, Space, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import React from 'react';
+import EmptyData from "@/assets/lottie/empty-table.json"
+import Lottie from 'lottie-react';
 
 interface DataType {
 	key: string;
@@ -64,7 +66,12 @@ const columns: ColumnsType<DataType> = [
 const Table: React.FC = () => {
 
 	return (
-		<AntTable columns={columns} pagination={{ position: ["bottomRight"] }} dataSource={[]} />
+		<AntTable columns={columns} pagination={{ position: ["bottomRight"] }} dataSource={[]} locale={{
+			emptyText: <div className='empty'>
+				<Lottie className='empty-anim' animationData={EmptyData} loop />
+				<span className='empty-text'>No data</span>
+			</div>
+		}} />
 	);
 };
 
