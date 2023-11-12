@@ -2,22 +2,46 @@ import { IChildren } from '@/types/helper.type'
 import { Typography } from 'antd'
 import React from 'react'
 import { FieldError } from 'react-hook-form'
+import styled from 'styled-components'
 
 interface IProps {
 	label?: string
 	error?: FieldError
 	children: IChildren
+	required: boolean
 }
 
-const InputWrapper: React.FC<IProps> = ({ label, error, children }) => {
+const StyleWrapper = styled.div<{ required: boolean }>`
+		.label{
+			margin-bottom: 4px;
+			display: block;
+			span{
+				margin-left: 2px;
+			}
+		}
+		.message{
+			font-size: 12px;
+			display: flex;
+			justify-content: flex-end;
+			padding: 0 4px;
+			transition: all 0.2s ease;
+			opacity: ${p => p.required ? 1 : 0};
+			height: 18px;
+			transform: translateY(${p => p.required ? "0" : "-10px"});
+		}
+	`
 
+const InputWrapper: React.FC<IProps> = ({ label, error, children, required }) => {
 
 	return (
-		<div className='form-element-wrapper'>
-			{label && <Typography.Text style={{ marginBottom: 4, display: "block" }} type={error && "danger"}>{label}</Typography.Text>}
+		<StyleWrapper className='form-element-wrapper' required={required}>
+			{label && <Typography.Text className='label' type={error && "danger"}>
+				{label}
+				{required ? <Typography.Text type="danger">*</Typography.Text> : null}
+			</Typography.Text>}
 			{children}
-			{error && <Typography.Text style={{ fontSize: 12 }} type="danger">{error.message}</Typography.Text>}
-		</div>
+			<Typography.Text className='message' type="danger">{error?.message}</Typography.Text>
+		</StyleWrapper>
 	)
 }
 

@@ -1,19 +1,18 @@
-import { FieldValues, RegisterOptions } from "react-hook-form";
+import { FormRule } from "antd";
+import { isValidNumber } from "libphonenumber-js";
 
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-export const PHONE_VALIDATE: RegisterOptions = {
-    minLength: { message: "Telefon raqam xato", value: 9 },
-    maxLength: { message: "Telefon raqam xato", value: 9 },
+export const VREQUIRED: FormRule = {
     required: true,
+    message: "Please fill this field",
 };
 
-export const PASSWORD_VALIDATE: RegisterOptions = {
-    minLength: { message: "Kamida 8 ta belgi kiriting", value: 8 },
-    required: true,
+export const VPHONE: FormRule = {
+    message: "Phone number is incorrect",
+    validator: (_, val) =>
+        isValidNumber(`+${val}`) ? Promise.resolve() : Promise.reject(),
 };
 
-export const formValidate = <T extends FieldValues>(
-    validation: RegisterOptions<T>
-) => {
-    return { required: true, ...validation };
+export const VPASSWORD: FormRule = {
+    min: 8,
+    message: "Enter at least 8 characters",
 };

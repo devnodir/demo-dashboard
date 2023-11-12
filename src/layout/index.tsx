@@ -6,6 +6,8 @@ import Navbar from './Navbar';
 import Pages from './Pages';
 import StyleWrapper from './Style'
 import PageLoader from '@/components/shared/Loaders/PageLoader';
+import TopProgressBar from '@/components/shared/TopProgressBar';
+import { useTranslation } from 'react-i18next';
 
 
 interface IProps {
@@ -16,22 +18,25 @@ interface IProps {
 
 const AppLayout: React.FC<IProps> = ({ children }) => {
 
+	const { i18n } = useTranslation()
 
 	return (
-		<StyleWrapper>
-			<Navbar />
-			<Layout hasSider>
-				<Sidebar />
-				<Layout>
-					<Pages>
-						<Suspense fallback={<PageLoader />}>
-							{children}
-						</Suspense>
-					</Pages>
-					{/* <Footer style={{ textAlign: 'center' }}>Ant Design ©2023 Created by Ant UED</Footer> */}
+		<TopProgressBar>
+			<StyleWrapper key={i18n.language}>
+				<Navbar />
+				<Layout hasSider>
+					<Sidebar />
+					<Layout>
+						<Pages>
+							<Suspense fallback={<PageLoader />}>
+								{children}
+							</Suspense>
+						</Pages>
+						{/* <Footer style={{ textAlign: 'center' }}>Ant Design ©2023 Created by Ant UED</Footer> */}
+					</Layout>
 				</Layout>
-			</Layout>
-		</StyleWrapper>
+			</StyleWrapper>
+		</TopProgressBar>
 	);
 };
 

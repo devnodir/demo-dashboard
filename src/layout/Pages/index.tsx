@@ -11,7 +11,7 @@ interface IProps {
 const Pages: React.FC<IProps> = ({ children }) => {
 	return (
 		<StyleWrapper>
-			<div style={{ padding: 24, textAlign: 'center' }}>
+			<div style={{ padding: 24 }}>
 				{children}
 			</div>
 			<div className="footer">

@@ -1,17 +1,17 @@
 import doctor from "@/assets/lottie/doctor.json";
-import FormElement from '@/components/form/FormElement';
+import PhoneInput from "@/components/form/PhoneInput";
 import useApiMutation from '@/hooks/useApiMutation';
 import { setIsAuth, setUserData } from '@/utils/dispatch';
 import { setLocalStorage } from '@/utils/localStorage';
-import { PASSWORD_VALIDATE, PHONE_VALIDATE } from '@/utils/validations';
+import { VPASSWORD, VPHONE, VREQUIRED } from '@/utils/validations';
 import { LOGIN, USER_TOKEN } from '@/utils/variables';
-import { Button, message } from 'antd';
+import { Button, Form, Input, InputNumber, message } from 'antd';
 import Lottie from "lottie-react";
 import React from 'react';
-import { useForm } from 'react-hook-form';
-import { FaLock } from "react-icons/fa6";
+import { FaEye, FaEyeSlash, FaLock, FaPhone } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
 import StyleWrapper from './Style';
+import { phoneFormatter } from "@/utils/formatter";
 
 interface IFormData {
 	phone_number: string
@@ -23,9 +23,9 @@ const Login: React.FC = () => {
 	const navigate = useNavigate()
 	const [messageApi, contextHolder] = message.useMessage();
 
-	const { control, handleSubmit } = useForm<IFormData>()
-
 	const { mutateAsync, isLoading } = useApiMutation(LOGIN)
+
+	const [form] = Form.useForm();
 
 	const parseForm = (data: IFormData) => {
 		return {
@@ -33,13 +33,16 @@ const Login: React.FC = () => {
 			phone_number: Number(`998${data.phone_number}`)
 		}
 	}
+	const handleFocus = () => {
+		if (!form.getFieldValue("phone_number")) {
+			form.setFieldValue("phone_number", "998")
+		}
+	}
 
 	const submit = (data: IFormData) => {
 		setIsAuth(true)
 		mutateAsync(parseForm(data), {
 			onSuccess: (res: any) => {
-				console.log(res);
-
 				setLocalStorage(USER_TOKEN, res.token)
 				setUserData(res.user)
 				setIsAuth(true)
@@ -61,23 +64,47 @@ const Login: React.FC = () => {
 				<div className="login-content-logo">
 					<img src="/logo.svg" alt="" />
 				</div>
-				<form onSubmit={handleSubmit(submit)} className="login-form">
-					<FormElement.TextInput
-						label='Phone number'
+				<Form
+					layout="vertical"
+					className="login-form"
+					onFinish={submit}
+					form={form}
+				>
+					<Form.Item<IFormData>
+						label="Phone number"
 						name="phone_number"
-						control={control}
-						addonBefore={"+998"}
-						rules={PHONE_VALIDATE}
-					/>
-					<FormElement.PasswordInput
-						label='Password'
+						rules={[VREQUIRED, VPHONE]}
+						validateFirst
+					>
+						<InputNumber
+							placeholder="+998 ** *** ** **"
+							onFocus={handleFocus}
+							formatter={phoneFormatter}
+							addonBefore={<FaPhone />}
+						/>
+					</Form.Item>
+					<Form.Item<IFormData>
+						label="Password"
 						name="password"
-						control={control}
-						addonBefore={<FaLock />}
-						rules={PASSWORD_VALIDATE}
-					/>
-					<Button loading={isLoading} className='login-form-button' htmlType="submit" block size="large" type="primary">SUBMIT</Button>
-				</form>
+						validateFirst
+						rules={[VREQUIRED, VPASSWORD]}
+					>
+						<Input.Password
+							addonBefore={<FaLock />}
+							iconRender={(visible) => (visible ? <FaEye /> : <FaEyeSlash />)}
+							placeholder="********"
+						/>
+					</Form.Item>
+					<Button
+						block
+						loading={isLoading}
+						className='login-form-button'
+						htmlType="submit"
+						type="primary"
+					>
+						SUBMIT
+					</Button>
+				</Form>
 			</div>
 		</StyleWrapper>
 	)

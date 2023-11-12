@@ -1,56 +1,57 @@
 import type { MenuProps } from 'antd';
-import { FaIdCard, FaHammer, FaUserGear, FaUserDoctor, FaHospitalUser, FaCity, FaClipboardList, FaBookOpen, FaFlaskVial, FaGear } from "react-icons/fa6";
+import { BsGridFill } from "react-icons/bs";
+import { FaBookOpen, FaCity, FaClipboardList, FaFlaskVial, FaGear, FaHammer, FaHospitalUser, FaUserDoctor, FaUserGear } from "react-icons/fa6";
 
-type MenuItem = Required<MenuProps>['items'][number];
+export type MenuItem = Required<MenuProps>['items'][number];
 
 const items: MenuItem[] = [
 	{
-		label: "Cabinet",
-		key: "/cabinet",
-		icon: <FaIdCard />,
+		label: "dashboard",
+		key: "/dashboard",
+		icon: <BsGridFill />,
 	},
 	{
-		label: "Services",
+		label: "patients",
+		key: "/patients",
+		icon: <FaHospitalUser />
+	},
+	{
+		label: "services",
 		key: "/services",
 		icon: <FaHammer />
 	},
 	{
-		label: "Doctors",
+		label: "doctors",
 		key: "/doctors",
 		icon: <FaUserDoctor />
 	},
 	{
-		label: "Users",
-		key: "/user",
+		label: "employees",
+		key: "/employees",
 		icon: <FaUserGear />
 	},
 	{
-		label: "Patientce",
-		key: "/patientce",
-		icon: <FaHospitalUser />
-	},
-	{
-		label: "Branches",
+		label: "branches",
 		key: "/branches",
 		icon: <FaCity />
 	},
 	{
-		label: "Templates",
+		label: "templates",
 		key: "/templates",
 		icon: <FaBookOpen />
 	},
 	{
-		label: "Tasks",
+		label: "tasks",
 		key: "/tasks",
 		icon: <FaClipboardList />
 	},
 	{
-		label: "Laboratory",
+		label: "laboratory",
 		key: "/laboratory",
 		icon: <FaFlaskVial />
 	},
 	{
-		label: "Settings",
+		label: "settings",
 		key: "/settings",
 		icon: <FaGear />
 	},

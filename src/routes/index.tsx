@@ -8,9 +8,12 @@ const publicRoutes: RouteObject[] = [
 ]
 
 const privateRoutes: RouteObject[] = [
-	{ path: "/login", element: redirectTo("/cabinet", true) },
-	{ path: "/", element: redirectTo("/cabinet", true) },
-	{ path: "*", element: page("Services", "", AppLayout) }
+	{ path: "/dashboard", element: page("Dashboard", AppLayout) },
+	{ path: "/patients", element: page("Patients", AppLayout) },
+	{ path: "/404", element: page("404", AppLayout) },
+	{ path: "/login", element: redirectTo("/dashboard", true) },
+	{ path: "/", element: redirectTo("/dashboard", true) },
+	{ path: "*", element: redirectTo("/404", true) }
 ]
 
 export { publicRoutes, privateRoutes }

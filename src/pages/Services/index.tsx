@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import Table from '@/components/Table'
+import Table from '@/pages/Patients/components/Table'
 import Box from '@/styles/Box'
 import TopBtns from '@/styles/TopBtns'
 import React, { Fragment } from 'react'

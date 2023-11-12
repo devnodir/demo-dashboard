@@ -31,8 +31,8 @@ const HeadSearch: React.FC = () => {
 			<Modal open={isOpen} onCancel={toggle} footer={null} closeIcon={null} width={600} destroyOnClose>
 				<StyleWrapper>
 					<Space.Compact className='search-wrapper'>
-						<Input size="large" ref={inputRef} />
-						<Button type="primary" size="large">
+						<Input ref={inputRef} />
+						<Button type="primary">
 							<BsSearch />
 						</Button>
 					</Space.Compact>

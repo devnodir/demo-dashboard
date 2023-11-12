@@ -1,43 +1,41 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import React, { useState } from 'react'
 import { Dropdown, MenuProps } from 'antd'
-
-
+import React from 'react'
+import { useTranslation } from 'react-i18next'
 
 const LangSelect: React.FC = () => {
 
-	const [lang, setLang] = useState<any>("uz")
+	const { i18n, t } = useTranslation()
 
+	console.log(i18n.language);
 
 	const items: MenuProps["items"] = [
 		{
 			key: "ru",
-			label: "Russian",
+			label: t("ru"),
 			icon: <img src='/ru.svg' alt='ru' className='lang-icon' />,
 			className: "lang-item",
-			onClick: () => setLang("ru")
 		},
 		{
 			key: "en",
-			label: "English",
+			label: t("en"),
 			icon: <img src='/en.svg' alt='ru' className='lang-icon' />,
 			className: "lang-item",
-			onClick: () => setLang("en")
 		},
 		{
 			key: "uz",
-			label: "Uzbek",
+			label: t("uz"),
 			icon: <img src='/uz.svg' alt='ru' className='lang-icon' />,
 			className: "lang-item",
-			onClick: () => setLang("uz")
 		},
 	]
 
+	const onSelect = ({ key }: any) => i18n.changeLanguage(key)
 
 	return (
-		<Dropdown menu={{ items }} placement="bottomRight" trigger={["click"]}>
+		<Dropdown menu={{ items, onSelect, selectable: true, defaultSelectedKeys: [i18n.language] }} placement="bottomRight" trigger={["click"]} >
 			<button>
-				<img src={`/${lang}.svg`} alt="" />
+				<img src={`/${i18n.language}.svg`} alt="" />
 			</button>
 		</Dropdown>
 	)

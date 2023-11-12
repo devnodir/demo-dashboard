@@ -14,6 +14,9 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
-    "@typescript-eslint/no-explicit-any": "off"
+    "@typescript-eslint/no-explicit-any": "off", // any type ishlatilganda
+    "react-hooks/exhaustive-deps": "off", // hook dependency lar berilmaganda
+    "@typescript-eslint/no-unused-vars":"warn", // import qilinganlar ishlatilmaganda 
+    "@typescript-eslint/ban-ts-comment":"off" // ts-ignore 
   },
 }

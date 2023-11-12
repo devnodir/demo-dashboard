@@ -26,11 +26,9 @@ export default styled.div`
         &-form {
             max-width: 380px;
             width: 100%;
-            .form-element-wrapper {
-                margin-bottom: 12px;
-            }
+
             &-button {
-                margin-top: 12px;
+                margin-top: 18px;
             }
         }
         &-desc {
