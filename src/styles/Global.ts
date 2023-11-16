@@ -1,7 +1,9 @@
-import { getToken } from "@/utils/theme";
+import { convertHex } from "@/utils/convertor";
+import { colors, getToken } from "@/utils/theme";
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
+
 *{
 	margin: 0;
 	padding: 0;
@@ -9,7 +11,7 @@ export default createGlobalStyle`
 	body {
 	  margin: 0;
 	  padding: 0;
-	  background-color: "#fafafa";
+	  background-color: #fcfcfc;
 	  height: 100vh;
 	}
 	.ant-input{
@@ -86,6 +88,45 @@ export default createGlobalStyle`
 			&-explain{
 				text-align: end !important;
 				font-size: 12px !important;
+			}
+		}
+	}
+	.ant-table{
+		background-color: transparent !important;
+		table{
+			border-spacing: 0 10px;
+			tr{
+				box-shadow: 0 0 4px 4px rgb(0 0 0 / 0.1%);
+				&.ant-table-row-selected {
+					td,
+					td.ant-table-cell-row-hover{
+						background-color:${convertHex(colors.primary, 0.1)} !important;
+					}
+				}
+				td{
+					background-color: white;
+					&.ant-table-cell-row-hover{
+						background-color: white !important;
+					}
+				}
+				th{
+					padding-bottom: 4px !important;
+					&::before{
+						display: none;
+					}
+				}
+				td,th{
+					border: none !important;
+					border-spacing: 0;
+				}
+				td:first-child{
+					border-top-left-radius: 10px;
+					border-bottom-left-radius: 10px;
+				}
+				td:last-child{
+					border-top-right-radius: 10px;
+					border-bottom-right-radius: 10px;
+				}
 			}
 		}
 	}

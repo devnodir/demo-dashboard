@@ -11,7 +11,7 @@ const Button: React.FC<ButtonProps> = ({ color, ...props }) => {
 			theme={color ? {
 				token: {
 					//@ts-ignore
-					colorPrimary: token[color]
+					colorPrimary: token[color],
 				}
 			} : undefined}
 		>

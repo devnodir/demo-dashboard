@@ -1,7 +1,8 @@
 import EmptyData from "@/assets/lottie/empty-table.json";
+import Button from "@/components/form/Button";
 import useFakeLoader from "@/hooks/useFakeLoader";
-import { colors, getToken } from "@/utils/theme";
-import { Table as AntTable, Button, Tag } from 'antd';
+import { getToken } from "@/utils/theme";
+import { Table as AntTable, Tag } from 'antd';
 import Lottie from 'lottie-react';
 import React from 'react';
 import { FaPenToSquare, FaTrash, FaPaperPlane } from "react-icons/fa6";
@@ -45,7 +46,7 @@ const columns = [
 		dataIndex: 'actions',
 		render: () => (
 			<div style={{ fontSize: 20 }}>
-				<Button shape="circle" type="text" icon={<FaPaperPlane color={getToken().blue5} />}></Button>
+				<Button color="red" shape="circle" type="text" icon={<FaPaperPlane color={getToken().blue5} />}></Button>
 				<Button shape="circle" type="text" icon={<FaPenToSquare color={getToken().colorPrimary} />}></Button>
 				<Button shape="circle" type="text" color="red" icon={<FaTrash color={getToken().red5} />}></Button>
 			</div>
@@ -60,7 +61,8 @@ const data = [
 		phone: "+998 (99) 008-27-35",
 		tags: [{ val: "VIP", color: "green" }, { val: "10%", color: "red" }],
 		address: "Yakkasaroy, Muqimiy 1/2",
-		date: "01.03.2022"
+		date: "01.03.2022",
+		key: 1
 	},
 	{
 		image: "https://randomuser.me/api/portraits/men/2.jpg",
@@ -68,7 +70,8 @@ const data = [
 		phone: "+998 (99) 008-27-35",
 		tags: [{ val: "VIP", color: "green" }, { val: "10%", color: "red" }],
 		address: "Yakkasaroy, Muqimiy 1/2",
-		date: "01.03.2022"
+		date: "01.03.2022",
+		key: 2
 	},
 	{
 		image: "https://randomuser.me/api/portraits/men/3.jpg",
@@ -76,7 +79,8 @@ const data = [
 		phone: "+998 (99) 008-27-35",
 		tags: [{ val: "VIP", color: "green" }, { val: "10%", color: "red" }],
 		address: "Yakkasaroy, Muqimiy 1/2",
-		date: "01.03.2022"
+		date: "01.03.2022",
+		key: 3
 	},
 	{
 		image: "https://randomuser.me/api/portraits/men/4.jpg",
@@ -84,7 +88,8 @@ const data = [
 		phone: "+998 (99) 008-27-35",
 		tags: [{ val: "VIP", color: "green" }, { val: "10%", color: "red" }],
 		address: "Yakkasaroy, Muqimiy 1/2",
-		date: "01.03.2022"
+		date: "01.03.2022",
+		key: 4
 	},
 	{
 		image: "https://randomuser.me/api/portraits/men/5.jpg",
@@ -92,7 +97,8 @@ const data = [
 		phone: "+998 (99) 008-27-35",
 		tags: [{ val: "VIP", color: "green" }, { val: "10%", color: "red" }],
 		address: "Yakkasaroy, Muqimiy 1/2",
-		date: "01.03.2022"
+		date: "01.03.2022",
+		key: 5
 	},
 ]
 
