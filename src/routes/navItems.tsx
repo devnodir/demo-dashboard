@@ -16,14 +16,14 @@ const items: MenuItem[] = [
 		icon: <FaHospitalUser />
 	},
 	{
-		label: "services",
-		key: "/services",
-		icon: <FaHammer />
-	},
-	{
 		label: "doctors",
 		key: "/doctors",
 		icon: <FaUserDoctor />
+	},
+	{
+		label: "services",
+		key: "/services",
+		icon: <FaHammer />
 	},
 	{
 		label: "employees",

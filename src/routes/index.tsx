@@ -10,6 +10,8 @@ const publicRoutes: RouteObject[] = [
 const privateRoutes: RouteObject[] = [
 	{ path: "/dashboard", element: page("Dashboard", AppLayout) },
 	{ path: "/patients", element: page("Patients", AppLayout) },
+	{ path: "/doctors", element: page("Doctors", AppLayout) },
+	{ path: "/doctors/cabinet/:id", element: page("DoctorCabinet", AppLayout) },
 	{ path: "/404", element: page("404", AppLayout) },
 	{ path: "/login", element: redirectTo("/dashboard", true) },
 	{ path: "/", element: redirectTo("/dashboard", true) },

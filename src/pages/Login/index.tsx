@@ -1,9 +1,7 @@
 import doctor from "@/assets/lottie/doctor.json";
-import PhoneInput from "@/components/form/PhoneInput";
 import useApiMutation from '@/hooks/useApiMutation';
 import { setIsAuth, setUserData } from '@/utils/dispatch';
 import { setLocalStorage } from '@/utils/localStorage';
-import { VPASSWORD, VPHONE, VREQUIRED } from '@/utils/validations';
 import { LOGIN, USER_TOKEN } from '@/utils/variables';
 import { Button, Form, Input, InputNumber, message } from 'antd';
 import Lottie from "lottie-react";
@@ -12,6 +10,7 @@ import { FaEye, FaEyeSlash, FaLock, FaPhone } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
 import StyleWrapper from './Style';
 import { phoneFormatter } from "@/utils/formatter";
+import { R_PASSWORD, R_PHONE, R_REQUIRED } from "@/utils/rules";
 
 interface IFormData {
 	phone_number: string
@@ -73,7 +72,7 @@ const Login: React.FC = () => {
 					<Form.Item<IFormData>
 						label="Phone number"
 						name="phone_number"
-						rules={[VREQUIRED, VPHONE]}
+						rules={[R_REQUIRED, R_PHONE]}
 						validateFirst
 					>
 						<InputNumber
@@ -87,7 +86,7 @@ const Login: React.FC = () => {
 						label="Password"
 						name="password"
 						validateFirst
-						rules={[VREQUIRED, VPASSWORD]}
+						rules={[R_REQUIRED, R_PASSWORD]}
 					>
 						<Input.Password
 							addonBefore={<FaLock />}

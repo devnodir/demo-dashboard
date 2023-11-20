@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { ButtonProps, ConfigProvider, Button as AntButton, theme } from 'antd'
+import { ButtonProps, ConfigProvider, Button, theme } from 'antd'
 import React from 'react'
 
-const Button: React.FC<ButtonProps> = ({ color, ...props }) => {
+const MyButton: React.FC<ButtonProps> = ({ color, ...props }) => {
 
 	const { token } = theme.useToken()
 
@@ -15,9 +15,9 @@ const Button: React.FC<ButtonProps> = ({ color, ...props }) => {
 				}
 			} : undefined}
 		>
-			<AntButton {...props} />
+			<Button {...props} />
 		</ConfigProvider>
 	)
 }
 
-export default Button
+export default MyButton

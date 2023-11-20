@@ -6,7 +6,7 @@ const useActivePath = (items: any) => {
     const [active, setActive] = useState<string[]>([]);
 
     useEffect(() => {
-        const item = items.find((el: any) => pathname.startsWith(el.key));
+        const item = items.find((el: any) => pathname.startsWith(el.key)).key;
         setActive([item, pathname]);
     }, [items, pathname]);
 

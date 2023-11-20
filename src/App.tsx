@@ -7,6 +7,8 @@ import AuthProvider from '@/providers/AuthProvider'
 import ScreenLoader from '@/components/shared/Loaders/ScreenLoader'
 import ErrorBoundary from '@/components/shared/ErrorBoundary'
 import { useTranslation } from 'react-i18next'
+import "@/assets/bootstrap/bootstrap.min.css"
+
 
 const App: React.FC = () => {
 
