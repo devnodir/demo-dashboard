@@ -129,6 +129,7 @@ const DoctorsTable: React.FC = () => {
 			columns={columns}
 			dataSource={data}
 			loading={loading}
+			rowSelection={{ type: "checkbox" }}
 			onRow={(_, rowIndex) => {
 				return {
 					onClick: () => navigate(`/doctors/cabinet/${rowIndex}`)

@@ -111,6 +111,7 @@ const PatientsTable: React.FC = () => {
 			columns={columns}
 			dataSource={data}
 			loading={loading}
+			rowSelection={{ type: "checkbox" }}
 		/>
 	);
 };
