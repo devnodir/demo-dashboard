@@ -8,7 +8,7 @@ const useFakeLoader = () => {
 
     useEffect(() => {
         setLoading(true);
-        const timeOut = setTimeout(() => setLoading(false), 800);
+        const timeOut = setTimeout(() => setLoading(false), 100);
         return () => clearTimeout(timeOut);
     }, [i18n.language]);
 

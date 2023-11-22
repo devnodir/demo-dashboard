@@ -17,6 +17,7 @@ const App: React.FC = () => {
 
   const { i18n } = useTranslation()
 
+
   return (
     <ThemeProvider>
       <Suspense fallback={<ScreenLoader />}>

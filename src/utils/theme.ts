@@ -23,13 +23,28 @@ export const theme: ThemeConfig = {
         colorText: colors.text,
         colorSuccess: colors.secondary,
         borderRadius: 10,
-        controlHeight: 40,
         // fontFamily: "Montserrat Alternates,sans-serif",
     },
     components: {
         Checkbox: {
             controlInteractiveSize: 20,
         },
+        Button: {
+            controlHeight: 40,
+        },
+        Input: {
+            controlHeight: 40,
+        },
+        InputNumber: {
+            controlHeight: 40,
+        },
+        DatePicker: {
+            controlHeight: 40,
+        },
+        Select: {
+            controlHeight: 40,
+        },
+        Card: {},
     },
 };
 

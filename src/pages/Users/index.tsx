@@ -2,14 +2,14 @@ import Button from '@/components/antd/MyButton'
 import useToggleState from '@/hooks/useToggleState'
 import { PlusOutlined } from '@ant-design/icons'
 import React from 'react'
-import ServicesTable from './components/Table'
+import UsersTable from './components/Table'
 import { Drawer } from 'antd'
-import ServiceAction from './components/Action'
+import UsersAction from './components/Action'
 
 const Users: React.FC = () => {
 	const [isOpen, toggle] = useToggleState(false)
 	return (
-		<div className='services'>
+		<div className='users'>
 			<Button
 				onClick={toggle}
 				icon={<PlusOutlined />}
@@ -17,16 +17,16 @@ const Users: React.FC = () => {
 				type="primary"
 				className="text-uppercase float-right"
 			>
-				Add service
+				Add user
 			</Button>
-			<ServicesTable />
+			<UsersTable />
 			<Drawer
 				open={isOpen}
 				onClose={toggle}
-				title="New service"
+				title="New user"
 				destroyOnClose
 			>
-				<ServiceAction />
+				<UsersAction />
 			</Drawer>
 		</div>
 	)

@@ -10,7 +10,7 @@ interface IProps {
 
 const Pages: React.FC<IProps> = ({ children }) => {
 	return (
-		<StyleWrapper>
+		<StyleWrapper className='pages' id='app-pages'>
 			<div style={{ padding: 24 }}>
 				{children}
 			</div>

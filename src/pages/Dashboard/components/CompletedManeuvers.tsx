@@ -6,6 +6,7 @@ import { BsArrowUpCircleFill } from 'react-icons/bs'
 import { RingProgress, RingProgressConfig } from '@ant-design/plots';
 import useFakeLoader from '@/hooks/useFakeLoader'
 import { colors } from '@/utils/theme'
+import CountUp from 'react-countup'
 
 const CompletedManeuvers: React.FC = () => {
 
@@ -35,7 +36,9 @@ const CompletedManeuvers: React.FC = () => {
 			<Typography.Title className='chart-title' level={5}>{t("completed_maneuvers")}</Typography.Title>
 			<div className='completed_maneuvers_content'>
 				<div className='completed_maneuvers_left'>
-					<Typography.Title className='title'>95%</Typography.Title>
+					<Typography.Title className='title'>
+						<CountUp end={95} duration={1.5} />%
+					</Typography.Title>
 					<div className='count_status'>
 						<BsArrowUpCircleFill /> <span>+1,65%</span>
 					</div>

@@ -12,6 +12,8 @@ const MyButton: React.FC<ButtonProps> = ({ color, ...props }) => {
 				token: {
 					//@ts-ignore
 					colorPrimary: token[color],
+					//@ts-ignore
+					colorText: token[color],
 				}
 			} : undefined}
 		>

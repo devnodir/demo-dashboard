@@ -8,6 +8,7 @@ import StyleWrapper from './Style'
 import PageLoader from '@/components/shared/Loaders/PageLoader';
 import TopProgressBar from '@/components/shared/TopProgressBar';
 import { useTranslation } from 'react-i18next';
+import HelpButton from '@/components/shared/HelpButton';
 
 
 interface IProps {
@@ -36,6 +37,7 @@ const AppLayout: React.FC<IProps> = ({ children }) => {
 					</Layout>
 				</Layout>
 			</StyleWrapper>
+			<HelpButton />
 		</TopProgressBar>
 	);
 };

@@ -10,7 +10,7 @@ export default styled.div`
         cursor: pointer;
         width: 200px;
         border: 1px solid ${getToken()?.colorBorder};
-        height: 36px;
+        height: 40px;
         font-size: 16px;
         border-radius: ${getToken()?.borderRadius}px;
         transition: 0.2s ease;

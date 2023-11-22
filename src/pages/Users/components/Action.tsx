@@ -1,19 +1,32 @@
 import MyButton from '@/components/antd/MyButton'
 import { phoneFormatter } from '@/utils/formatter'
-import { R_PHONE, R_REQUIRED } from '@/utils/rules'
+import { R_PASSWORD, R_PHONE, R_REQUIRED } from '@/utils/rules'
 import { PlusOutlined } from '@ant-design/icons'
 import { Button, Col, DatePicker, Form, Input, InputNumber, Row, Select } from 'antd'
 import React, { useState } from 'react'
 import { BsCalendarFill } from 'react-icons/bs'
-import { FaLocationDot, FaPhone, FaTrash, FaUser } from 'react-icons/fa6'
+import { FaEye, FaEyeSlash, FaLock, FaPhone, FaTrash, FaUser } from 'react-icons/fa6'
 
-const tags = [
-	{ label: "VIP", value: "vip", color: "red" },
-	{ label: "50%", value: "50" },
-	{ label: "70%", value: "70" }
+const role = [
+	{ label: "Admin", value: "1" },
+	{ label: "Moderator", value: "2" },
+	{ label: "Contributor", value: "3" }
 ]
 
-const PatientAction: React.FC = () => {
+const branches = [
+	{ label: "Yunusobod Filial", value: "1" },
+	{ label: "Mirobod Filial", value: "2" },
+	{ label: "Yakkasaroy Filial", value: "3" },
+	{ label: "Uchtepa Filial", value: "4" },
+]
+
+const status = [
+	{ label: "Active", value: "active" },
+	{ label: "Inactive", value: "inactive" },
+]
+
+const UsersAction: React.FC = () => {
+
 
 	const [phones, setPhones] = useState<number[]>([1])
 
@@ -53,22 +66,20 @@ const PatientAction: React.FC = () => {
 				/>
 			</Form.Item>
 			<Form.Item
-				label="Address"
-				name="address"
-				rules={[R_REQUIRED]}
+				label="Rol"
+				name="rol"
 			>
-				<Input
-					addonBefore={<FaLocationDot />}
+				<Select
+					options={role}
 				/>
 			</Form.Item>
 			<Form.Item
-				label="Tags"
-				name="tags"
+				label="Branches"
+				name="branches"
 			>
 				<Select
+					options={branches}
 					mode="multiple"
-					allowClear
-					options={tags}
 				/>
 			</Form.Item>
 			<Form.Item
@@ -79,6 +90,26 @@ const PatientAction: React.FC = () => {
 					format="DD.MM.YYYY"
 					style={{ width: "100%" }}
 					suffixIcon={<BsCalendarFill />}
+				/>
+			</Form.Item>
+			<Form.Item
+				label="Status"
+				name="status"
+			>
+				<Select
+					options={status}
+				/>
+			</Form.Item>
+			<Form.Item
+				label="Password"
+				name="password"
+				validateFirst
+				rules={[R_REQUIRED, R_PASSWORD]}
+			>
+				<Input.Password
+					addonBefore={<FaLock />}
+					iconRender={(visible) => (visible ? <FaEye /> : <FaEyeSlash />)}
+					placeholder="********"
 				/>
 			</Form.Item>
 			{
@@ -110,15 +141,14 @@ const PatientAction: React.FC = () => {
 
 				))
 			}
-
-			<MyButton color="green" shape="circle" className='mb-4 float-right' type="primary" onClick={addPhone}>
+			<MyButton color='green' shape="circle" className='mb-4 float-right' type="primary" onClick={addPhone}>
 				<PlusOutlined />
 			</MyButton>
-			<Button block type="primary" htmlType="submit" >
+			<Button block type="primary" htmlType="submit" className='mt-2'>
 				CREATE
 			</Button>
 		</Form>
 	)
 }
 
-export default PatientAction
+export default UsersAction

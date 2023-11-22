@@ -1,11 +1,11 @@
+import { Card } from "antd";
 import styled from "styled-components";
 
-export default styled.div`
-    background-color: white;
-    padding: 16px;
-    border-radius: 8px;
-    position: relative;
+export default styled(Card)`
+    border: none;
     overflow: hidden;
-    text-align: start;
+    .ant-card-body {
+        padding: 16px;
+    }
     box-shadow: 0 0 4px 4px rgb(0 0 0 / 0.4%);
 `;
