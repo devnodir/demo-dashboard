@@ -88,7 +88,7 @@ const FinanceTable: React.FC = () => {
 							dot: <FaMoneyBill />
 						},
 						{
-							children: '225 000',
+							children: <b>225 000</b>,
 							dot: <FaCalculator />
 						},
 
