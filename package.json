@@ -41,6 +41,7 @@
     "react-topbar-progress-indicator": "^4.1.1",
     "redux": "^4.2.1",
     "styled-components": "^6.1.0",
+    "vite-plugin-pwa": "^0.17.2",
     "workbox-background-sync": "^6.6.0",
     "workbox-broadcast-update": "^6.6.0",
     "workbox-cacheable-response": "^6.6.0",
