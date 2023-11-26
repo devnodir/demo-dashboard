@@ -8,7 +8,7 @@ export default styled.div`
         align-items: center;
         user-select: none;
         cursor: pointer;
-        width: 200px;
+        width: 320px;
         border: 1px solid ${(p) => styledColor(p).border};
         height: 40px;
         font-size: 16px;
