@@ -1,15 +1,13 @@
 import MyButton from "@/components/antd/MyButton";
 import MyTable from "@/components/antd/MyTable";
-import useFakeLoader from "@/hooks/useFakeLoader";
 import { colors } from "@/utils/theme";
 import { CloseOutlined, EyeFilled } from "@ant-design/icons";
-import { Button, Flex, Tag, Timeline, Tooltip } from "antd";
+import { Flex, Tag, Timeline, Tooltip } from "antd";
 import React from 'react';
 import { FaArrowRight, FaCalculator, FaMoneyBill, FaUserDoctor } from "react-icons/fa6";
 
 const FinanceTable: React.FC = () => {
 
-	const loading = useFakeLoader()
 
 
 	const columns = [
@@ -156,7 +154,6 @@ const FinanceTable: React.FC = () => {
 			// style={{ width: Number(document.getElementById("app-pages")?.clientWidth) - 48 }}
 			columns={columns}
 			dataSource={data}
-			loading={loading}
 		/>
 	);
 };

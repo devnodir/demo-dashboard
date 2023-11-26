@@ -1,16 +1,12 @@
 import Button from "@/components/antd/MyButton";
 import MyTable from "@/components/antd/MyTable";
-import useFakeLoader from "@/hooks/useFakeLoader";
 import { getToken } from "@/utils/theme";
 import { Tag } from "antd";
 import React from 'react';
-import { FaPenToSquare, FaTrash, FaPaperPlane } from "react-icons/fa6";
-import { useNavigate } from "react-router-dom";
+import { FaPaperPlane, FaPenToSquare, FaTrash } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const DoctorsTable: React.FC = () => {
-
-	const loading = useFakeLoader()
-	const navigate = useNavigate()
 
 
 	const columns = [
@@ -24,6 +20,9 @@ const DoctorsTable: React.FC = () => {
 		{
 			title: 'Full name',
 			dataIndex: 'name',
+			render: (name: string, order: any) => <Link to={`/doctors/cabinet/${order.id}`} className="py-3">
+				{name}
+			</Link>
 		},
 		{
 			title: 'Phone Number',
@@ -128,14 +127,7 @@ const DoctorsTable: React.FC = () => {
 		<MyTable
 			columns={columns}
 			dataSource={data}
-			loading={loading}
 			rowSelection={{ type: "checkbox" }}
-			rowClassName="cursor-pointer"
-			onRow={(_, rowIndex) => {
-				return {
-					onClick: () => navigate(`/doctors/cabinet/${rowIndex}`),
-				};
-			}}
 		/>
 	);
 };

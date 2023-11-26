@@ -1,14 +1,11 @@
 import Button from "@/components/antd/MyButton";
 import MyTable from "@/components/antd/MyTable";
-import useFakeLoader from "@/hooks/useFakeLoader";
 import { getToken } from "@/utils/theme";
 import { Tag } from 'antd';
 import React from 'react';
 import { FaPenToSquare, FaTrash, FaPaperPlane } from "react-icons/fa6";
 
 const PatientsTable: React.FC = () => {
-
-	const loading = useFakeLoader()
 
 
 	const columns = [
@@ -110,7 +107,6 @@ const PatientsTable: React.FC = () => {
 		<MyTable
 			columns={columns}
 			dataSource={data}
-			loading={loading}
 			rowSelection={{ type: "checkbox" }}
 		/>
 	);

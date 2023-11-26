@@ -130,6 +130,13 @@ export default createGlobalStyle`
 				}
 			}
 		}
+		&-wrapper{
+			:where(.css-dev-only-do-not-override-xto465).ant-spin-nested-loading .ant-spin-container::after{
+			background: transparent !important;
+		}
+		}
+		
+		
 	}
 	.cursor-pointer{
 		cursor: pointer;

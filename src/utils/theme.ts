@@ -55,7 +55,6 @@ export const themeCompontens: ThemeConfig["components"] = {
     Select: {
         controlHeight: 40,
     },
-    Card: {},
 };
 
 export const themeToken = (mode: IMode): ThemeConfig["token"] => {
@@ -84,8 +83,6 @@ export const styledToken = (props: any) => {
 };
 
 export const styledColor = (props: any) => {
-    console.log(props.theme);
-
     return colors[props.theme.mode as IMode];
 };
 

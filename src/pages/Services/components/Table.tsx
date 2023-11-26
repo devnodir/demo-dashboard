@@ -1,17 +1,12 @@
-import MyButton from "@/components/antd/MyButton";
 import Button from "@/components/antd/MyButton";
 import MyTable from "@/components/antd/MyTable";
-import useFakeLoader from "@/hooks/useFakeLoader";
 import { getToken } from "@/utils/theme";
-import { Popover, Tag } from "antd";
+import { Tag } from "antd";
 import React from 'react';
-import { FaPenToSquare, FaTrash, FaPaperPlane } from "react-icons/fa6";
-import { useNavigate } from "react-router-dom";
+import { FaPaperPlane, FaPenToSquare, FaTrash } from "react-icons/fa6";
 
 const ServicesTable: React.FC = () => {
 
-	const loading = useFakeLoader()
-	const navigate = useNavigate()
 
 
 	const columns = [
@@ -99,13 +94,7 @@ const ServicesTable: React.FC = () => {
 		<MyTable
 			columns={columns}
 			dataSource={data}
-			loading={loading}
 			rowSelection={{ type: "checkbox" }}
-			onRow={(_, rowIndex) => {
-				return {
-					onClick: () => navigate(`/doctors/cabinet/${rowIndex}`)
-				};
-			}}
 		/>
 	);
 };

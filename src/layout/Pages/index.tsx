@@ -15,7 +15,7 @@ const Pages: React.FC<IProps> = ({ children }) => {
 				{children}
 			</div>
 			<div className="footer">
-				<Typography.Text>©2023 Created by DEVNODIR</Typography.Text>
+				<Typography.Text>©2023 Created by <a href='https://devnodir.uz'>DEVNODIR</a></Typography.Text>
 			</div>
 		</StyleWrapper>
 	)

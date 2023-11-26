@@ -81,9 +81,9 @@ export default styled(Header)`
                     align-items: flex-end;
                     flex-direction: column;
                     padding-right: 12px;
-                    span {
+                    span:first-child {
                         color: ${(p) => styledColor(p).text};
-                        &:last-child {
+                        /* &:last-child {
                             position: relative;
                             background-color: ${getToken("light")?.green2};
                             color: ${getToken("light")?.green};
@@ -91,7 +91,7 @@ export default styled(Header)`
                             border-radius: 6px;
                             opacity: 0.7;
                             margin-top: 2px;
-                        }
+                        } */
                     }
                 }
             }
