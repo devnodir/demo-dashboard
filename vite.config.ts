@@ -7,9 +7,9 @@ const manifestForPlugIn: Partial<VitePWAOptions> = {
     registerType: "prompt",
     includeAssets: ["favicon.ico", "apple-touc-icon.png", "masked-icon.svg"],
     manifest: {
-        name: "React-vite-app",
-        short_name: "react-vite-app",
-        description: "I am a simple vite app",
+        name: "Demo med",
+        short_name: "demo-med",
+        description: "Created by devnodir",
         icons: [
             {
                 src: "images/icons/icon-72x72.png",
