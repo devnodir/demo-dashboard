@@ -1,4 +1,4 @@
-import { getToken } from "@/utils/theme";
+import { getToken, styledColor } from "@/utils/theme";
 import styled from "styled-components";
 
 export default styled.div`
@@ -9,7 +9,7 @@ export default styled.div`
         user-select: none;
         cursor: pointer;
         width: 200px;
-        border: 1px solid ${getToken()?.colorBorder};
+        border: 1px solid ${(p) => styledColor(p).border};
         height: 40px;
         font-size: 16px;
         border-radius: ${getToken()?.borderRadius}px;

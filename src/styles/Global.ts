@@ -1,5 +1,5 @@
 import { convertHex } from "@/utils/convertor";
-import { colors, getToken } from "@/utils/theme";
+import { colors, getToken, styledColor, styledToken } from "@/utils/theme";
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
@@ -11,7 +11,7 @@ export default createGlobalStyle`
 	body {
 	  margin: 0;
 	  padding: 0;
-	  background-color: #fcfcfc;
+	  background-color: ${(p) => styledColor(p).body};
 	  height: 100vh;
 	}
 	.ant-input{
@@ -104,12 +104,13 @@ export default createGlobalStyle`
 					}
 				}
 				td{
-					background-color: white;
+					background-color: ${(p) => styledToken(p).colorBgContainer};
 					&.ant-table-cell-row-hover{
-						background-color: white !important;
+						background-color: ${(p) => styledToken(p).colorBgContainer}!important;
 					}
 				}
 				th{
+					background-color: transparent !important;
 					padding-bottom: 4px !important;
 					&::before{
 						display: none;
@@ -129,5 +130,8 @@ export default createGlobalStyle`
 				}
 			}
 		}
+	}
+	.cursor-pointer{
+		cursor: pointer;
 	}
   `;

@@ -9,3 +9,7 @@ export const setIsAuth = (payload: boolean) => {
 export const setUserData = (payload: any) => {
     dispatch({ type: "auth/setUserData", payload });
 };
+
+export const setMode = (payload: any) => {
+    dispatch({ type: "auth/setMode", payload });
+};

@@ -4,14 +4,12 @@ import { Typography } from 'antd'
 import React from 'react'
 import { BsArrowUpCircleFill } from 'react-icons/bs'
 import { RingProgress, RingProgressConfig } from '@ant-design/plots';
-import useFakeLoader from '@/hooks/useFakeLoader'
 import { colors } from '@/utils/theme'
 import CountUp from 'react-countup'
 
 const CompletedManeuvers: React.FC = () => {
 
 	const t = useT()
-	const loading = useFakeLoader()
 
 	const config: RingProgressConfig = {
 		height: 100,
@@ -24,7 +22,6 @@ const CompletedManeuvers: React.FC = () => {
 		statistic: {
 			content: false
 		},
-		loading,
 		progressStyle: {
 			lineCap: "round",
 			lineJoin: "miter",
@@ -32,7 +29,7 @@ const CompletedManeuvers: React.FC = () => {
 	};
 
 	return (
-		<Box className='completed_maneuvers chart-box' key={`${loading}`}>
+		<Box className='completed_maneuvers chart-box'>
 			<Typography.Title className='chart-title' level={5}>{t("completed_maneuvers")}</Typography.Title>
 			<div className='completed_maneuvers_content'>
 				<div className='completed_maneuvers_left'>

@@ -1,4 +1,3 @@
-import useFakeLoader from '@/hooks/useFakeLoader';
 import Box from '@/styles/Box';
 import { Column, ColumnConfig } from '@ant-design/plots';
 import { Typography } from 'antd';
@@ -8,7 +7,6 @@ import { useTranslation } from 'react-i18next';
 const ClinicWorkload: React.FC = () => {
 
 	const { t } = useTranslation()
-	const loading = useFakeLoader()
 
 	const data = [
 		{
@@ -62,11 +60,10 @@ const ClinicWorkload: React.FC = () => {
 		columnStyle: {
 			radius: [20, 20, 0, 0],
 		},
-		loading,
 	};
 
 	return (
-		<Box key={`${loading}`} className='chart-box'>
+		<Box className='chart-box'>
 			<Typography.Title level={5} className='chart-title'>{t("clinic_workload")}</Typography.Title>
 			<Column {...config} height={150} />
 		</Box>

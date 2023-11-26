@@ -130,9 +130,10 @@ const DoctorsTable: React.FC = () => {
 			dataSource={data}
 			loading={loading}
 			rowSelection={{ type: "checkbox" }}
+			rowClassName="cursor-pointer"
 			onRow={(_, rowIndex) => {
 				return {
-					onClick: () => navigate(`/doctors/cabinet/${rowIndex}`)
+					onClick: () => navigate(`/doctors/cabinet/${rowIndex}`),
 				};
 			}}
 		/>

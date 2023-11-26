@@ -1,10 +1,11 @@
 import MyButton from "@/components/antd/MyButton";
 import MyTable from "@/components/antd/MyTable";
 import useFakeLoader from "@/hooks/useFakeLoader";
-import { ArrowRightOutlined, CalculatorOutlined, EyeFilled } from "@ant-design/icons";
-import { Button, Flex, Tag, Timeline } from "antd";
+import { colors } from "@/utils/theme";
+import { CloseOutlined, EyeFilled } from "@ant-design/icons";
+import { Button, Flex, Tag, Timeline, Tooltip } from "antd";
 import React from 'react';
-import { FaArrowRight, FaCalculator, FaEye, FaMoneyBill, FaUserDoctor } from "react-icons/fa6";
+import { FaArrowRight, FaCalculator, FaMoneyBill, FaUserDoctor } from "react-icons/fa6";
 
 const FinanceTable: React.FC = () => {
 
@@ -15,6 +16,7 @@ const FinanceTable: React.FC = () => {
 		{
 			title: 'Номер счета',
 			dataIndex: 'number',
+			render: (el: string) => <Tag color={colors.success}>{el}</Tag>
 		},
 		{
 			title: 'Пациент',
@@ -38,10 +40,10 @@ const FinanceTable: React.FC = () => {
 							children: 'Узи',
 							dot: <FaArrowRight />
 						},
-						{
-							children: 'Итого',
-							dot: <FaCalculator />
-						},
+						// {
+						// 	children: 'Итого',
+						// 	dot: <FaCalculator />
+						// },
 					]}
 				/>
 			)
@@ -114,8 +116,12 @@ const FinanceTable: React.FC = () => {
 			dataIndex: 'action',
 			render: () => (
 				<Flex gap={4}>
-					<MyButton size="small" type="text" color="green"><EyeFilled />Просмотр</MyButton>
-					<MyButton size="small" danger>Отменить</MyButton>
+					<Tooltip title="Просмотр">
+						<MyButton size="small" type="text" shape="circle" color="green"><EyeFilled /></MyButton>
+					</Tooltip>
+					<Tooltip title="Отменить">
+						<MyButton size="small" type="text" shape="circle" color="red"><CloseOutlined /></MyButton>
+					</Tooltip>
 				</Flex>
 			),
 		},

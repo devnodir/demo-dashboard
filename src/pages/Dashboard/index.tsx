@@ -5,6 +5,8 @@ import { BsCalendarFill } from 'react-icons/bs'
 import Style from './Style'
 import ClinicWorkload from './components/ClinicWorkload'
 import CompletedManeuvers from './components/CompletedManeuvers'
+import TotalBalance from './components/TotalBalance'
+import TopDoctors from './components/TopDoctors'
 
 const Dashboard: React.FC = () => {
 	return (
@@ -22,7 +24,16 @@ const Dashboard: React.FC = () => {
 					<CompletedManeuvers />
 				</Col>
 				<Col lg={8}>
-
+					<TopDoctors title='Топ врачи по приемам' type={1} />
+				</Col>
+				<Col lg={8}>
+					<TotalBalance title="Общая сумма" summ={12412332} />
+				</Col>
+				<Col lg={8}>
+					<TotalBalance title="Всего произведенных платежей" summ={11212332} />
+				</Col>
+				<Col lg={8}>
+					<TopDoctors title='Топ врачи по доходам' type={2} />
 				</Col>
 			</Row>
 		</Style>

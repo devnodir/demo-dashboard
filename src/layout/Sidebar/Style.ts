@@ -1,11 +1,10 @@
+import { convertHex } from "@/utils/convertor";
 import styled from "styled-components";
 import { Layout } from "antd";
-import { getToken } from "@/utils/theme";
+import { getToken, styledToken } from "@/utils/theme";
 const { Sider } = Layout;
 
 export default styled(Sider)`
-    background-color: ${getToken()?.colorBgLayout} !important;
-    overflow: auto;
     .ant-menu {
         height: 100%;
         user-select: none;
@@ -15,7 +14,8 @@ export default styled(Sider)`
             padding: 8px 16px !important;
             height: unset;
             &:not(&-selected) {
-                color: rgba(0, 0, 0, 0.75);
+                color: ${(p) =>
+                    convertHex(getToken(p.theme.mode)?.colorText, 0.75)};
             }
             &::before {
                 content: "";
@@ -23,7 +23,7 @@ export default styled(Sider)`
                 height: 0%;
                 top: 50%;
                 width: 6px;
-                background-color: ${getToken()?.colorPrimary};
+                background-color: ${(p) => styledToken(p).colorPrimary};
                 left: -3px;
                 transform: translateY(-50%);
                 transition: 0.3s ease;

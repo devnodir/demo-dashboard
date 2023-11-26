@@ -1,12 +1,13 @@
 import styled from "styled-components";
 import { Layout } from "antd";
-import { getToken } from "@/utils/theme";
+import { getToken, styledColor } from "@/utils/theme";
 const { Header } = Layout;
 
 export default styled(Header)`
     padding: 0;
-    border-bottom: 1px solid ${getToken()?.colorBorderSecondary};
-    background-color: ${getToken()?.colorBgLayout};
+    border-bottom: 1px solid
+        ${(p) => getToken(p.theme.mode)?.colorBorderSecondary};
+    background-color: ${(p) => getToken(p.theme.mode)?.colorBgContainer};
     box-shadow: 0 0 4px 4px rgb(0 0 0 / 2%);
     z-index: 111;
     display: grid;
@@ -26,14 +27,6 @@ export default styled(Header)`
         align-items: center;
         justify-content: space-between;
         padding: 0 16px;
-        .toggle {
-            background-color: ${getToken()?.colorPrimaryBg};
-            color: ${getToken()?.colorPrimary};
-            border-color: ${getToken()?.colorPrimaryBg};
-            svg {
-                transition: 0.3s ease;
-            }
-        }
         &-left {
             display: flex;
             align-items: center;
@@ -56,12 +49,13 @@ export default styled(Header)`
                     border: none;
                     border-radius: 4px;
                     min-width: 36px;
+                    color: ${(p) => styledColor(p).text};
+                    background-color: ${(p) => styledColor(p).border};
                     img {
                         width: 24px;
                         border-radius: 2px;
                     }
                     svg {
-                        opacity: 0.8;
                         font-size: 18px;
                     }
                 }
@@ -72,7 +66,7 @@ export default styled(Header)`
                 &-img {
                     height: 42px;
                     width: 42px;
-                    background-color: ${getToken()?.colorBorderSecondary};
+                    background-color: ${(p) => styledColor(p).border};
                     border-radius: 50%;
                     display: flex;
                     align-items: center;
@@ -88,10 +82,11 @@ export default styled(Header)`
                     flex-direction: column;
                     padding-right: 12px;
                     span {
+                        color: ${(p) => styledColor(p).text};
                         &:last-child {
                             position: relative;
-                            background-color: ${getToken()?.green2};
-                            color: ${getToken()?.green};
+                            background-color: ${getToken("light")?.green2};
+                            color: ${getToken("light")?.green};
                             padding: 0 6px;
                             border-radius: 6px;
                             opacity: 0.7;

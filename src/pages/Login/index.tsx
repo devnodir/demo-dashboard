@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import StyleWrapper from './Style';
 import { phoneFormatter } from "@/utils/formatter";
 import { R_PASSWORD, R_PHONE, R_REQUIRED } from "@/utils/rules";
+import useAppSelector from "@/hooks/useAppSelector";
 
 interface IFormData {
 	phone_number: string
@@ -21,6 +22,7 @@ const Login: React.FC = () => {
 
 	const navigate = useNavigate()
 	const [messageApi, contextHolder] = message.useMessage();
+	const mode = useAppSelector(state => state.auth.mode)
 
 	const { mutateAsync, isLoading } = useApiMutation(LOGIN)
 
@@ -61,7 +63,7 @@ const Login: React.FC = () => {
 			</div>
 			<div className='login-content'>
 				<div className="login-content-logo">
-					<img src="/logo.svg" alt="" />
+					<img src={`/logo-${mode}.svg`} alt="" />
 				</div>
 				<Form
 					layout="vertical"
@@ -70,7 +72,7 @@ const Login: React.FC = () => {
 					form={form}
 				>
 					<Form.Item<IFormData>
-						label="Phone number"
+						label="Номер телефона"
 						name="phone_number"
 						rules={[R_REQUIRED, R_PHONE]}
 						validateFirst
@@ -83,7 +85,7 @@ const Login: React.FC = () => {
 						/>
 					</Form.Item>
 					<Form.Item<IFormData>
-						label="Password"
+						label="Пароль"
 						name="password"
 						validateFirst
 						rules={[R_REQUIRED, R_PASSWORD]}
@@ -101,7 +103,7 @@ const Login: React.FC = () => {
 						htmlType="submit"
 						type="primary"
 					>
-						SUBMIT
+						ВОЙТИ
 					</Button>
 				</Form>
 			</div>

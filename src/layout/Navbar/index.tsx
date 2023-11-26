@@ -7,13 +7,18 @@ import React from 'react';
 import { BsArrowLeftSquareFill, BsGearWide } from "react-icons/bs";
 import { FaUser } from "react-icons/fa6";
 import StyleWrapper from './Style';
+import ModeHandler from '@/components/shared/ModeHandler';
+import useAppSelector from '@/hooks/useAppSelector';
+import { setIsAuth } from '@/utils/dispatch';
 
 const Navbar: React.FC = () => {
+
+	const mode = useAppSelector(state => state.auth.mode)
 
 	return (
 		<StyleWrapper>
 			<div className='logo'>
-				<img src='/logo.svg' alt='logo' />
+				<img src={`/logo-${mode}.svg`} alt='logo' />
 			</div>
 			<div className='content'>
 				<div className="content-left">
@@ -21,6 +26,7 @@ const Navbar: React.FC = () => {
 				</div>
 				<div className="content-right">
 					<div className="buttons">
+						<ModeHandler />
 						<FullScreenHandler />
 						<Notifications />
 						<LangSelect />
@@ -47,7 +53,10 @@ const UserMenu: React.FC = () => {
 			key: "logout",
 			label: "Logout",
 			icon: <BsArrowLeftSquareFill />,
-			danger: true
+			danger: true,
+			onClick: () => {
+				setIsAuth(false)
+			}
 		},
 	]
 
