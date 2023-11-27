@@ -1,12 +1,12 @@
-import useAppSelector from '@/hooks/useAppSelector'
-import { setMode } from '@/utils/dispatch'
+import useMainStore from '@/store/main'
 import React from 'react'
 import { BsBrightnessHighFill } from 'react-icons/bs'
 import { FaMoon } from 'react-icons/fa6'
 
 const ModeHandler: React.FC = () => {
 
-	const mode = useAppSelector(state => state.auth.mode)
+	const { mode, setMode } = useMainStore()
+
 
 	const toggle = () => {
 		setMode(mode === "dark" ? "light" : "dark")

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import useApi from '@/hooks/useApi'
+import useMainStore from '@/store/main'
 import { IChildren } from '@/types/helper.type'
-import { setIsAuth, setUserData } from '@/utils/dispatch'
 import { getLocalStorage, removeLocalStorage } from '@/utils/localStorage'
 import { AUTH_USER, USER_TOKEN } from '@/utils/variables'
 import { message } from 'antd'
@@ -17,6 +17,8 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
 
 	const [messageApi, contextHolder] = message.useMessage();
 	const { error } = useApi(AUTH_USER, { onSuccess, onError, enabled: Boolean(token), suspense: true })
+
+	const { setIsAuth, setUserData } = useMainStore()
 
 	function onSuccess(res: any) {
 		setUserData(res.user)

@@ -1,17 +1,16 @@
 /* eslint-disable react-refresh/only-export-components */
-import GlobalStyle from '@/styles/Global';
-import { IChildren } from '@/types/helper.type'
-import { ConfigProvider } from 'antd'
-import React, { useEffect } from 'react'
-import ru from "antd/locale/ru_RU"
-import en from "antd/locale/en_US"
-import dayjs from 'dayjs';
-import { useTranslation } from 'react-i18next';
-import useAppSelector from '@/hooks/useAppSelector';
-import { ThemeConfig, theme as antTheme } from 'antd';
-import { themeCompontens, themeToken } from '@/utils/theme';
-import { ThemeProvider as ThemeStyledComponent } from "styled-components"
 import useObserveMode from '@/hooks/useObserveMode';
+import useMainStore from '@/store/main';
+import GlobalStyle from '@/styles/Global';
+import { IChildren } from '@/types/helper.type';
+import { themeCompontens, themeToken } from '@/utils/theme';
+import { ConfigProvider, ThemeConfig, theme as antTheme } from 'antd';
+import en from "antd/locale/en_US";
+import ru from "antd/locale/ru_RU";
+import dayjs from 'dayjs';
+import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { ThemeProvider as ThemeStyledComponent } from "styled-components";
 import("dayjs/locale/ru");
 import("dayjs/locale/en");
 import("dayjs/locale/uz-latn");
@@ -23,7 +22,7 @@ interface IProps {
 const ThemeProvider: React.FC<IProps> = ({ children }) => {
 
 	const { i18n: { language } } = useTranslation()
-	const mode = useAppSelector(state => state.auth.mode)
+	const { mode } = useMainStore()
 
 	useObserveMode()
 

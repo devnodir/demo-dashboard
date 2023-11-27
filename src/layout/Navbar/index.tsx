@@ -1,20 +1,19 @@
 import FullScreenHandler from '@/components/shared/FullScreenHandler';
 import HeadSearch from '@/components/shared/HeadSearch';
 import LangSelect from '@/components/shared/LangSelect';
+import ModeHandler from '@/components/shared/ModeHandler';
 import Notifications from '@/components/shared/Notifications';
+import useMainStore from '@/store/main';
+import { colors } from '@/utils/theme';
 import { Dropdown, MenuProps, Tag, Typography } from 'antd';
 import React from 'react';
 import { BsArrowLeftSquareFill, BsGearWide } from "react-icons/bs";
 import { FaUser } from "react-icons/fa6";
 import StyleWrapper from './Style';
-import ModeHandler from '@/components/shared/ModeHandler';
-import useAppSelector from '@/hooks/useAppSelector';
-import { setIsAuth } from '@/utils/dispatch';
-import { colors } from '@/utils/theme';
 
 const Navbar: React.FC = () => {
 
-	const mode = useAppSelector(state => state.auth.mode)
+	const { mode } = useMainStore()
 
 	return (
 		<StyleWrapper>
@@ -43,6 +42,7 @@ export default Navbar
 
 
 const UserMenu: React.FC = () => {
+	const { setIsAuth } = useMainStore()
 
 	const items: MenuProps["items"] = [
 		{

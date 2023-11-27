@@ -1,5 +1,4 @@
 import React, { Suspense } from 'react'
-import useAppSelector from '@/hooks/useAppSelector.ts'
 import ThemeProvider from '@/providers/ThemeProvider/index.tsx'
 import { publicRoutes, privateRoutes } from '@/routes'
 import RenderRoutes from '@/components/shared/RenderRoutes'
@@ -7,11 +6,11 @@ import AuthProvider from '@/providers/AuthProvider'
 import ScreenLoader from '@/components/shared/Loaders/ScreenLoader'
 import ErrorBoundary from '@/components/shared/ErrorBoundary'
 import { useTranslation } from 'react-i18next'
-import "@/assets/bootstrap/bootstrap.min.css"
+import useMainStore from '@/store/main'
 
 const App: React.FC = () => {
 
-  const { isAuth } = useAppSelector(({ auth }) => auth)
+  const { isAuth } = useMainStore()
   const routes = isAuth ? privateRoutes : publicRoutes
 
   const { i18n } = useTranslation()

@@ -1,6 +1,5 @@
 import doctor from "@/assets/lottie/doctor.json";
 import useApiMutation from '@/hooks/useApiMutation';
-import { setIsAuth, setUserData } from '@/utils/dispatch';
 import { setLocalStorage } from '@/utils/localStorage';
 import { LOGIN, USER_TOKEN } from '@/utils/variables';
 import { Button, Form, Input, InputNumber, message } from 'antd';
@@ -11,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import StyleWrapper from './Style';
 import { phoneFormatter } from "@/utils/formatter";
 import { R_PASSWORD, R_PHONE, R_REQUIRED } from "@/utils/rules";
-import useAppSelector from "@/hooks/useAppSelector";
+import useMainStore from "@/store/main";
 
 interface IFormData {
 	phone_number: string
@@ -22,7 +21,7 @@ const Login: React.FC = () => {
 
 	const navigate = useNavigate()
 	const [messageApi, contextHolder] = message.useMessage();
-	const mode = useAppSelector(state => state.auth.mode)
+	const { mode, setIsAuth, setUserData } = useMainStore()
 
 	const { mutateAsync, isLoading } = useApiMutation(LOGIN)
 

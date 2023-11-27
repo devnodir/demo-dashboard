@@ -1,8 +1,8 @@
+import useMainStore from "@/store/main";
 import { useEffect } from "react";
-import useAppSelector from "./useAppSelector";
 
 const useObserveMode = () => {
-    const mode = useAppSelector((state) => state.auth.mode);
+    const { mode } = useMainStore();
     useEffect(() => {
         localStorage.setItem("theme", mode);
         document.body.className = mode;
