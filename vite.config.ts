@@ -6,7 +6,12 @@ import { VitePWA, VitePWAOptions } from "vite-plugin-pwa";
 const manifestForPlugIn: Partial<VitePWAOptions> = {
     registerType: "autoUpdate",
     mode: "production",
-    includeAssets: ["favicon.ico", "apple-touc-icon.png", "masked-icon.svg"],
+    includeAssets: [
+        "favicon.ico",
+        "apple-touc-icon.png",
+        "masked-icon.svg",
+        "assets/*.svg",
+    ],
     manifest: {
         name: "Demo med",
         short_name: "demo-med",
