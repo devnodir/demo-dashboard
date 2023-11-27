@@ -63,7 +63,7 @@ const Login: React.FC = () => {
 			</div>
 			<div className='login-content'>
 				<div className="login-content-logo">
-					<img src={`/logo-${mode}.svg`} alt="" />
+					<img src={`/assets/logo-${mode}.svg`} alt="" />
 				</div>
 				<Form
 					layout="vertical"

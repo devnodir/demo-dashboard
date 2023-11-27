@@ -19,7 +19,7 @@ const Navbar: React.FC = () => {
 	return (
 		<StyleWrapper>
 			<div className='logo'>
-				<img src={`/logo-${mode}.svg`} alt='logo' />
+				<img src={`/assets/logo-${mode}.svg`} alt='logo' />
 			</div>
 			<div className='content'>
 				<div className="content-left">

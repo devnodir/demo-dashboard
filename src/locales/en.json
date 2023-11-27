@@ -26,5 +26,7 @@
 	"completed": "Completed",
 	"incompleted": "Inompleted",
 	"page_not_found": "Sorry, the page you visited does not exist.",
-	"home_page": "Home page"
+	"home_page": "Home page",
+	"l_phone": "",
+	"l_password": ""
 }

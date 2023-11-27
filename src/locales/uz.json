@@ -26,5 +26,7 @@
 	"completed": "Bajarilgan",
 	"incompleted": "Barilmagan",
 	"page_not_found": "Kechirasiz, bunday sahifa mavjud emas",
-	"home_page": "Asosiy sahifa"
+	"home_page": "Asosiy sahifa",
+	"l_phone": "",
+	"l_password": ""
 }

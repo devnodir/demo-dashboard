@@ -2,9 +2,12 @@
 import { ButtonProps, ConfigProvider, Button, theme } from 'antd'
 import React from 'react'
 
-const MyButton: React.FC<ButtonProps> = ({ color, ...props }) => {
+const MyButton: React.FC<ButtonProps> = ({ color, icon, ...props }) => {
 
 	const { token } = theme.useToken()
+	if (icon) {
+		icon = <span className='anticon'>{icon}</span>
+	}
 
 	return (
 		<ConfigProvider
@@ -17,7 +20,7 @@ const MyButton: React.FC<ButtonProps> = ({ color, ...props }) => {
 				}
 			} : undefined}
 		>
-			<Button {...props} />
+			<Button {...props} icon={icon} />
 		</ConfigProvider>
 	)
 }

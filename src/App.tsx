@@ -9,14 +9,12 @@ import ErrorBoundary from '@/components/shared/ErrorBoundary'
 import { useTranslation } from 'react-i18next'
 import "@/assets/bootstrap/bootstrap.min.css"
 
-
 const App: React.FC = () => {
 
   const { isAuth } = useAppSelector(({ auth }) => auth)
   const routes = isAuth ? privateRoutes : publicRoutes
 
   const { i18n } = useTranslation()
-
 
   return (
     <ThemeProvider>

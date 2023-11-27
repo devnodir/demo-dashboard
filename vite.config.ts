@@ -4,8 +4,15 @@ import * as path from "path";
 import { VitePWA, VitePWAOptions } from "vite-plugin-pwa";
 
 const manifestForPlugIn: Partial<VitePWAOptions> = {
-    registerType: "prompt",
-    includeAssets: ["favicon.ico", "apple-touc-icon.png", "masked-icon.svg"],
+    registerType: "autoUpdate",
+    injectRegister: "auto",
+    mode: "production",
+    includeAssets: [
+        "favicon.ico",
+        "apple-touc-icon.png",
+        "masked-icon.svg",
+        "assets",
+    ],
     manifest: {
         name: "Demo med",
         short_name: "demo-med",

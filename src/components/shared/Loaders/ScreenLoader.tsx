@@ -7,7 +7,7 @@ const ScreenLoader: React.FC = () => {
 		<Style>
 			<div className='screen-loader'>
 				<div className="screen-loader-content">
-					{/* <img src="/logo.svg" alt="" /> */}
+					{/* <img src="/assets/logo.svg" alt="" /> */}
 					<Spin />
 				</div>
 			</div>
