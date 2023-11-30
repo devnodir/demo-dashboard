@@ -14,6 +14,9 @@ export default createGlobalStyle`
 	  background-color: ${(p) => styledColor(p).body};
 	  height: 100vh;
 	}
+	#root{
+		height: 100%;
+	}
 	.ant-input{
 		&-group{
 			&-addon{
