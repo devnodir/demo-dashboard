@@ -1,4 +1,5 @@
 import MyButton from "@/components/antd/MyButton"
+import useWindowListener from "@/hooks/useWindowListener"
 import { IChildren } from "@/types/helper.type"
 import { getToken } from "@/utils/theme"
 import { ReloadOutlined } from "@ant-design/icons"
@@ -12,7 +13,9 @@ interface Props {
 
 const NetworkError: React.FC<Props> = ({ children }) => {
 
-	const [noInternet, setNoEnternet] = useState(false)
+	const [noInternet, setNoInternet] = useState(!navigator.onLine)
+
+	useWindowListener("offline", () => setNoInternet(true))
 
 	const reload = () => {
 		window.location.reload()
