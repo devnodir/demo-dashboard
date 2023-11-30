@@ -1,6 +1,7 @@
 import MyButton from '@/components/antd/MyButton'
 import { phoneFormatter } from '@/utils/formatter'
 import { R_PHONE, R_REQUIRED } from '@/utils/rules'
+import { colors } from '@/utils/theme'
 import { PlusOutlined } from '@ant-design/icons'
 import { Button, Col, DatePicker, Form, Input, InputNumber, Row, Select } from 'antd'
 import React, { useState } from 'react'
@@ -111,7 +112,7 @@ const PatientAction: React.FC = () => {
 				))
 			}
 
-			<MyButton color="green" shape="circle" className='mb-4 float-right' type="primary" onClick={addPhone}>
+			<MyButton color={colors.success} shape="circle" className='mb-4 float-right' type="primary" onClick={addPhone}>
 				<PlusOutlined />
 			</MyButton>
 			<Button block type="primary" htmlType="submit" >

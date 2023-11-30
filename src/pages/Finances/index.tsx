@@ -7,6 +7,7 @@ import { BsCalendarFill } from 'react-icons/bs'
 import FinanceTable from './components/Table'
 import CountUp from "react-countup"
 import Style from './Style'
+import { colors } from '@/utils/theme'
 
 const Finances: React.FC = () => {
 	return (
@@ -40,13 +41,13 @@ const Finances: React.FC = () => {
 			<Flex justify="space-between" className='my-4'>
 				<Flex gap={8}>
 					<Select showSearch placeholder="Фильтр пациентов" style={{ minWidth: 200 }} />
-					<DatePicker.RangePicker style={{ minWidth: 300 }} format="DD.MM.YYYY" suffixIcon={<BsCalendarFill />} />
+					<DatePicker.RangePicker style={{ maxWidth: 300 }} format="DD.MM.YYYY" suffixIcon={<BsCalendarFill />} />
 					<Select showSearch placeholder="Статус оплаты" />
 					<Select showSearch placeholder="Выбрать врача" />
 					<Select showSearch placeholder="Способ оплаты" />
 				</Flex>
 				<Flex gap={8}>
-					<MyButton type="text" color="green" icon={<DownloadOutlined />}>Скачать Excel</MyButton>
+					<MyButton color={colors.success} icon={<DownloadOutlined />}>Скачать Excel</MyButton>
 					<MyButton type="primary">Создать счет</MyButton>
 				</Flex>
 			</Flex>

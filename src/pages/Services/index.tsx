@@ -5,6 +5,7 @@ import React from 'react'
 import ServicesTable from './components/Table'
 import { Drawer } from 'antd'
 import ServiceAction from './components/Action'
+import { colors } from '@/utils/theme'
 
 const Users: React.FC = () => {
 	const [isOpen, toggle] = useToggleState(false)
@@ -13,7 +14,7 @@ const Users: React.FC = () => {
 			<Button
 				onClick={toggle}
 				icon={<PlusOutlined />}
-				color="green"
+				color={colors.success}
 				type="primary"
 				className="text-uppercase float-right"
 			>

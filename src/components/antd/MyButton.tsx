@@ -13,10 +13,9 @@ const MyButton: React.FC<ButtonProps> = ({ color, icon, ...props }) => {
 		<ConfigProvider
 			theme={color ? {
 				token: {
-					//@ts-ignore
-					colorPrimary: token[color],
-					//@ts-ignore
-					colorText: token[color],
+					colorPrimary: color,
+					colorText: color,
+					colorBorder: color
 				}
 			} : undefined}
 		>

@@ -6,7 +6,7 @@ import ru from "@/locales/ru.json";
 import en from "@/locales/en.json";
 import uz from "@/locales/uz.json";
 
-const resources = {
+export const resources = {
     uz: {
         translation: uz,
     },

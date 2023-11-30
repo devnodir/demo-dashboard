@@ -1,6 +1,6 @@
 import type { MenuProps } from 'antd';
 import { BsGridFill } from "react-icons/bs";
-import { FaChartLine, FaHammer, FaHospitalUser, FaUserDoctor, FaUserGear } from "react-icons/fa6";
+import { FaChartLine, FaGear, FaHammer, FaHospitalUser, FaUserDoctor, FaUserGear } from "react-icons/fa6";
 
 export type MenuItem = Required<MenuProps>['items'][number];
 
@@ -35,6 +35,11 @@ const items: MenuItem[] = [
 		key: "/finances",
 		icon: <FaChartLine />
 	},
+	{
+		label: "settings",
+		key: "/settings",
+		icon: <FaGear />
+	},
 	// {
 	// 	label: "branches",
 	// 	key: "/branches",
@@ -55,11 +60,7 @@ const items: MenuItem[] = [
 	// 	key: "/laboratory",
 	// 	icon: <FaFlaskVial />
 	// },
-	// {
-	// 	label: "settings",
-	// 	key: "/settings",
-	// 	icon: <FaGear />
-	// },
+
 ];
 
 

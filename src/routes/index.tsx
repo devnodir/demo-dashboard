@@ -15,6 +15,19 @@ const privateRoutes: RouteObject[] = [
 	{ path: "/users", element: page("Users", AppLayout) },
 	{ path: "/services", element: page("Services", AppLayout) },
 	{ path: "/finances", element: page("Finances", AppLayout) },
+	{
+		path: "/settings", element: page("Settings", AppLayout),
+		children: [
+			{ path: "/settings/main", element: page("Settings/Main") },
+			{ path: "/settings/files", element: page("Settings/Files") },
+			{ path: "/settings/branches", element: page("Settings/Branches") },
+			{ path: "/settings/protocols", element: page("Settings/Protocols") },
+			{ path: "/settings/sms-template", element: page("Settings/Sms") },
+			{ path: "/settings/intergrations", element: page("Settings/Intergrations") },
+			{ path: "/settings/billing", element: page("Settings/Billing") },
+			{ path: "/settings", element: redirectTo("/settings/main", true) },
+		]
+	},
 	{ path: "/404", element: page("404", AppLayout) },
 	{ path: "/login", element: redirectTo("/dashboard", true) },
 	{ path: "/", element: redirectTo("/dashboard", true) },

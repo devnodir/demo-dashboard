@@ -115,10 +115,10 @@ const FinanceTable: React.FC = () => {
 			render: () => (
 				<Flex gap={4}>
 					<Tooltip title="Просмотр">
-						<MyButton size="small" type="text" shape="circle" color="green"><EyeFilled /></MyButton>
+						<MyButton size="small" type="text" shape="circle" color={colors.success}><EyeFilled /></MyButton>
 					</Tooltip>
 					<Tooltip title="Отменить">
-						<MyButton size="small" type="text" shape="circle" color="red"><CloseOutlined /></MyButton>
+						<MyButton size="small" type="text" shape="circle" color={colors.red}><CloseOutlined /></MyButton>
 					</Tooltip>
 				</Flex>
 			),

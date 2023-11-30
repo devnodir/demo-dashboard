@@ -1,9 +1,8 @@
-import Button from "@/components/antd/MyButton";
 import MyTable from "@/components/antd/MyTable";
-import { getToken } from "@/utils/theme";
+import ActionButtons from "@/components/shared/TableComponents/ActionButtons";
+import UserAvatar from "@/components/shared/TableComponents/UserAvatar";
 import { Tag } from 'antd';
 import React from 'react';
-import { FaPenToSquare, FaTrash, FaPaperPlane } from "react-icons/fa6";
 
 const PatientsTable: React.FC = () => {
 
@@ -12,9 +11,7 @@ const PatientsTable: React.FC = () => {
 		{
 			title: 'Image',
 			dataIndex: 'image',
-			render: (val: any) => (
-				<img src={val} alt="" style={{ height: 40, width: 40, borderRadius: "50%" }} />
-			)
+			render: (val: any) => <UserAvatar img={val} />
 		},
 		{
 			title: 'Full name',
@@ -42,16 +39,14 @@ const PatientsTable: React.FC = () => {
 			}
 		},
 		{
-			title: 'Actions',
+			title: '',
 			dataIndex: 'actions',
 			key: 'actions',
-			render: () => (
-				<div style={{ fontSize: 20 }}>
-					<Button color="red" shape="circle" type="text" icon={<FaPaperPlane color={getToken().blue5} />}></Button>
-					<Button shape="circle" type="text" icon={<FaPenToSquare color={getToken().colorPrimary} />}></Button>
-					<Button shape="circle" type="text" color="red" icon={<FaTrash color={getToken().red5} />}></Button>
-				</div>
-			)
+			render: () => <ActionButtons
+				onDelete={() => { }}
+				onUpdate={() => { }}
+				onMessage={() => { }}
+			/>
 		},
 	];
 

@@ -6,10 +6,12 @@ import { EditOutlined } from '@ant-design/icons'
 import { BsCalendarFill } from 'react-icons/bs'
 import { FaFilter } from 'react-icons/fa6'
 import MyButton from '@/components/antd/MyButton'
+import BackButton from '@/components/shared/BackButton'
 
 const DoctorCabinet: React.FC = () => {
 	return (
 		<Style className='doctor-cabinet'>
+			<BackButton />
 			<Box>
 				<Row gutter={[24, 24]}>
 					<Col lg={5} className='info-doctor'>
@@ -46,7 +48,7 @@ const DoctorCabinet: React.FC = () => {
 				</Row>
 			</Box>
 			<Box className='mt-4'>
-				<DatePicker.RangePicker style={{ minWidth: 320 }} format="DD.MM.YYYY" suffixIcon={<BsCalendarFill />} />
+				<DatePicker.RangePicker style={{ maxWidth: 320 }} format="DD.MM.YYYY" suffixIcon={<BsCalendarFill />} />
 				<MyButton type="primary" className='ml-4' icon={<FaFilter />}>Фильтр</MyButton>
 			</Box>
 		</Style>

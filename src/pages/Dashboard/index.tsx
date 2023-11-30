@@ -14,7 +14,7 @@ const Dashboard: React.FC = () => {
 			<Row gutter={[24, 24]}>
 				<Col lg={24}>
 					<Box>
-						<DatePicker.RangePicker style={{ minWidth: 300 }} format="DD.MM.YYYY" suffixIcon={<BsCalendarFill />} />
+						<DatePicker.RangePicker style={{ maxWidth: 300 }} format="DD.MM.YYYY" suffixIcon={<BsCalendarFill />} />
 					</Box>
 				</Col>
 				<Col lg={8}>

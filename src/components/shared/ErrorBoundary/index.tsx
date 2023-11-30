@@ -2,6 +2,8 @@ import { IChildren } from "@/types/helper.type";
 import { Button, Result } from "antd";
 import React from "react";
 import { ReloadOutlined } from "@ant-design/icons"
+import { FaBug } from "react-icons/fa6";
+import { colors, getToken } from "@/utils/theme";
 
 interface IProps {
 	children: IChildren
@@ -30,10 +32,10 @@ class ErrorBoundary extends React.Component<IProps, IStateProps> {
 	render() {
 		if (this.state.hasError) {
 			return <Result
-				status="500"
-				title="Unhanled Error"
-				subTitle={"Sorry, something went wrong. Please refresh page"}
-				extra={<Button type="primary" icon={<ReloadOutlined />} onClick={this.reload}>Refesh</Button>}
+				icon={<FaBug color={getToken().red5} />}
+				title="Необработанная Ошибка"
+				subTitle={"Извините, что-то пошло не так. Пожалуйста, обновите страницу"}
+				extra={<Button type="primary" icon={<ReloadOutlined />} className="text-uppercase" onClick={this.reload}>Обновить</Button>}
 			/>;
 		}
 

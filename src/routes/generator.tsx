@@ -4,7 +4,8 @@ import { ILayout } from "@/types/general.type"
 
 // generate that lazy imported page
 const generatePage = (folderPath: string, Layout?: React.FC<ILayout>, title?: string) => {
-	const Page = lazy(() => import(`../pages/${folderPath}/index.tsx`))
+	const match = `../pages/${folderPath}`
+	const Page = lazy(() => import(match))
 	return Layout ? <Layout title={title}><Page /></Layout> : <Page />
 }
 

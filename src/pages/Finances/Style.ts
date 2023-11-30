@@ -5,6 +5,9 @@ export default styled.div`
         tbody {
             td {
                 vertical-align: top !important;
+                &:last-child {
+                    width: 50px;
+                }
             }
         }
     }

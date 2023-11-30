@@ -6,8 +6,8 @@ export const baseColors = {
     primary: "#4c6fff",
     secondary: "#05bad1",
     success: "#52c41a",
-    red: "#cf1322",
-    blue: "#0958d9",
+    red: "#FF2E2E",
+    blue: "#0073cf",
 };
 
 export const colors = {
@@ -42,6 +42,7 @@ export const themeCompontens: ThemeConfig["components"] = {
     },
     Button: {
         controlHeight: 40,
+        controlHeightSM: 30,
     },
     Input: {
         controlHeight: 40,

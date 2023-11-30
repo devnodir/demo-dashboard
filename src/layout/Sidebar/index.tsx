@@ -25,8 +25,8 @@ const Sidebar: React.FC = () => {
 				mode="inline"
 				items={itemsLocale}
 				selectedKeys={active}
-				onSelect={({ key }) => {
-					navigate(key)
+				onSelect={(item) => {
+					navigate(item?.key)
 				}}
 			/>
 		</StyleWrapper>

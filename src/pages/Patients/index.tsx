@@ -5,13 +5,14 @@ import React, { Fragment } from 'react'
 import PatientsTable from "./components/Table"
 import PatientAction from "./components/Action"
 import MyButton from "@/components/antd/MyButton"
+import { colors } from '@/utils/theme'
 
 const Patients: React.FC = () => {
 	const [isOpen, toggle] = useToggleState(false)
 	return (
 		<Fragment>
 			<MyButton
-				color="green"
+				color={colors.success}
 				type="primary"
 				onClick={toggle}
 				icon={<PlusOutlined />}

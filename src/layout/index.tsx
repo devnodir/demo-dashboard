@@ -9,6 +9,8 @@ import PageLoader from '@/components/shared/Loaders/PageLoader';
 import TopProgressBar from '@/components/shared/TopProgressBar';
 import { useTranslation } from 'react-i18next';
 import HelpButton from '@/components/shared/HelpButton';
+import ErrorBoundary from '@/components/shared/ErrorBoundary';
+import NetworkError from '@/components/shared/NetworkError';
 
 
 interface IProps {
@@ -30,7 +32,11 @@ const AppLayout: React.FC<IProps> = ({ children }) => {
 					<Layout>
 						<Pages>
 							<Suspense fallback={<PageLoader />}>
-								{children}
+								<ErrorBoundary>
+									<NetworkError>
+										{children}
+									</NetworkError>
+								</ErrorBoundary>
 							</Suspense>
 						</Pages>
 						{/* <Footer style={{ textAlign: 'center' }}>Ant Design ©2023 Created by Ant UED</Footer> */}
