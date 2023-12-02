@@ -28,7 +28,7 @@ const privateRoutes: RouteObject[] = [
 			{ path: "/settings", element: redirectTo("/settings/main", true) },
 		]
 	},
-	{ path: "/404", element: page("404", AppLayout) },
+	{ path: "/404", element: page(() => import(`@/pages/404`), AppLayout) },
 	{ path: "/login", element: redirectTo("/dashboard", true) },
 	{ path: "/", element: redirectTo("/dashboard", true) },
 	{ path: "*", element: redirectTo("/404", true) }

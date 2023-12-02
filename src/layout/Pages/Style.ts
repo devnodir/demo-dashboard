@@ -8,6 +8,7 @@ export default styled(Content)`
     overflow-y: auto;
     display: grid;
     grid-template-rows: 1fr 52px;
+    position: relative;
     .footer {
         display: flex;
         align-items: center;

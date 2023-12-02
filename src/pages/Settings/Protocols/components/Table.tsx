@@ -41,28 +41,28 @@ const ProtocolsTable = () => {
 			create_by: "Nodirbek Abdunazarov"
 		},
 		{
-			key: "1",
+			key: "2",
 			name: "Main form",
 			service: "Health care",
 			create_at: "02.09.2023",
 			create_by: "Nodirbek Abdunazarov"
 		},
 		{
-			key: "1",
+			key: "3",
 			name: "Main form",
 			service: "Health care",
 			create_at: "02.09.2023",
 			create_by: "Nodirbek Abdunazarov"
 		},
 		{
-			key: "1",
+			key: "4",
 			name: "Main form",
 			service: "Health care",
 			create_at: "02.09.2023",
 			create_by: "Nodirbek Abdunazarov"
 		},
 		{
-			key: "1",
+			key: "5",
 			name: "Main form",
 			service: "Health care",
 			create_at: "02.09.2023",

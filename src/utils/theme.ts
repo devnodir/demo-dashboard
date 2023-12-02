@@ -18,6 +18,8 @@ export const colors = {
         layout: "#ffffff",
         container: "#ffffff",
         border_secondary: "#fefefe",
+        box_shadow:
+            "0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 9px 28px 8px rgba(0, 0, 0, 0.05)",
         ...baseColors,
     },
     dark: {
@@ -27,6 +29,8 @@ export const colors = {
         layout: "#1b2531",
         container: "#283142",
         border_secondary: "#344057",
+        box_shadow:
+            "0 3px 6px -4px rgba(0,0,0,.12), 0 6px 16px 0 rgba(0,0,0,.58), 0 9px 28px 8px rgba(0,0,0,.15)",
         ...baseColors,
     },
     ...baseColors,
@@ -56,6 +60,10 @@ export const themeCompontens: ThemeConfig["components"] = {
     Select: {
         controlHeight: 40,
     },
+    Segmented: {
+        itemSelectedBg: colors.primary,
+        itemSelectedColor: "#fff",
+    },
 };
 
 export const themeToken = (mode: IMode): ThemeConfig["token"] => {
@@ -72,6 +80,9 @@ export const themeToken = (mode: IMode): ThemeConfig["token"] => {
         colorPrimaryBg: convertHex(colors.primary, 0.1),
         colorTextPlaceholder: convertHex(colors[mode].text, 0.6),
         borderRadius: 10,
+        // boxShadow: "0 0 10px 10px #000",
+        boxShadowSecondary: colors[mode].box_shadow,
+        // boxShadowTertiary: "0 0 10px 10px #000",
     };
 };
 
