@@ -9,7 +9,7 @@ import { useForm } from 'antd/es/form/Form'
 import { MenuProps } from 'antd/lib'
 import { Fragment } from 'react'
 import { BsListUl } from 'react-icons/bs'
-import { FaAnglesDown, FaAnglesUp, FaCircleDot, FaFont, FaSquareCheck, FaTrash } from 'react-icons/fa6'
+import { FaAnglesDown, FaAnglesUp, FaCircleDot, FaFont, FaSquareCheck, FaTrashCan } from 'react-icons/fa6'
 
 const services = [
 	{ label: "Health care", value: "1" },
@@ -96,7 +96,7 @@ const ProtocolAction = () => {
 													<MyButton icon={< FaAnglesUp />} type="text" color={colors.primary} onClick={() => move(name, name - 1)} disabled={name === 0} />
 												</div>
 												<div style={{ width: 100 }}>
-													<MyButton icon={<FaTrash />} type="text" danger className="float-right" onClick={() => remove(name)} />
+													<MyButton icon={<FaTrashCan />} type="text" danger className="float-right" onClick={() => remove(name)} />
 												</div>
 											</Flex>
 										}

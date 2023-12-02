@@ -1,9 +1,8 @@
 import { IVoid } from '@/types/helper.type'
-import { EditOutlined } from '@ant-design/icons'
-import { Flex } from 'antd'
-import { FaMessage, FaPen, FaPencil, FaTrash } from 'react-icons/fa6'
-import MyButton from '../../antd/MyButton'
 import { colors } from '@/utils/theme'
+import { Flex } from 'antd'
+import { FaMessage, FaPen, FaTrash } from 'react-icons/fa6'
+import MyButton from '../../antd/MyButton'
 
 interface Props {
 	onDelete?: IVoid
