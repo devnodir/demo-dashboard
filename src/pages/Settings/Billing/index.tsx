@@ -66,6 +66,7 @@ const Billing: React.FC = () => {
 			<Flex className="my-2" gap={12} justify="end">
 				<Select
 					style={{ minWidth: 200 }}
+					placeholder="Select amount"
 					options={[
 						{ label: "100,000 UZS", value: "1" },
 						{ label: "200,000 UZS", value: "2" },
