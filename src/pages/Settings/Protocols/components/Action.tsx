@@ -49,6 +49,7 @@ const ProtocolAction = () => {
 			layout="vertical"
 			form={form}
 			onFinish={submit}
+			initialValues={{ items: [{ field_type: "input" }] }}
 		>
 			<Row gutter={24}>
 				<Col md={12} span={24}>
@@ -85,10 +86,11 @@ const ProtocolAction = () => {
 										key={key}
 										className='mb-4'
 										headStyle={{ background: colors[mode].body }}
+										bodyStyle={{ paddingBottom: 0 }}
 										style={{ borderColor: colors[mode].border }}
 										title={
 											<Flex justify="space-between" align="center">
-												<Typography.Title level={4} className='mb-0' style={{ width: 100 }}>{toCapitalize(type)}</Typography.Title>
+												<Typography.Title level={5} className='mb-0' style={{ width: 100 }}>{toCapitalize(type)}</Typography.Title>
 												<div>
 													<MyButton icon={< FaAnglesDown />} type="text" color={colors.primary} onClick={() => move(name, name + 1)} disabled={name + 1 === fields.length} />
 													<MyButton icon={< FaAnglesUp />} type="text" color={colors.primary} onClick={() => move(name, name - 1)} disabled={name === 0} />
@@ -151,12 +153,14 @@ const ProtocolAction = () => {
 								)
 							})
 						}
-						<AddButton onClick={({ key }) => add({ field_type: key })} />
+						<Flex justify="space-between" align="center">
+							<AddButton onClick={({ key }) => add({ field_type: key })} />
+							<MyButton htmlType="submit" type="primary" color={colors.success} className='text-uppercase'>Create Protocol</MyButton>
+						</Flex>
 					</Fragment>
 
 				)}
 			</Form.List>
-			<MyButton htmlType="submit" block color={colors.success} className='text-uppercase'>Create Protocol</MyButton>
 		</Form >
 	)
 }
