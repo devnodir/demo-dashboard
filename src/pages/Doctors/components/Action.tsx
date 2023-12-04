@@ -1,3 +1,4 @@
+import useT from '@/hooks/useT'
 import { phoneFormatter } from '@/utils/formatter'
 import { R_PASSWORD, R_PHONE, R_REQUIRED } from '@/utils/rules'
 import { Button, DatePicker, Form, Input, InputNumber, Radio, Select, TimePicker } from 'antd'
@@ -18,13 +19,14 @@ const status = [
 
 const DoctorAction: React.FC = () => {
 
+	const t = useT()
 
 	return (
 		<Form
 			layout="vertical"
 		>
 			<Form.Item
-				label="Name"
+				label={t("full_name")}
 				name="name"
 				rules={[R_REQUIRED]}
 			>
@@ -33,7 +35,7 @@ const DoctorAction: React.FC = () => {
 				/>
 			</Form.Item>
 			<Form.Item
-				label="Phone number"
+				label={t("l_phone")}
 				name="phone"
 				rules={[R_REQUIRED, R_PHONE]}
 				validateFirst
@@ -45,7 +47,7 @@ const DoctorAction: React.FC = () => {
 				/>
 			</Form.Item>
 			<Form.Item
-				label="Specialty"
+				label={t("specialty")}
 				name="specialty"
 			>
 				<Select
@@ -55,7 +57,7 @@ const DoctorAction: React.FC = () => {
 				/>
 			</Form.Item>
 			<Form.Item
-				label="Birthday"
+				label={t("birthday")}
 				name="birthday"
 			>
 				<DatePicker
@@ -65,13 +67,13 @@ const DoctorAction: React.FC = () => {
 				/>
 			</Form.Item>
 			<Form.Item
-				label="Working experience"
+				label={t("working_experience")}
 				name="experience"
 			>
 				<InputNumber type="number" className='w-100' />
 			</Form.Item>
 			<Form.Item
-				label="Working time"
+				label={t("working_time")}
 				name="time"
 			>
 				<TimePicker.RangePicker
@@ -81,7 +83,7 @@ const DoctorAction: React.FC = () => {
 				/>
 			</Form.Item>
 			<Form.Item
-				label="Status"
+				label={t("status")}
 				name="status"
 			>
 				<Select
@@ -89,7 +91,7 @@ const DoctorAction: React.FC = () => {
 				/>
 			</Form.Item>
 			<Form.Item
-				label="Password"
+				label={t("l_password")}
 				name="password"
 				validateFirst
 				rules={[R_REQUIRED, R_PASSWORD]}
@@ -101,7 +103,7 @@ const DoctorAction: React.FC = () => {
 				/>
 			</Form.Item>
 			<Form.Item
-				label="Branch"
+				label={t("branch")}
 				name="branch"
 			>
 				<Radio.Group>
@@ -111,8 +113,8 @@ const DoctorAction: React.FC = () => {
 					<Radio value={4} className='mb-2'>Uchtepa Filial</Radio>
 				</Radio.Group>
 			</Form.Item>
-			<Button block type="primary" htmlType="submit" className='mt-4'>
-				CREATE
+			<Button block type="primary" htmlType="submit" className='mt-4 text-uppercase'>
+				{t("create")}
 			</Button>
 		</Form>
 	)

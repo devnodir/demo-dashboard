@@ -5,9 +5,11 @@ import { FaCity, FaCodeFork, FaCoins, FaFileLines, FaMessage, FaSquare } from 'r
 import { BsUiChecks } from 'react-icons/bs'
 import { useNavigate, Outlet, useLocation } from 'react-router-dom'
 import PageLoader from '@/components/shared/Loaders/PageLoader'
+import useT from '@/hooks/useT'
 
 const Settings: React.FC = () => {
 
+	const t = useT()
 	const navigate = useNavigate()
 	const { pathname } = useLocation()
 
@@ -20,13 +22,13 @@ const Settings: React.FC = () => {
 	)
 
 	const items = [
-		{ label: <><FaSquare /> Main settings</>, key: "main", },
-		{ label: <><FaFileLines />Files</>, key: "files" },
-		{ label: <><FaCity />Branches</>, key: "branches" },
-		{ label: <><BsUiChecks />Protocols</>, key: "protocols" },
-		{ label: <><FaMessage /> SMS template</>, key: "sms-template" },
-		{ label: <><FaCodeFork />Intergrations</>, key: "intergrations" },
-		{ label: <><FaCoins /> Billing</>, key: "billing" },
+		{ label: <><FaSquare /> {t("main_settings")}</>, key: "main", },
+		{ label: <><FaFileLines />{t("files")}</>, key: "files" },
+		{ label: <><FaCity />{t("branches")}</>, key: "branches" },
+		{ label: <><BsUiChecks />{t("protocols")}</>, key: "protocols" },
+		{ label: <><FaMessage /> {t("sms_template")}</>, key: "sms-template" },
+		{ label: <><FaCodeFork />{t("intergrations")}</>, key: "intergrations" },
+		{ label: <><FaCoins /> {t("billing")}</>, key: "billing" },
 	]
 
 

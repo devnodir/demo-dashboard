@@ -1,7 +1,6 @@
-import { IChildren } from '@/types/helper.type'
-import React from 'react'
-import StyleWrapper from './Style'
-import { Typography } from "antd";
+import { IChildren } from '@/types/helper.type';
+import React from 'react';
+import StyleWrapper from './Style';
 
 
 interface IProps {
@@ -14,9 +13,9 @@ const Pages: React.FC<IProps> = ({ children }) => {
 			<div style={{ padding: 24 }}>
 				{children}
 			</div>
-			<div className="footer">
+			{/* <div className="footer">
 				<Typography.Text>©2023 Created by <a href='https://devnodir.uz'>DEVNODIR</a></Typography.Text>
-			</div>
+			</div> */}
 		</StyleWrapper>
 	)
 }

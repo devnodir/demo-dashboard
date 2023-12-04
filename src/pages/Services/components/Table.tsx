@@ -1,31 +1,32 @@
 import MyTable from "@/components/antd/MyTable";
 import ActionButtons from "@/components/shared/TableComponents/ActionButtons";
+import useT from "@/hooks/useT";
 import { Tag } from "antd";
 import React from 'react';
 
 const ServicesTable: React.FC = () => {
 
-
+	const t = useT()
 
 	const columns = [
 		{
-			title: 'Service name',
+			title: t("service_name"),
 			dataIndex: 'name',
 		},
 		{
-			title: 'Price',
+			title: t("price"),
 			dataIndex: 'price',
 		},
 		{
-			title: 'Parent',
+			title: t("parent_service"),
 			dataIndex: 'parent',
 		},
 		{
-			title: 'Branches',
+			title: t("branches"),
 			dataIndex: 'branch',
 		},
 		{
-			title: 'Status',
+			title: t("status"),
 			dataIndex: 'status',
 			render: (text: string) => (
 				<Tag color={text === "active" ? "green" : "red"} className="text-capitalize">{text}</Tag>

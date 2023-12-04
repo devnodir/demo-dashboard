@@ -1,48 +1,50 @@
 import MyTable from "@/components/antd/MyTable";
 import ActionButtons from "@/components/shared/TableComponents/ActionButtons";
 import UserAvatar from "@/components/shared/TableComponents/UserAvatar";
+import useT from "@/hooks/useT";
 import { Tag } from "antd";
 import React from 'react';
 import { Link } from "react-router-dom";
 
 const DoctorsTable: React.FC = () => {
 
+	const t = useT()
 
 	const columns = [
 		{
-			title: 'Image',
+			title: t('image'),
 			dataIndex: 'image',
 			render: (val: any) => <UserAvatar img={val} />
 		},
 		{
-			title: 'Full name',
+			title: t('full_name'),
 			dataIndex: 'name',
 			render: (name: string, order: any) => <Link to={`/doctors/cabinet/${order.id}`} className="py-3">
 				{name}
 			</Link>
 		},
 		{
-			title: 'Phone Number',
+			title: t('l_phone'),
 			dataIndex: 'phone',
 		},
 		{
-			title: 'Specialty',
+			title: t('specialty'),
 			dataIndex: 'specialty',
 		},
 		{
-			title: 'Working experience',
+			title: t('working_experience'),
 			dataIndex: 'experience',
 		},
 		{
-			title: 'Working time',
+			title: t('working_time'),
 			dataIndex: 'time',
 		},
 		{
-			title: 'Birthday',
+			title: t('birthday'),
 			dataIndex: 'birthday',
 		},
 		{
-			title: 'Status',
+			title: t('status'),
 			dataIndex: 'status',
 			render: (text: string) => (
 				<Tag color={text === "active" ? "green" : "red"} className="text-capitalize">{text}</Tag>

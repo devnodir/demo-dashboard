@@ -10,6 +10,7 @@ import React from 'react';
 import { BsArrowLeftSquareFill, BsGearWide } from "react-icons/bs";
 import { FaUser } from "react-icons/fa6";
 import StyleWrapper from './Style';
+import useT from '@/hooks/useT';
 
 const Navbar: React.FC = () => {
 
@@ -43,16 +44,17 @@ export default Navbar
 
 const UserMenu: React.FC = () => {
 	const { setIsAuth } = useMainStore()
+	const t = useT()
 
 	const items: MenuProps["items"] = [
 		{
 			key: "settings",
-			label: "Settings",
+			label: t("settings"),
 			icon: <BsGearWide />,
 		},
 		{
 			key: "logout",
-			label: "Logout",
+			label: t("logout"),
 			icon: <BsArrowLeftSquareFill />,
 			danger: true,
 			onClick: () => {

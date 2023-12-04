@@ -6,8 +6,10 @@ import UsersTable from './components/Table'
 import { Drawer } from 'antd'
 import UsersAction from './components/Action'
 import { colors } from '@/utils/theme'
+import useT from '@/hooks/useT'
 
 const Users: React.FC = () => {
+	const t = useT()
 	const [isOpen, toggle] = useToggleState(false)
 	return (
 		<div className='users'>
@@ -18,14 +20,15 @@ const Users: React.FC = () => {
 				type="primary"
 				className="text-uppercase float-right"
 			>
-				Add user
+				{t("add_user")}
 			</Button>
 			<UsersTable />
 			<Drawer
 				open={isOpen}
 				onClose={toggle}
-				title="New user"
+				title={t("new_user")}
 				destroyOnClose
+				width={480}
 			>
 				<UsersAction />
 			</Drawer>

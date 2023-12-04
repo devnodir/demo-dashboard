@@ -82,7 +82,7 @@ export const themeToken = (mode: IMode): ThemeConfig["token"] => {
         borderRadius: 10,
         // boxShadow: "0 0 10px 10px #000",
         boxShadowSecondary: colors[mode].box_shadow,
-        // boxShadowTertiary: "0 0 10px 10px #000",
+        // boxShadowTertiary: "0 0 10px 10px #000"
     };
 };
 

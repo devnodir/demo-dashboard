@@ -6,8 +6,10 @@ import ServicesTable from './components/Table'
 import { Drawer } from 'antd'
 import ServiceAction from './components/Action'
 import { colors } from '@/utils/theme'
+import useT from '@/hooks/useT'
 
 const Users: React.FC = () => {
+	const t = useT()
 	const [isOpen, toggle] = useToggleState(false)
 	return (
 		<div className='services'>
@@ -18,14 +20,15 @@ const Users: React.FC = () => {
 				type="primary"
 				className="text-uppercase float-right"
 			>
-				Add service
+				{t("add_service")}
 			</Button>
 			<ServicesTable />
 			<Drawer
 				open={isOpen}
 				onClose={toggle}
-				title="New service"
+				title={t("new_service")}
 				destroyOnClose
+				width={480}
 			>
 				<ServiceAction />
 			</Drawer>

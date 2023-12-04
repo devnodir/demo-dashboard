@@ -6,8 +6,10 @@ import DoctorsTable from './components/Table'
 import { Drawer } from 'antd'
 import DoctorAction from './components/Action'
 import { colors } from '@/utils/theme'
+import useT from '@/hooks/useT'
 
 const Doctors: React.FC = () => {
+	const t = useT()
 	const [isOpen, toggle] = useToggleState(false)
 	return (
 		<div className='doctors'>
@@ -18,14 +20,16 @@ const Doctors: React.FC = () => {
 				type="primary"
 				className="text-uppercase float-right"
 			>
-				Add doctor
+				{t("add_doctor")}
 			</Button>
 			<DoctorsTable />
 			<Drawer
 				open={isOpen}
 				onClose={toggle}
-				title="New doctor"
+				title={t("new_doctor")}
 				destroyOnClose
+				width={480}
+
 			>
 				<DoctorAction />
 			</Drawer>

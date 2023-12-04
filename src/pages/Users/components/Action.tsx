@@ -1,9 +1,11 @@
 import MyButton from '@/components/antd/MyButton'
+import useT from '@/hooks/useT'
 import { phoneFormatter } from '@/utils/formatter'
 import { R_PASSWORD, R_PHONE, R_REQUIRED } from '@/utils/rules'
+import { colors } from '@/utils/theme'
 import { PlusOutlined } from '@ant-design/icons'
-import { Button, Col, DatePicker, Form, Input, InputNumber, Row, Select } from 'antd'
-import React, { useState } from 'react'
+import { Button, Col, DatePicker, Form, Input, InputNumber, Row, Select, Typography } from 'antd'
+import React, { Fragment } from 'react'
 import { BsCalendarFill } from 'react-icons/bs'
 import { FaEye, FaEyeSlash, FaLock, FaPhone, FaTrash, FaUser } from 'react-icons/fa6'
 
@@ -27,25 +29,15 @@ const status = [
 
 const UsersAction: React.FC = () => {
 
+	const t = useT()
 
-	const [phones, setPhones] = useState<number[]>([1])
-
-	const addPhone = () => {
-		phones.push(phones[phones.length - 1] + 1)
-		setPhones([...phones])
-	}
-
-	const deletePhone = (index: number) => {
-		phones.splice(index, 1)
-		setPhones([...phones])
-	}
 
 	return (
 		<Form
 			layout="vertical"
 		>
 			<Form.Item
-				label="Name"
+				label={t("full_name")}
 				name="name"
 				rules={[R_REQUIRED]}
 			>
@@ -54,7 +46,7 @@ const UsersAction: React.FC = () => {
 				/>
 			</Form.Item>
 			<Form.Item
-				label="Phone number"
+				label={t("l_phone")}
 				name="phone"
 				rules={[R_REQUIRED, R_PHONE]}
 				validateFirst
@@ -66,7 +58,7 @@ const UsersAction: React.FC = () => {
 				/>
 			</Form.Item>
 			<Form.Item
-				label="Rol"
+				label={t("role")}
 				name="rol"
 			>
 				<Select
@@ -74,7 +66,7 @@ const UsersAction: React.FC = () => {
 				/>
 			</Form.Item>
 			<Form.Item
-				label="Branches"
+				label={t("branches")}
 				name="branches"
 			>
 				<Select
@@ -83,7 +75,7 @@ const UsersAction: React.FC = () => {
 				/>
 			</Form.Item>
 			<Form.Item
-				label="Birthday"
+				label={t("birthday")}
 				name="birthday"
 			>
 				<DatePicker
@@ -93,7 +85,7 @@ const UsersAction: React.FC = () => {
 				/>
 			</Form.Item>
 			<Form.Item
-				label="Status"
+				label={t("status")}
 				name="status"
 			>
 				<Select
@@ -101,7 +93,7 @@ const UsersAction: React.FC = () => {
 				/>
 			</Form.Item>
 			<Form.Item
-				label="Password"
+				label={t("l_password")}
 				name="password"
 				validateFirst
 				rules={[R_REQUIRED, R_PASSWORD]}
@@ -112,40 +104,47 @@ const UsersAction: React.FC = () => {
 					placeholder="********"
 				/>
 			</Form.Item>
-			{
-				phones.map((item, index) => (
-					<Form.Item
-						label={`Additional phone (${index + 1})`}
-						name={["additional_phone", item]}
-						rules={[R_PHONE]}
-						validateFirst
-						key={item}
-					>
-						<Row
-							gutter={4}
-						>
-							<Col span={20}>
-								<InputNumber
-									placeholder="+998 ** *** ** **"
-									formatter={phoneFormatter}
-									addonBefore={<FaPhone />}
-								/>
-							</Col>
-							<Col span={4}>
-								<Button danger disabled={phones.length === 1} type="text" className='float-right' onClick={() => deletePhone(index)}>
-									<FaTrash />
-								</Button>
-							</Col>
-						</Row>
-					</Form.Item>
-
-				))
-			}
-			<MyButton color='green' shape="circle" className='mb-4 float-right' type="primary" onClick={addPhone}>
-				<PlusOutlined />
-			</MyButton>
-			<Button block type="primary" htmlType="submit" className='mt-2'>
-				CREATE
+			<Form.List
+				name="addtion_phones"
+			>
+				{(fields, { add, remove }) => (
+					<Fragment>
+						<Typography.Text className='mb-2 d-inline-block'>{t("addtional_phones")}</Typography.Text>
+						{
+							fields.map(({ key, name }) => (
+								<Form.Item
+									name={[name, "additional_phone"]}
+									rules={[R_PHONE]}
+									validateFirst
+									key={key}
+								>
+									<Row
+										gutter={4}
+									>
+										<Col span={20}>
+											<InputNumber
+												placeholder="+998 ** *** ** **"
+												formatter={phoneFormatter}
+												addonBefore={<FaPhone />}
+											/>
+										</Col>
+										<Col span={4}>
+											<Button danger disabled={fields.length === 1} type="text" className='float-right' onClick={() => remove(name)}>
+												<FaTrash />
+											</Button>
+										</Col>
+									</Row>
+								</Form.Item>
+							))
+						}
+						<MyButton color={colors.success} shape="circle" className='mb-4 float-right' type="primary" onClick={add}>
+							<PlusOutlined />
+						</MyButton>
+					</Fragment>
+				)}
+			</Form.List>
+			<Button block type="primary" htmlType="submit" className='mt-2 text-uppercase'>
+				{t("create")}
 			</Button>
 		</Form>
 	)

@@ -2,33 +2,34 @@ import MyButton from "@/components/antd/MyButton";
 import MyTable from "@/components/antd/MyTable";
 import ActionButtons from "@/components/shared/TableComponents/ActionButtons";
 import UserAvatar from "@/components/shared/TableComponents/UserAvatar";
+import useT from "@/hooks/useT";
 import { Popover, Tag } from "antd";
 import React from 'react';
 
 const UsersTable: React.FC = () => {
 
-
+	const t = useT()
 
 	const columns = [
 		{
-			title: 'Image',
+			title: t("image"),
 			dataIndex: 'image',
 			render: (val: any) => <UserAvatar img={val} />
 		},
 		{
-			title: 'Full name',
+			title: t("full_name"),
 			dataIndex: 'name',
 		},
 		{
-			title: 'Phone Number',
+			title: t("l_phone"),
 			dataIndex: 'phone',
 		},
 		{
-			title: 'Role',
+			title: t("role"),
 			dataIndex: 'role',
 		},
 		{
-			title: 'Additional numbers',
+			title: t("addtional_phones"),
 			dataIndex: 'addtional_phones',
 			render: () => <Popover trigger={["click"]} title={<>
 				<p>+998 (99) 008-27-35</p>
@@ -38,15 +39,15 @@ const UsersTable: React.FC = () => {
 			</Popover>
 		},
 		{
-			title: 'Branches',
+			title: t("branch"),
 			dataIndex: 'branch',
 		},
 		{
-			title: 'Birthday',
+			title: t("birthday"),
 			dataIndex: 'birthday',
 		},
 		{
-			title: 'Status',
+			title: t("status"),
 			dataIndex: 'status',
 			render: (text: string) => (
 				<Tag color={text === "active" ? "green" : "red"} className="text-capitalize">{text}</Tag>
@@ -60,7 +61,7 @@ const UsersTable: React.FC = () => {
 				onDelete={() => { }}
 				onUpdate={() => { }}
 				onMessage={() => { }}
-			/>
+			/>,
 		},
 	];
 

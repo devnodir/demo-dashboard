@@ -1,12 +1,15 @@
 import MyButton from "@/components/antd/MyButton";
+import useT from "@/hooks/useT";
 import Box from "@/styles/Box";
 import { R_REQUIRED } from "@/utils/rules";
-import { DownloadOutlined, SaveFilled } from "@ant-design/icons";
-import { Checkbox, Col, DatePicker, Form, Input, Row, Typography } from "antd";
-import Dragger from "antd/lib/upload/Dragger";
+import { SaveFilled } from "@ant-design/icons";
+import { Checkbox, Col, DatePicker, Form, Input, Row, Upload } from "antd";
+import { useState } from "react";
 import { BsCalendarFill } from "react-icons/bs";
 
 const MainSettings = () => {
+    const t = useT()
+    const [files, setFiles] = useState<any[]>([])
     return (
         <div className="settings-main">
             <Box style={{ maxWidth: 900 }}>
@@ -48,16 +51,18 @@ const MainSettings = () => {
                         </Col>
                         <Col lg={12}>
                             <Form.Item
-                                name="logo-name"
+                                name="logo-icon"
                                 label="Image"
                                 rules={[R_REQUIRED]}
                             >
-                                <Dragger>
-                                    <p className="ant-upload-drag-icon">
-                                        <DownloadOutlined />
-                                    </p>
-                                    <Typography.Text>Click or drag file to this area to upload</Typography.Text>
-                                </Dragger>
+                                <Upload
+                                    maxCount={1}
+                                    listType="picture-card"
+                                    openFileDialogOnClick
+                                    onChange={({ fileList }) => setFiles(fileList)}
+                                >
+                                    {files.length === 0 && "Upload"}
+                                </Upload>
                             </Form.Item>
                         </Col>
                     </Row>

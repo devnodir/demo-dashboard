@@ -1,3 +1,4 @@
+import useT from '@/hooks/useT'
 import { R_REQUIRED } from '@/utils/rules'
 import { Button, Form, Input, InputNumber, Select } from 'antd'
 import React from 'react'
@@ -16,27 +17,28 @@ const branches = [
 
 const ServiceAction: React.FC = () => {
 
+	const t = useT()
 
 	return (
 		<Form
 			layout="vertical"
 		>
 			<Form.Item
-				label="Service name"
+				label={t("service_name")}
 				name="name"
 				rules={[R_REQUIRED]}
 			>
 				<Input />
 			</Form.Item>
 			<Form.Item
-				label="Price"
+				label={t("price")}
 				name="price"
 				rules={[R_REQUIRED]}
 			>
 				<InputNumber className='w-100' />
 			</Form.Item>
 			<Form.Item
-				label="Parent service"
+				label={t("parent_service")}
 				name="parent"
 			>
 				<Select
@@ -44,7 +46,7 @@ const ServiceAction: React.FC = () => {
 				/>
 			</Form.Item>
 			<Form.Item
-				label="Branches"
+				label={t("branches")}
 				name="branches"
 			>
 				<Select
@@ -53,7 +55,7 @@ const ServiceAction: React.FC = () => {
 				/>
 			</Form.Item>
 			<Form.Item
-				label="Status"
+				label={t("status")}
 				name="status"
 			>
 				<Select
@@ -61,7 +63,7 @@ const ServiceAction: React.FC = () => {
 				/>
 			</Form.Item>
 			<Button block type="primary" htmlType="submit" className='mt-2'>
-				CREATE
+				{t("create")}
 			</Button>
 		</Form>
 	)

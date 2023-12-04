@@ -6,8 +6,10 @@ import PatientsTable from "./components/Table"
 import PatientAction from "./components/Action"
 import MyButton from "@/components/antd/MyButton"
 import { colors } from '@/utils/theme'
+import useT from '@/hooks/useT'
 
 const Patients: React.FC = () => {
+	const t = useT()
 	const [isOpen, toggle] = useToggleState(false)
 	return (
 		<Fragment>
@@ -18,13 +20,14 @@ const Patients: React.FC = () => {
 				icon={<PlusOutlined />}
 				className="text-uppercase float-right"
 			>
-				Add patient
+				{t("add_patient")}
 			</MyButton>
 			<PatientsTable />
 			<Drawer
 				open={isOpen}
 				onClose={toggle}
-				title="New patient"
+				title={t("new_patient")}
+				width={480}
 				destroyOnClose
 			>
 				<PatientAction />

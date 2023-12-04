@@ -6,8 +6,6 @@ const { Content } = Layout;
 export default styled(Content)`
     background-color: ${(p) => styledColor(p).body};
     overflow-y: auto;
-    display: grid;
-    grid-template-rows: 1fr 52px;
     position: relative;
     .footer {
         display: flex;

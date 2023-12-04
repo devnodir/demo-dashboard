@@ -1,36 +1,38 @@
 import MyTable from "@/components/antd/MyTable";
 import ActionButtons from "@/components/shared/TableComponents/ActionButtons";
 import UserAvatar from "@/components/shared/TableComponents/UserAvatar";
+import useT from "@/hooks/useT";
 import { Tag } from 'antd';
 import React from 'react';
 
 const PatientsTable: React.FC = () => {
 
+	const t = useT()
 
 	const columns = [
 		{
-			title: 'Image',
+			title: t("image"),
 			dataIndex: 'image',
 			render: (val: any) => <UserAvatar img={val} />
 		},
 		{
-			title: 'Full name',
+			title: t("full_name"),
 			dataIndex: 'name',
 		},
 		{
-			title: 'Phone Number',
+			title: t("l_phone"),
 			dataIndex: 'phone',
 		},
 		{
-			title: 'Date',
+			title: t("date"),
 			dataIndex: 'date',
 		},
 		{
-			title: 'Address',
+			title: t("address"),
 			dataIndex: 'address',
 		},
 		{
-			title: 'Tags',
+			title: t("tags"),
 			dataIndex: 'tags',
 			render: (tags: any[]) => {
 				return tags.map((tag) => (

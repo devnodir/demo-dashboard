@@ -83,6 +83,8 @@ export default createGlobalStyle`
 		}
 	}
 	.ant-table{
+		width: calc(100% + 48px);
+    	margin-left: -24px !important;
 		background-color: transparent !important;
 		table{
 			border-spacing: 0 10px;
@@ -136,10 +138,19 @@ export default createGlobalStyle`
 				}
 			}
 		}
+		&-content{
+			padding: 0 24px;
+			padding-bottom: 12px;
+		}
 		&-wrapper{
 			:where(.css-dev-only-do-not-override-xto465).ant-spin-nested-loading .ant-spin-container::after{
 			background: transparent !important;
 		}
+		}
+		.ant-table-container{
+			&::after,&::before{
+				display: none;
+			}
 		}
 		.empty{
 			&-anim{
