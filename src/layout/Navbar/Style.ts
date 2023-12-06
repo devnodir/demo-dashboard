@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Layout } from "antd";
 import { getToken, styledColor } from "@/utils/theme";
+import { media } from "@/styles/media";
 const { Header } = Layout;
 
 export default styled(Header)`
@@ -13,8 +14,17 @@ export default styled(Header)`
     display: grid;
     grid-template-columns: 240px 1fr;
     align-items: center;
+
+    ${media("md")`
+        grid-template-columns: auto 1fr;
+    `}
+    .menu-btn {
+        button {
+            width: 42px;
+        }
+    }
     .logo {
-        display: flex;
+        display: none;
         align-items: center;
         padding: 0 16px;
         img {
@@ -27,6 +37,10 @@ export default styled(Header)`
         align-items: center;
         justify-content: space-between;
         padding: 0 16px;
+        ${media("md")`
+         padding: 0 8px;
+         gap:24px
+        `}
         &-left {
             display: flex;
             align-items: center;
@@ -35,6 +49,7 @@ export default styled(Header)`
         &-right {
             display: flex;
             align-items: center;
+            flex-shrink: 0;
             .buttons {
                 display: flex;
                 gap: 12px;
@@ -59,6 +74,10 @@ export default styled(Header)`
                         font-size: 18px;
                     }
                 }
+                ${media("md")`
+                    padding:0 12px;
+                    gap: 8px;
+                `}
             }
             .user {
                 display: flex;
@@ -93,6 +112,9 @@ export default styled(Header)`
                             margin-top: 2px;
                         } */
                     }
+                    ${media("md")`
+                    display:none;
+                    `}
                 }
             }
         }

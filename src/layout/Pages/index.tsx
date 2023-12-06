@@ -10,9 +10,7 @@ interface IProps {
 const Pages: React.FC<IProps> = ({ children }) => {
 	return (
 		<StyleWrapper className='pages' id='app-pages'>
-			<div style={{ padding: 24 }}>
-				{children}
-			</div>
+			{children}
 			{/* <div className="footer">
 				<Typography.Text>©2023 Created by <a href='https://devnodir.uz'>DEVNODIR</a></Typography.Text>
 			</div> */}

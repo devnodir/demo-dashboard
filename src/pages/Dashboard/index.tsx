@@ -11,29 +11,32 @@ import TopDoctors from './components/TopDoctors'
 const Dashboard: React.FC = () => {
 	return (
 		<Style className='dashboard'>
-			<Row gutter={[24, 24]}>
-				<Col lg={24}>
+			<Row gutter={[{ xs: 12, sm: 12, md: 24 }, { xs: 12, sm: 12, md: 24 }]}>
+				<Col span={24}>
 					<Box>
-						<DatePicker.RangePicker style={{ maxWidth: 300 }} format="DD.MM.YYYY" suffixIcon={<BsCalendarFill />} />
+						<DatePicker.RangePicker className='filter-date' format="DD.MM.YYYY" suffixIcon={<BsCalendarFill />} />
 					</Box>
 				</Col>
-				<Col lg={8}>
+				<Col lg={8} md={12} sm={12} span={24}>
 					<ClinicWorkload />
 				</Col>
-				<Col lg={8}>
+				<Col lg={8} md={12} sm={12} span={24}>
 					<CompletedManeuvers />
 				</Col>
-				<Col lg={8}>
+				<Col lg={8} md={12} sm={12} span={24} className='d-none d-lg-block'>
 					<TopDoctors title='Топ врачи по приемам' type={1} />
 				</Col>
-				<Col lg={8}>
+				<Col lg={8} md={12} sm={12} span={24}>
 					<TotalBalance title="Общая сумма" summ={12412332} />
 				</Col>
-				<Col lg={8}>
+				<Col lg={8} md={12} sm={12} span={24}>
 					<TotalBalance title="Всего произведенных платежей" summ={11212332} />
 				</Col>
-				<Col lg={8}>
+				<Col lg={8} md={12} sm={12} span={24}>
 					<TopDoctors title='Топ врачи по доходам' type={2} />
+				</Col>
+				<Col lg={8} md={12} sm={12} span={24} className='d-lg-none'>
+					<TopDoctors title='Топ врачи по приемам' type={1} />
 				</Col>
 			</Row>
 		</Style>

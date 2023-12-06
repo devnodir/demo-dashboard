@@ -1,3 +1,4 @@
+import { media } from "@/styles/media";
 import { getToken, styledColor } from "@/utils/theme";
 import styled from "styled-components";
 
@@ -8,7 +9,8 @@ export default styled.div`
         align-items: center;
         user-select: none;
         cursor: pointer;
-        width: 320px;
+        width: 100%;
+        max-width: 320px;
         border: 1px solid ${(p) => styledColor(p).border};
         height: 40px;
         font-size: 16px;
@@ -18,6 +20,10 @@ export default styled.div`
         &:active {
             border-color: ${getToken()?.colorPrimary};
         }
+        ${media("sm")`
+         width:42px;
+         flex-shrink:0;
+        `}
     }
     .keyboard {
         position: absolute;
@@ -31,6 +37,11 @@ export default styled.div`
         width: 100%;
         height: 100%;
         opacity: 0.5;
+        div {
+            ${media("sm")`
+                display:none
+            `}
+        }
     }
     .search-wrapper {
         width: 100%;

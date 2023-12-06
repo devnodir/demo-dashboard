@@ -62,7 +62,5 @@
 	"price": "Price",
 	"parent_service": "Parent",
 	"clinic_name": "Clinic name",
-	"working_days": "Working_days",
-	"": "",
-	"": ""
+	"working_days": "Working days"
 }

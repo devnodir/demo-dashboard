@@ -1,3 +1,4 @@
+import { media } from "@/styles/media";
 import { colors } from "@/utils/theme";
 import styled from "styled-components";
 
@@ -16,6 +17,12 @@ export default styled.div`
             align-items: center;
             justify-content: space-between;
             padding-right: 24px;
+            position: relative;
+        }
+        &_right {
+            position: absolute;
+            right: 12px;
+            top: 0px;
         }
         .count_status {
             margin-bottom: 24px;
@@ -94,5 +101,11 @@ export default styled.div`
                 width: 50px;
             }
         }
+    }
+    .filter-date {
+        max-width: 320px;
+        ${media("sm")`
+            max-width:unset;
+        `}
     }
 `;

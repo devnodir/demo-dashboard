@@ -1,9 +1,9 @@
 import { convertHex } from "@/utils/convertor";
 import { colors, getToken, styledColor, styledToken } from "@/utils/theme";
 import { createGlobalStyle } from "styled-components";
+import { media } from "./media";
 
 export default createGlobalStyle`
-
 *{
 	margin: 0;
 	padding: 0;
@@ -182,6 +182,41 @@ export default createGlobalStyle`
 		border-color: ${(p) => styledColor(p).border} !important;
 		&:hover{
 			border-color: ${(p) => styledColor(p).primary} !important;
+		}
+	}
+	.ant-drawer{
+		&-header{
+			&-title{
+			flex-direction: row-reverse;
+		}
+		.ant-drawer-close{
+			margin: 0;
+			font-size: 18px;
+		}
+		}
+		&-content{
+			&-wrapper{
+				${media("sm")`
+					width: 100%; !important;
+				`}
+			}
+		}
+	}
+	.ant-modal{
+		${media("sm")`
+		    width: 100% !important;
+			max-width: unset;
+			margin: 0;
+			height: 100vh;
+			transform: unset;
+			top: 0;
+			padding: 0;
+		`}
+		&-content{
+			${media("sm")`
+				height: 100%;
+				border-radius:0 !important;
+			`}
 		}
 	}
 	.cursor-pointer{

@@ -22,7 +22,7 @@ const FullScreenHandler: React.FC = () => {
 	}
 
 	return (
-		<button onClick={toggle}>
+		<button onClick={toggle} className='d-none d-md-block'>
 			{isFull ? <FaCompress /> : <FaExpand />}
 		</button>
 	)

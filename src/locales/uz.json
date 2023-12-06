@@ -60,5 +60,7 @@
 	"new_service": "Yangi xizmat",
 	"service_name": "Xizmat nomi",
 	"price": "Narxi",
-	"parent_service": "Otasi"
+	"parent_service": "Otasi",
+	"clinic_name": "Klinika nomi",
+	"working_days": "Ish kunlari"
 }
