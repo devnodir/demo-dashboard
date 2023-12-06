@@ -35,6 +35,9 @@ const UsersAction: React.FC = () => {
 	return (
 		<Form
 			layout="vertical"
+			initialValues={{
+				addtion_phones: [{}]
+			}}
 		>
 			<Form.Item
 				label={t("full_name")}

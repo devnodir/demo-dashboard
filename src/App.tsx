@@ -7,13 +7,17 @@ import ScreenLoader from '@/components/shared/Loaders/ScreenLoader'
 import ErrorBoundary from '@/components/shared/ErrorBoundary'
 import { useTranslation } from 'react-i18next'
 import useMainStore from '@/store/main'
+import useDetectLang from './hooks/useDetectLang'
 
 const App: React.FC = () => {
+
+  useDetectLang()
 
   const { isAuth } = useMainStore()
   const routes = isAuth ? privateRoutes : publicRoutes
 
   const { i18n } = useTranslation()
+
 
   return (
     <ThemeProvider>

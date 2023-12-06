@@ -1,16 +1,15 @@
-import React, { Suspense } from 'react';
-import { Layout } from 'antd';
+import ErrorBoundary from '@/components/shared/ErrorBoundary';
+import PageLoader from '@/components/shared/Loaders/PageLoader';
+import NetworkError from '@/components/shared/NetworkError';
+import TopProgressBar from '@/components/shared/TopProgressBar';
 import { IChildren } from '@/types/helper.type';
-import Sidebar from './Sidebar';
+import { Layout } from 'antd';
+import React, { Suspense } from 'react';
+import { useTranslation } from 'react-i18next';
 import Navbar from './Navbar';
 import Pages from './Pages';
-import StyleWrapper from './Style'
-import PageLoader from '@/components/shared/Loaders/PageLoader';
-import TopProgressBar from '@/components/shared/TopProgressBar';
-import { useTranslation } from 'react-i18next';
-import HelpButton from '@/components/shared/HelpButton';
-import ErrorBoundary from '@/components/shared/ErrorBoundary';
-import NetworkError from '@/components/shared/NetworkError';
+import Sidebar from './Sidebar';
+import StyleWrapper from './Style';
 
 
 interface IProps {
@@ -43,7 +42,7 @@ const AppLayout: React.FC<IProps> = ({ children }) => {
 					</Layout>
 				</Layout>
 			</StyleWrapper>
-			<HelpButton />
+			{/* <HelpButton /> */}
 		</TopProgressBar>
 	);
 };

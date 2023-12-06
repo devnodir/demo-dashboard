@@ -17,8 +17,8 @@ const Intergrations = () => {
 			<Form
 				layout="vertical"
 			>
-				<Row gutter={24}>
-					<Col md={12}>
+				<Row gutter={{ xs: 12, sm: 12, md: 24 }}>
+					<Col md={12} span={24}>
 						<Form.Item
 							label="Provider"
 							name="provider"
@@ -27,7 +27,7 @@ const Intergrations = () => {
 							<Select options={options} showSearch />
 						</Form.Item>
 					</Col>
-					<Col md={12}>
+					<Col md={12} span={24}>
 						<Form.Item
 							label="Login"
 							name="login"
@@ -36,7 +36,7 @@ const Intergrations = () => {
 							<Input />
 						</Form.Item>
 					</Col>
-					<Col md={12}>
+					<Col md={12} span={24}>
 						<Form.Item
 							label="Password"
 							name="password"
@@ -47,7 +47,7 @@ const Intergrations = () => {
 							/>
 						</Form.Item>
 					</Col>
-					<Col md={12}>
+					<Col md={12} span={24}>
 						<Form.Item
 							label="Orginator"
 							name="orginator"

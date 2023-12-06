@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import StyleWrapper from "./Style";
 import useMainStore from '@/store/main';
+import styled from 'styled-components';
 
 const Sidebar: React.FC = () => {
 
@@ -33,6 +34,7 @@ const Sidebar: React.FC = () => {
 		/>
 	}
 
+
 	return (
 		<Fragment>
 			<StyleWrapper className='d-none d-lg-block' width={120}>
@@ -43,6 +45,7 @@ const Sidebar: React.FC = () => {
 				onClose={() => setMobileMenu(false)}
 				// title={<img src={`/assets/logo-${mode}.svg`} style={{ width: 120, display: "flex" }} />}
 				placement="left"
+				className='mobile-drawer'
 				width={120}
 				styles={{ body: { padding: 0 } }}
 			>

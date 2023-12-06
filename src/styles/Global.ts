@@ -86,6 +86,10 @@ export default createGlobalStyle`
 		width: calc(100% + 48px);
     	margin-left: -24px !important;
 		background-color: transparent !important;
+		${media("sm")`
+			width: calc(100% + 24px);
+			margin-left: -12px !important;
+		`}
 		table{
 			border-spacing: 0 10px;
 			thead{
@@ -141,6 +145,10 @@ export default createGlobalStyle`
 		&-content{
 			padding: 0 24px;
 			padding-bottom: 12px;
+			${media("sm")`
+			padding: 0 12px;
+			padding-bottom: 4px;
+		`}
 		}
 		&-wrapper{
 			:where(.css-dev-only-do-not-override-xto465).ant-spin-nested-loading .ant-spin-container::after{
@@ -197,8 +205,11 @@ export default createGlobalStyle`
 		&-content{
 			&-wrapper{
 				${media("sm")`
-					width: 100%; !important;
+					width: 100%;
 				`}
+			}
+			&.mobile-drawer{
+
 			}
 		}
 	}

@@ -16,8 +16,8 @@ const MainSettings = () => {
                 <Form
                     layout="vertical"
                 >
-                    <Row gutter={[24, 24]}>
-                        <Col lg={12}>
+                    <Row gutter={{ xs: 12, sm: 12, md: 24 }}>
+                        <Col md={12} span={24}>
                             <Form.Item
                                 name="clinic-name"
                                 label="Clinic name"
@@ -26,7 +26,7 @@ const MainSettings = () => {
                                 <Input />
                             </Form.Item>
                         </Col>
-                        <Col lg={12}>
+                        <Col md={12} span={24}>
                             <Form.Item
                                 name="start-of-working_day"
                                 label="Working day"
@@ -35,7 +35,7 @@ const MainSettings = () => {
                                 <DatePicker.RangePicker suffixIcon={<BsCalendarFill />} />
                             </Form.Item>
                         </Col>
-                        <Col lg={12}>
+                        <Col md={12} span={16}>
                             <Form.Item
                                 name="logo-name"
                                 label="Logo"
@@ -49,7 +49,7 @@ const MainSettings = () => {
                                 <Checkbox>Is sms active?</Checkbox>
                             </Form.Item>
                         </Col>
-                        <Col lg={12}>
+                        <Col md={12} span={8}>
                             <Form.Item
                                 name="logo-icon"
                                 label="Image"

@@ -7,8 +7,6 @@ const LangSelect: React.FC = () => {
 
 	const { i18n, t } = useTranslation()
 
-	console.log(i18n.language);
-
 	const items: MenuProps["items"] = [
 		{
 			key: "ru",
