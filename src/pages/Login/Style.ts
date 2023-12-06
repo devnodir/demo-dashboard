@@ -1,3 +1,4 @@
+import { media } from "@/styles/media";
 import styled from "styled-components";
 
 export default styled.div`
@@ -22,6 +23,9 @@ export default styled.div`
                     width: 165px;
                 }
             }
+            ${media("sm")`
+                padding: 0 24px;
+            `}
         }
         &-form {
             max-width: 380px;
