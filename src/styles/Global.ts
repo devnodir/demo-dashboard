@@ -17,6 +17,11 @@ export default createGlobalStyle`
 	#root{
 		height: 100%;
 	}
+	input,textarea{
+		${media("sm")`
+			font-size:16px !important;
+		`}
+	}
 	.ant-input{
 		&-group{
 			&-addon{
