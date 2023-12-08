@@ -11,6 +11,7 @@ export default styled(Content)`
     padding: 24px;
     ${media("sm")`
         padding:12px;
+        overflow-y: unset;
     `}
     .footer {
         display: flex;
