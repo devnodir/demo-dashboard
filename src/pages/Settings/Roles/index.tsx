@@ -1,6 +1,6 @@
 import MyButton from "@/components/antd/MyButton";
 import MyTable from "@/components/antd/MyTable";
-import { BRANCH } from "@/components/endpoints";
+import { ROLES } from "@/components/endpoints";
 import ActionButtons from "@/components/shared/TableComponents/ActionButtons";
 import useApi from "@/hooks/useApi";
 import useApiMutation from "@/hooks/useApiMutation";
@@ -16,18 +16,18 @@ import dayjs from "dayjs";
 import React, { useEffect, useState } from 'react';
 
 
-const Branches: React.FC = () => {
+const Roles: React.FC = () => {
 
 	const [isOpen, toggle] = useToggleState(false)
-	const { data, isLoading, isRefetching, refetch } = useApi(BRANCH)
-	const { mutate, isLoading: deleteLoading } = useApiMutationID("delete", BRANCH)
+	const { data, isLoading, isRefetching, refetch } = useApi(ROLES)
+	const { mutate, isLoading: deleteLoading } = useApiMutationID("delete", ROLES)
 	const [editingItem, setEditingItem] = useState<string | null>(null)
 
 	const t = useT()
 
 	const columns = [
 		{
-			title: t("branch_name"),
+			title: t("role_name"),
 			dataIndex: 'name',
 		},
 		{
@@ -72,7 +72,7 @@ const Branches: React.FC = () => {
 				type="primary"
 				className="text-uppercase float-right"
 			>
-				{t("add_branch")}
+				{t("add_role")}
 			</MyButton>
 			<MyTable
 				columns={columns}
@@ -83,7 +83,7 @@ const Branches: React.FC = () => {
 			<Drawer
 				open={isOpen}
 				onClose={toggle}
-				title={t(editingItem ? "edit_branch" : "new_branch")}
+				title={t(editingItem ? "edit_role" : "new_role")}
 				destroyOnClose
 			>
 				<Action onFinish={onFinish} id={editingItem} />
@@ -92,7 +92,7 @@ const Branches: React.FC = () => {
 	);
 };
 
-export default Branches;
+export default Roles;
 
 
 interface IFormData {
@@ -109,9 +109,9 @@ const Action: React.FC<IActionProps> = ({ onFinish, id }) => {
 
 	const [form] = Form.useForm<IFormData>()
 
-	const { mutate, isLoading } = useApiMutation(BRANCH)
-	const { mutate: editMutate, isLoading: editLoading } = useApiMutationID("patch", BRANCH)
-	const { isLoading: getLoading, data } = useApi(`${BRANCH}/${id}`, { enabled: Boolean(id), suspense: false, cacheTime: 0 })
+	const { mutate, isLoading } = useApiMutation(ROLES)
+	const { mutate: editMutate, isLoading: editLoading } = useApiMutationID("patch", ROLES)
+	const { isLoading: getLoading, data } = useApi(`${ROLES}/${id}`, { enabled: Boolean(id), cacheTime: 0 })
 
 	useEffect(() => {
 		if (data) {
@@ -146,7 +146,7 @@ const Action: React.FC<IActionProps> = ({ onFinish, id }) => {
 				onFinish={submit}
 			>
 				<Form.Item
-					label={t("branch_name")}
+					label={t("role_name")}
 					name="name"
 					rules={[R_REQUIRED]}
 				>

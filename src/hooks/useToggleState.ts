@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-type Toggle = (e: any) => void;
+type Toggle = (e?: any) => void;
 
 const useToggleState = (init: boolean) => {
     const [isOpen, setOpen] = useState(init);

@@ -1,133 +1,104 @@
-import MyButton from "@/components/antd/MyButton";
 import MyTable from "@/components/antd/MyTable";
+import { USERS } from "@/components/endpoints";
 import ActionButtons from "@/components/shared/TableComponents/ActionButtons";
-import UserAvatar from "@/components/shared/TableComponents/UserAvatar";
+import TableAdditionalContact from "@/components/shared/TableComponents/TableAdditionalContact";
+import TableDate from "@/components/shared/TableComponents/TableDate";
+import TableIsActive from "@/components/shared/TableComponents/TableIsActive";
+import TableNameRecord from "@/components/shared/TableComponents/TableNameRecord";
+import TablePhone from "@/components/shared/TableComponents/TablePhone";
+import { INIT_PAGE_PARAMS } from "@/components/variables";
+import useApi from "@/hooks/useApi";
+import useApiMutationID from "@/hooks/useApiMutationID";
+import { useQueryParams } from "@/hooks/useQueryParams";
 import useT from "@/hooks/useT";
-import { Popover, Tag } from "antd";
+import useTableData from "@/hooks/useTableData";
+import { ISetState } from "@/types/helper.type";
+import { message } from "antd";
 import React from 'react';
 
-const UsersTable: React.FC = () => {
+interface Props {
+	setId: ISetState<string | null>
+}
+
+const UsersTable: React.FC<Props> = ({ setId }) => {
 
 	const t = useT()
 
+	const [query, setQuery] = useQueryParams(INIT_PAGE_PARAMS)
+
+	const { data, refetch, isLoading, isRefetching } = useApi(USERS, {}, query)
+
+	const { records, pagination } = useTableData("users", data, query, setQuery)
+
+	const { mutate, isLoading: isDeleting } = useApiMutationID("delete", USERS)
+
 	const columns = [
-		{
-			title: t("image"),
-			dataIndex: 'image',
-			render: (val: any) => <UserAvatar img={val} />
-		},
+		// {
+		// 	title: t("image"),
+		// 	dataIndex: 'image',
+		// 	render: (val: any) => <UserAvatar img={val} />
+		// },
 		{
 			title: t("full_name"),
 			dataIndex: 'name',
 		},
 		{
 			title: t("l_phone"),
-			dataIndex: 'phone',
+			dataIndex: 'phone_number',
+			render: TablePhone
 		},
 		{
 			title: t("role"),
 			dataIndex: 'role',
-		},
-		{
-			title: t("addtional_phones"),
-			dataIndex: 'addtional_phones',
-			render: () => <Popover trigger={["click"]} title={<>
-				<p>+998 (99) 008-27-35</p>
-				<p>+998 (99) 008-27-35</p>
-			</>}>
-				<MyButton type="text" shape="circle" icon={<>...</>} className="ml-4" />
-			</Popover>
+			render: TableNameRecord
 		},
 		{
 			title: t("branch"),
 			dataIndex: 'branch',
+			render: TableNameRecord
 		},
 		{
 			title: t("birthday"),
 			dataIndex: 'birthday',
+			render: TableDate
+		},
+		{
+			title: t("addtional_contact"),
+			dataIndex: 'additional_contact',
+			render: TableAdditionalContact
 		},
 		{
 			title: t("status"),
-			dataIndex: 'status',
-			render: (text: string) => (
-				<Tag color={text === "active" ? "green" : "red"} className="text-capitalize">{text}</Tag>
-			)
+			dataIndex: 'is_active',
+			render: TableIsActive
 		},
 		{
 			title: '',
-			dataIndex: 'actions',
-			key: 'actions',
-			render: () => <ActionButtons
-				onDelete={() => { }}
-				onUpdate={() => { }}
+			dataIndex: '_id',
+			render: (id: string) => <ActionButtons
+				onDelete={() => deleteItem(id)}
+				onUpdate={() => setId(id)}
 				onMessage={() => { }}
 			/>,
 		},
 	];
 
-	const data = [
-		{
-			image: "https://randomuser.me/api/portraits/men/11.jpg",
-			name: "Nodirek Abdunazarov",
-			phone: "+998 (99) 008-27-35",
-			birthday: "01.03.2022",
-			role: "Admin",
-			addtional_phones: "...",
-			branch: "Yakkasaroy filiali",
-			status: "active",
-			key: "1"
-		},
-		{
-			image: "https://randomuser.me/api/portraits/men/12.jpg",
-			name: "Nodirek Abdunazarov",
-			phone: "+998 (99) 008-27-35",
-			birthday: "01.03.2022",
-			role: "Admin",
-			addtional_phones: "...",
-			branch: "Yakkasaroy filiali",
-			status: "inactive",
-			key: "2"
-		},
-		{
-			image: "https://randomuser.me/api/portraits/men/13.jpg",
-			name: "Nodirek Abdunazarov",
-			phone: "+998 (99) 008-27-35",
-			birthday: "01.03.2022",
-			role: "Admin",
-			addtional_phones: "...",
-			branch: "Yakkasaroy filiali",
-			status: "active",
-			key: "3"
-		},
-		{
-			image: "https://randomuser.me/api/portraits/men/14.jpg",
-			name: "Nodirek Abdunazarov",
-			phone: "+998 (99) 008-27-35",
-			birthday: "01.03.2022",
-			role: "Admin",
-			addtional_phones: "...",
-			branch: "Yakkasaroy filiali",
-			status: "active",
-			key: "4"
-		},
-		{
-			image: "https://randomuser.me/api/portraits/men/15.jpg",
-			name: "Nodirek Abdunazarov",
-			phone: "+998 (99) 008-27-35",
-			birthday: "01.03.2022",
-			role: "Admin",
-			addtional_phones: "...",
-			branch: "Yakkasaroy filiali",
-			status: "active",
-			key: "5"
-		},
-	]
+	const deleteItem = (id: string) => {
+		mutate({ id }, {
+			onSuccess: () => refetch(),
+			onError: (err) => {
+				message.error(err?.message)
+			}
+		})
+	}
 
 	return (
 		<MyTable
 			columns={columns}
-			dataSource={data}
+			dataSource={records}
 			rowSelection={{ type: "checkbox" }}
+			pagination={pagination}
+			loading={isLoading || isRefetching || isDeleting}
 		/>
 	);
 };

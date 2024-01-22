@@ -7,7 +7,6 @@ import EmptyData from "@/assets/lottie/empty-table.json";
 const MyTable: React.FC<TableProps<any>> = (props) => {
 	return (
 		<Table
-			pagination={{ position: ["bottomRight"] }}
 			scroll={{ x: "max-content" }}
 			locale={{
 				emptyText: <div className='empty'>

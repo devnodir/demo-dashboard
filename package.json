@@ -22,7 +22,9 @@
     "i18next-browser-languagedetector": "^7.1.0",
     "i18next-http-backend": "^2.3.1",
     "libphonenumber-js": "^1.10.49",
+    "lodash": "^4.17.21",
     "lottie-react": "^2.4.0",
+    "qs": "^6.11.2",
     "react": "^18.2.0",
     "react-countup": "^6.5.0",
     "react-dom": "^18.2.0",
@@ -36,7 +38,9 @@
     "zustand": "^4.4.6"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.202",
     "@types/node": "^20.8.10",
+    "@types/qs": "^6.9.11",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",

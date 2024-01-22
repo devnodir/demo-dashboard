@@ -45,24 +45,27 @@ export const themeCompontens: ThemeConfig["components"] = {
         controlInteractiveSize: 20,
     },
     Button: {
-        controlHeight: 40,
+        controlHeight: 38,
         controlHeightSM: 30,
     },
     Input: {
-        controlHeight: 40,
+        controlHeight: 38,
     },
     InputNumber: {
-        controlHeight: 40,
+        controlHeight: 38,
     },
     DatePicker: {
-        controlHeight: 40,
+        controlHeight: 38,
     },
     Select: {
-        controlHeight: 40,
+        controlHeight: 38,
     },
     Segmented: {
         itemSelectedBg: colors.primary,
         itemSelectedColor: "#fff",
+    },
+    Pagination: {
+        controlHeight: 38,
     },
 };
 

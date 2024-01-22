@@ -13,6 +13,8 @@ import React from 'react';
 import { BsArrowLeftSquareFill, BsGearWide } from "react-icons/bs";
 import { FaUser } from "react-icons/fa6";
 import StyleWrapper from './Style';
+import { removeLocalStorage } from '@/utils/localStorage';
+import { USER_ID, USER_TOKEN } from '@/components/variables';
 
 const Navbar: React.FC = () => {
 
@@ -61,6 +63,8 @@ const UserMenu: React.FC = () => {
 			icon: <BsArrowLeftSquareFill />,
 			danger: true,
 			onClick: () => {
+				removeLocalStorage(USER_TOKEN)
+				removeLocalStorage(USER_ID)
 				setIsAuth(false)
 			}
 		},

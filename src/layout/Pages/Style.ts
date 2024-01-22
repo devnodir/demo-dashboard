@@ -9,9 +9,14 @@ export default styled(Content)`
     overflow-y: auto;
     position: relative;
     padding: 24px;
+    ${media("md")`
+        overflow-y: unset;
+    `}
     ${media("sm")`
         padding:12px;
-        overflow-y: unset;
+        &>div{
+            padding-bottom: 12px;
+        }
     `}
     .footer {
         display: flex;

@@ -21,6 +21,7 @@ const privateRoutes: RouteObject[] = [
 			{ path: "/settings/main", element: page(() => import(`@/pages/Settings/Main`)) },
 			{ path: "/settings/files", element: page(() => import(`@/pages/Settings/Files`)) },
 			{ path: "/settings/branches", element: page(() => import(`@/pages/Settings/Branches`)) },
+			{ path: "/settings/roles", element: page(() => import(`@/pages/Settings/Roles`)) },
 			{ path: "/settings/protocols", element: page(() => import(`@/pages/Settings/Protocols`)) },
 			{ path: "/settings/sms-template", element: page(() => import(`@/pages/Settings/Sms`)) },
 			{ path: "/settings/intergrations", element: page(() => import(`@/pages/Settings/Intergrations`)) },

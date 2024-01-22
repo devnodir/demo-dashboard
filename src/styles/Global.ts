@@ -155,11 +155,6 @@ export default createGlobalStyle`
 			padding-bottom: 4px;
 		`}
 		}
-		&-wrapper{
-			:where(.css-dev-only-do-not-override-xto465).ant-spin-nested-loading .ant-spin-container::after{
-			background: transparent !important;
-		}
-		}
 		.ant-table-container{
 			&::after,&::before{
 				display: none;
@@ -238,4 +233,17 @@ export default createGlobalStyle`
 	.cursor-pointer{
 		cursor: pointer;
 	}
+
+	 .ant-spin-container::after{
+				background:none !important
+	}
+
+	@media (max-width: 480px) {
+    .ant-calendar-range {
+        width: 320px;
+    }
+    .ant-calendar-range-part {
+        width: 100%;
+    }
+}
   `;

@@ -1,16 +1,30 @@
 import Button from '@/components/antd/MyButton'
-import useToggleState from '@/hooks/useToggleState'
-import { PlusOutlined } from '@ant-design/icons'
-import React from 'react'
-import UsersTable from './components/Table'
-import { Drawer } from 'antd'
-import UsersAction from './components/Action'
-import { colors } from '@/utils/theme'
+import { USERS } from '@/components/endpoints'
+import SuspenseWrapper from '@/components/shared/TableComponents/SuspenseWrapper'
 import useT from '@/hooks/useT'
+import useToggleState from '@/hooks/useToggleState'
+import { queryClient } from '@/utils/props'
+import { colors } from '@/utils/theme'
+import { PlusOutlined } from '@ant-design/icons'
+import { Drawer } from 'antd'
+import qs from "qs"
+import React, { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import UsersAction from './components/Action'
+import UsersTable from './components/Table'
 
 const Users: React.FC = () => {
 	const t = useT()
 	const [isOpen, toggle] = useToggleState(false)
+	const [id, setId] = useState<string | null>(null)
+	const [search] = useSearchParams()
+
+	const onActionFinish = () => {
+		setId(null)
+		toggle()
+		queryClient.refetchQueries([USERS, qs.parse(search.toString())])
+	}
+
 	return (
 		<div className='users'>
 			<Button
@@ -22,15 +36,17 @@ const Users: React.FC = () => {
 			>
 				{t("add_user")}
 			</Button>
-			<UsersTable />
+			<UsersTable setId={(val) => { setId(val); toggle() }} />
 			<Drawer
 				open={isOpen}
 				onClose={toggle}
-				title={t("new_user")}
+				title={t(id ? "edit_user" : "new_user")}
 				destroyOnClose
 				width={480}
 			>
-				<UsersAction />
+				<SuspenseWrapper>
+					<UsersAction id={id} onFinish={onActionFinish} />
+				</SuspenseWrapper>
 			</Drawer>
 		</div>
 	)

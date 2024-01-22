@@ -1,9 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { USERS } from '@/components/endpoints'
+import { USER_ID, USER_TOKEN } from '@/components/variables'
 import useApi from '@/hooks/useApi'
 import useMainStore from '@/store/main'
 import { IChildren } from '@/types/helper.type'
 import { getLocalStorage, removeLocalStorage } from '@/utils/localStorage'
-import { AUTH_USER, USER_TOKEN } from '@/utils/variables'
 import { message } from 'antd'
 import React, { Fragment, useEffect } from 'react'
 
@@ -11,12 +12,13 @@ interface Props {
 	children: IChildren
 }
 
-const token = getLocalStorage(USER_TOKEN)
+// const token = getLocalStorage(USER_TOKEN)
+const user_id = getLocalStorage(USER_ID)
 
 const AuthProvider: React.FC<Props> = ({ children }) => {
 
 	const [messageApi, contextHolder] = message.useMessage();
-	const { error } = useApi(AUTH_USER, { onSuccess, onError, enabled: Boolean(token), suspense: true })
+	const { error } = useApi(`${USERS}/${user_id}`, { onSuccess, onError, enabled: false, suspense: true })
 
 	const { setIsAuth, setUserData } = useMainStore()
 
@@ -26,6 +28,7 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
 	}
 
 	function onError() {
+		setIsAuth(true)
 		removeLocalStorage(USER_TOKEN)
 	}
 

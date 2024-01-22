@@ -1,7 +1,6 @@
 import doctor from "@/assets/lottie/doctor.json";
 import useApiMutation from '@/hooks/useApiMutation';
 import { setLocalStorage } from '@/utils/localStorage';
-import { LOGIN, USER_TOKEN } from '@/utils/variables';
 import { Button, Form, Input, InputNumber, message } from 'antd';
 import Lottie from "lottie-react";
 import React from 'react';
@@ -11,11 +10,13 @@ import StyleWrapper from './Style';
 import { phoneFormatter } from "@/utils/formatter";
 import { R_PASSWORD, R_PHONE, R_REQUIRED } from "@/utils/rules";
 import useMainStore from "@/store/main";
+import { LOGIN_USER } from "@/components/endpoints";
+import { USER_ID, USER_TOKEN } from "@/components/variables";
 
 interface IFormData {
 	phone_number: string
 	password: string
-}
+}``
 
 const Login: React.FC = () => {
 
@@ -23,14 +24,14 @@ const Login: React.FC = () => {
 	const [messageApi, contextHolder] = message.useMessage();
 	const { mode, setIsAuth, setUserData } = useMainStore()
 
-	const { mutateAsync, isLoading } = useApiMutation(LOGIN)
+	const { mutateAsync, isLoading } = useApiMutation(LOGIN_USER)
 
 	const [form] = Form.useForm();
 
 	const parseForm = (data: IFormData) => {
 		return {
 			...data,
-			phone_number: Number(`998${data.phone_number}`)
+			phone_number: `${data.phone_number}`
 		}
 	}
 	const handleFocus = () => {
@@ -40,11 +41,11 @@ const Login: React.FC = () => {
 	}
 
 	const submit = (data: IFormData) => {
-		setIsAuth(true)
 		mutateAsync(parseForm(data), {
 			onSuccess: (res: any) => {
 				setLocalStorage(USER_TOKEN, res.token)
-				setUserData(res.user)
+				setLocalStorage(USER_ID, res.userId)
+				setUserData(res)
 				setIsAuth(true)
 				navigate("/", { replace: true })
 			},

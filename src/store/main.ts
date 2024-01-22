@@ -1,7 +1,8 @@
 import { create } from "zustand";
 import { IMode } from "@/types/helper.type";
-import { isDevelopment } from "@/utils/methods";
 import { getInitMode } from "@/utils/theme";
+import { getLocalStorage } from "@/utils/localStorage";
+import { USER_TOKEN } from "@/components/variables";
 
 interface Store {
     isAuth: boolean;
@@ -15,7 +16,7 @@ interface Store {
 }
 
 const useMainStore = create<Store>((set) => ({
-    isAuth: isDevelopment(),
+    isAuth: Boolean(getLocalStorage(USER_TOKEN)),
     userData: null,
     mode: getInitMode(),
     isMobileMenu: false,

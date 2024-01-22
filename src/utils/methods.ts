@@ -9,3 +9,25 @@ export const isEmtypObj = (obj: any) => {
 export const toCapitalize = (str: string) => {
     return str ? str.charAt(0).toUpperCase() + str.slice(1) : "";
 };
+
+export const mapTableData = (data: any[]) => {
+    return data?.map((item) => {
+        return {
+            key: item._id,
+            ...item,
+        };
+    });
+};
+
+export const mapSelectData = (data: any, key: string = "data") => {
+    if (data) {
+        return data[key]?.map((item: any) => {
+            return {
+                ...item,
+                value: item._id,
+                label: item.name,
+            };
+        });
+    }
+    return [];
+};

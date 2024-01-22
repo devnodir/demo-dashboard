@@ -1,156 +1,263 @@
 import MyButton from '@/components/antd/MyButton'
+import { BRANCH, ROLES, USERS } from '@/components/endpoints'
+import { STATUS } from '@/components/variables'
+import useApi from '@/hooks/useApi'
+import useApiMutation from '@/hooks/useApiMutation'
+import useApiMutationID from '@/hooks/useApiMutationID'
 import useT from '@/hooks/useT'
+import { IVoid } from '@/types/helper.type'
 import { phoneFormatter } from '@/utils/formatter'
-import { R_PASSWORD, R_PHONE, R_REQUIRED } from '@/utils/rules'
+import { mapSelectData } from '@/utils/methods'
+import { R_EMAIL, R_PASSWORD, R_PHONE, R_REQUIRED } from '@/utils/rules'
 import { colors } from '@/utils/theme'
 import { PlusOutlined } from '@ant-design/icons'
-import { Button, Col, DatePicker, Form, Input, InputNumber, Row, Select, Typography } from 'antd'
-import React, { Fragment } from 'react'
+import { Button, Col, DatePicker, Dropdown, Form, Input, InputNumber, Row, Select, Spin, Typography, message } from 'antd'
+import { MenuProps } from 'antd/lib'
+import dayjs from 'dayjs'
+import _ from 'lodash'
+import React, { Fragment, useEffect } from 'react'
 import { BsCalendarFill } from 'react-icons/bs'
-import { FaEye, FaEyeSlash, FaLock, FaPhone, FaTrash, FaUser } from 'react-icons/fa6'
+import { FaEnvelope, FaEye, FaEyeSlash, FaLock, FaPhone, FaTelegram, FaTrash, FaUser } from 'react-icons/fa6'
 
-const role = [
-	{ label: "Admin", value: "1" },
-	{ label: "Moderator", value: "2" },
-	{ label: "Contributor", value: "3" }
-]
+interface IFormData {
+	name: string
+	phone_number: number
+	role: string
+	branch: string
+	birthday: string
+	is_active: boolean
+	password: string
+	additional_contact: {
+		type: "phone_number" | "email" | "telegram",
+		value: string | number
+	}
+}
 
-const branches = [
-	{ label: "Yunusobod Filial", value: "1" },
-	{ label: "Mirobod Filial", value: "2" },
-	{ label: "Yakkasaroy Filial", value: "3" },
-	{ label: "Uchtepa Filial", value: "4" },
-]
+interface IProps {
+	id: string | null
+	onFinish: IVoid
+}
 
-const status = [
-	{ label: "Active", value: "active" },
-	{ label: "Inactive", value: "inactive" },
-]
-
-const UsersAction: React.FC = () => {
+const UsersAction: React.FC<IProps> = ({ onFinish, id }) => {
 
 	const t = useT()
 
+	const [form] = Form.useForm<IFormData>()
+
+
+	const { data: userData, isLoading: getLoading } = useApi(`${USERS}/${id}`, { enabled: Boolean(id), cacheTime: 0 })
+	const { data: branchData, isLoading: branchLoading } = useApi(BRANCH)
+	const { data: rolesData, isLoading: rolesLoading } = useApi(ROLES)
+
+	const { mutate: createMutate, isLoading: createLoading } = useApiMutation(USERS)
+	const { mutate: editMutate, isLoading: editLoading } = useApiMutationID("patch", USERS)
+
+	useEffect(() => {
+		if (userData) {
+			const data = userData?.data
+			form.setFieldsValue(_.pick(data, ["name", "phone_number", "role", "branch", "birthday", "is_active", "additional_contact"]))
+		}
+	}, [userData])
+
+	const submit = (data: IFormData) => {
+		const formData: any = {
+			...data,
+			phone_number: data.phone_number.toString()
+		}
+		if (data.birthday) {
+			formData.birthday = dayjs(data.birthday).format("DD.MM.YYYY")
+		}
+		if (id) editMutate({ data, id }, responses)
+		else createMutate(formData, responses)
+	}
+
+	const responses = {
+		onSuccess: () => onFinish(),
+		onError: (err: any) => {
+			message.error(err.message)
+		}
+	}
 
 	return (
-		<Form
-			layout="vertical"
-			initialValues={{
-				addtion_phones: [{}]
-			}}
-		>
-			<Form.Item
-				label={t("full_name")}
-				name="name"
-				rules={[R_REQUIRED]}
+		<Spin spinning={getLoading}>
+			<Form
+				layout="vertical"
+				form={form}
+				onFinish={submit}
 			>
-				<Input
-					addonBefore={<FaUser />}
-				/>
-			</Form.Item>
-			<Form.Item
-				label={t("l_phone")}
-				name="phone"
-				rules={[R_REQUIRED, R_PHONE]}
-				validateFirst
-			>
-				<InputNumber
-					placeholder="+998 ** *** ** **"
-					formatter={phoneFormatter}
-					addonBefore={<FaPhone />}
-				/>
-			</Form.Item>
-			<Form.Item
-				label={t("role")}
-				name="rol"
-			>
-				<Select
-					options={role}
-				/>
-			</Form.Item>
-			<Form.Item
-				label={t("branches")}
-				name="branches"
-			>
-				<Select
-					options={branches}
-					mode="multiple"
-				/>
-			</Form.Item>
-			<Form.Item
-				label={t("birthday")}
-				name="birthday"
-			>
-				<DatePicker
-					format="DD.MM.YYYY"
-					style={{ width: "100%" }}
-					suffixIcon={<BsCalendarFill />}
-				/>
-			</Form.Item>
-			<Form.Item
-				label={t("status")}
-				name="status"
-			>
-				<Select
-					options={status}
-				/>
-			</Form.Item>
-			<Form.Item
-				label={t("l_password")}
-				name="password"
-				validateFirst
-				rules={[R_REQUIRED, R_PASSWORD]}
-			>
-				<Input.Password
-					addonBefore={<FaLock />}
-					iconRender={(visible) => (visible ? <FaEye /> : <FaEyeSlash />)}
-					placeholder="********"
-				/>
-			</Form.Item>
-			<Form.List
-				name="addtion_phones"
-			>
-				{(fields, { add, remove }) => (
-					<Fragment>
-						<Typography.Text className='mb-2 d-inline-block'>{t("addtional_phones")}</Typography.Text>
-						{
-							fields.map(({ key, name }) => (
-								<Form.Item
-									name={[name, "additional_phone"]}
-									rules={[R_PHONE]}
-									validateFirst
-									key={key}
-								>
-									<Row
-										gutter={4}
-									>
-										<Col span={20}>
-											<InputNumber
-												placeholder="+998 ** *** ** **"
-												formatter={phoneFormatter}
-												addonBefore={<FaPhone />}
-											/>
-										</Col>
-										<Col span={4}>
-											<Button danger disabled={fields.length === 1} type="text" className='float-right' onClick={() => remove(name)}>
-												<FaTrash />
-											</Button>
-										</Col>
-									</Row>
-								</Form.Item>
-							))
-						}
-						<MyButton color={colors.success} shape="circle" className='mb-4 float-right' type="primary" onClick={add}>
-							<PlusOutlined />
-						</MyButton>
-					</Fragment>
-				)}
-			</Form.List>
-			<Button block type="primary" htmlType="submit" className='mt-2 text-uppercase'>
-				{t("create")}
-			</Button>
-		</Form>
+				<Form.Item
+					label={t("full_name")}
+					name="name"
+					rules={[R_REQUIRED]}
+				>
+					<Input
+						addonBefore={<FaUser />}
+					/>
+				</Form.Item>
+				<Form.Item
+					label={t("l_phone")}
+					name="phone_number"
+					rules={[R_REQUIRED, R_PHONE]}
+					validateFirst
+				>
+					<InputNumber
+						placeholder="+998 ** *** ** **"
+						formatter={phoneFormatter}
+						addonBefore={<FaPhone />}
+					/>
+				</Form.Item>
+				<Form.Item
+					label={t("role")}
+					name="role"
+					rules={[R_REQUIRED]}
+				>
+					<Select
+						options={mapSelectData(rolesData)}
+						showSearch
+						loading={rolesLoading}
+					/>
+				</Form.Item>
+				<Form.Item
+					label={t("branches")}
+					name="branch"
+					rules={[R_REQUIRED]}
+
+				>
+					<Select
+						options={mapSelectData(branchData)}
+						mode="multiple"
+						loading={branchLoading}
+					/>
+				</Form.Item>
+				<Form.Item
+					label={t("birthday")}
+					name="birthday"
+				>
+					<DatePicker
+						format="DD.MM.YYYY"
+						style={{ width: "100%" }}
+						suffixIcon={<BsCalendarFill />}
+					/>
+				</Form.Item>
+				{id && <Form.Item
+					label={t("status")}
+					name="is_active"
+				>
+					<Select
+						options={STATUS}
+					/>
+				</Form.Item>}
+				<Form.Item
+					label={t("l_password")}
+					name="password"
+					validateFirst
+					rules={id ? [R_PASSWORD] : [R_REQUIRED, R_PASSWORD]}
+				>
+					<Input.Password
+						addonBefore={<FaLock />}
+						iconRender={(visible) => (visible ? <FaEye /> : <FaEyeSlash />)}
+						placeholder="********"
+					/>
+				</Form.Item>
+				<Form.List
+					name="additional_contact"
+				>
+					{(fields, { add, remove }) => (
+						<Fragment>
+							<Typography.Text className='mb-2 d-inline-block'>{t("addtional_contact")}</Typography.Text>
+							{
+								fields.map(({ key, name }) => {
+									const type = form.getFieldValue("additional_contact")[name]?.type
+									return (
+										<Row
+											gutter={2}
+											key={key}
+										>
+											<Col span={21}>
+												{
+													type === "phone_number" &&
+													<Form.Item
+														name={[name, "value"]}
+														rules={[R_REQUIRED, R_PHONE]}
+														validateFirst
+														key={key}
+													>
+														<InputNumber
+															placeholder="+998 ** *** ** **"
+															formatter={phoneFormatter}
+															addonBefore={<FaPhone />}
+														/>
+
+
+													</Form.Item>
+												}
+												{
+													type === "email" &&
+													<Form.Item
+														name={[name, "value"]}
+														rules={[R_REQUIRED, R_EMAIL]}
+														validateFirst
+														key={key}
+													>
+														<Input
+															placeholder="example@gmail.com"
+															addonBefore={<FaEnvelope />}
+														/>
+													</Form.Item>
+												}
+												{
+													type === "telegram" &&
+													<Form.Item
+														name={[name, "value"]}
+														rules={[R_REQUIRED]}
+														validateFirst
+														key={key}
+													>
+														<Input
+															placeholder="@example"
+															addonBefore={<FaTelegram />}
+														/>
+													</Form.Item>
+												}
+											</Col>
+											<Col span={3}>
+												<Button danger type="text" className='float-right' onClick={() => remove(name)}>
+													<FaTrash />
+												</Button>
+											</Col>
+										</Row>
+									)
+								})
+							}
+							<AddButton onClick={({ key }) => add({ type: key })} />
+						</Fragment>
+					)}
+				</Form.List>
+				<Button block type="primary" htmlType="submit" className='mt-2 text-uppercase' loading={createLoading || editLoading}>
+					{t(id ? "save" : "create")}
+				</Button>
+			</Form>
+		</Spin>
 	)
 }
 
 export default UsersAction
+
+const AddButton = ({ onClick }: { onClick: MenuProps["onClick"] }) => {
+
+	const t = useT()
+
+	const items: MenuProps["items"] = [
+		{ label: t("l_phone"), icon: <FaPhone />, key: "phone_number" },
+		{ label: "Email", icon: <FaEnvelope />, key: "email" },
+		{ label: "Telegram", icon: <FaTelegram />, key: "telegram" },
+	]
+
+	return (
+		<Dropdown menu={{ items, onClick }} trigger={["click"]} overlayStyle={{ width: 200 }} arrow >
+			<MyButton color={colors.success} shape="circle" className='mb-4 float-right' type="primary">
+				<PlusOutlined />
+			</MyButton>
+		</Dropdown>
+	)
+}

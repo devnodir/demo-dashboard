@@ -54,7 +54,7 @@ const Finances: React.FC = () => {
 				<MyButton color={colors.primary} className='d-lg-none' icon={<FaFilter />} onClick={toggle}>Фильтр</MyButton>
 				<Flex gap={8} className=''>
 					<MyButton color={colors.success} icon={<DownloadOutlined />}>
-						{window.innerWidth > 576 && <span className='d-none'>Скачать Excel</span>}
+						{window.innerWidth > 576 && <span>Скачать Excel</span>}
 					</MyButton>
 					<MyButton type="primary">Создать счет</MyButton>
 				</Flex>

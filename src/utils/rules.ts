@@ -13,6 +13,11 @@ export const R_PHONE: FormRule = {
 };
 
 export const R_PASSWORD: FormRule = {
-    min: 8,
-    message: "Enter at least 8 characters",
+    min: 6,
+    message: "Enter at least 6 characters",
+};
+
+export const R_EMAIL: FormRule = {
+    pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+    message: "Incorrect email",
 };
