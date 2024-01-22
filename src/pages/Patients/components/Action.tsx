@@ -81,7 +81,7 @@ const PatientAction: React.FC = () => {
 			>
 				{(fields, { add, remove }) => (
 					<Fragment>
-						<Typography.Text className='mb-2 d-inline-block'>{t("addtional_phones")}</Typography.Text>
+						<Typography.Text className='mb-2 d-inline-block'>{t("addtional_contact")}</Typography.Text>
 						{
 							fields.map(({ key, name }) => (
 								<Form.Item
