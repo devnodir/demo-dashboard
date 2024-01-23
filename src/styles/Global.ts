@@ -88,9 +88,11 @@ export default createGlobalStyle`
 		}
 	}
 	.ant-table{
-		width: calc(100% + 48px);
-    	margin-left: -24px !important;
 		background-color: transparent !important;
+		&:not(.ant-table-empty){
+			width: calc(100% + 48px);
+    		margin-left: -24px !important;
+		}
 		${media("sm")`
 			width: calc(100% + 24px);
 			margin-left: -12px !important;
@@ -154,6 +156,12 @@ export default createGlobalStyle`
 			padding: 0 12px;
 			padding-bottom: 4px;
 		`}
+		}
+		&-empty{
+			.ant-table-content{
+				overflow: hidden !important;
+				padding: 0 !important;
+			}
 		}
 		.ant-table-container{
 			&::after,&::before{

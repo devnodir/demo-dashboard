@@ -75,5 +75,6 @@
 	"edit_role": "Rolni tahrirlash",
 	"save": "Saqlash",
 	"active": "Faol",
-	"inactive": "Nofaol"
+	"inactive": "Nofaol",
+	"no_data": "Ma'lumot yo'q"
 }

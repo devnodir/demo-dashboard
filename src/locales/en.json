@@ -75,5 +75,6 @@
 	"edit_role": "Edit role",
 	"save": "Save",
 	"active": "Active",
-	"inactive": "Inactive"
+	"inactive": "Inactive",
+	"no_data": "No data"
 }

@@ -1,7 +1,7 @@
 import { useState, useLayoutEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import qs from "qs";
 import { IQueryParams, ISetState } from "@/types/helper.type";
+import qs from "qs";
 import _ from "lodash";
 
 export const useQueryParams = (initParams: IQueryParams) => {

@@ -1,12 +1,27 @@
 import MyTable from "@/components/antd/MyTable";
+import { SERVICES } from "@/components/endpoints";
 import ActionButtons from "@/components/shared/TableComponents/ActionButtons";
+import { INIT_PAGE_PARAMS } from "@/components/variables";
+import useApi from "@/hooks/useApi";
+import useApiMutationID from "@/hooks/useApiMutationID";
+import { useQueryParams } from "@/hooks/useQueryParams";
 import useT from "@/hooks/useT";
+import useTableData from "@/hooks/useTableData";
 import { Tag } from "antd";
 import React from 'react';
 
 const ServicesTable: React.FC = () => {
 
 	const t = useT()
+
+	const [query, setQuery] = useQueryParams(INIT_PAGE_PARAMS)
+
+	const { data, refetch, isLoading, isRefetching } = useApi(SERVICES, {}, query)
+
+	const { records, pagination } = useTableData("services", data, query, setQuery)
+
+	const { mutate, isLoading: isDeleting } = useApiMutationID("delete", SERVICES)
+
 
 	const columns = [
 		{
@@ -44,53 +59,11 @@ const ServicesTable: React.FC = () => {
 		},
 	];
 
-	const data = [
-		{
-			name: "Health care",
-			price: "2,000,000 UZS",
-			parent: "-",
-			branch: "Yakkasaroy filiali",
-			status: "active",
-			key: "1"
-		},
-		{
-			name: "Health care",
-			price: "2,000,000 UZS",
-			parent: "-",
-			branch: "Yakkasaroy filiali",
-			status: "inactive",
-			key: "2"
-		},
-		{
-			name: "Health care",
-			price: "2,000,000 UZS",
-			parent: "-",
-			branch: "Yakkasaroy filiali",
-			status: "active",
-			key: "3"
-		},
-		{
-			name: "Health care",
-			price: "2,000,000 UZS",
-			parent: "-",
-			branch: "Yakkasaroy filiali",
-			status: "active",
-			key: "4"
-		},
-		{
-			name: "Health care",
-			price: "2,000,000 UZS",
-			parent: "-",
-			branch: "Yakkasaroy filiali",
-			status: "active",
-			key: "5"
-		},
-	]
 
 	return (
 		<MyTable
 			columns={columns}
-			dataSource={data}
+			dataSource={[]}
 			rowSelection={{ type: "checkbox" }}
 		/>
 	);
