@@ -14,6 +14,7 @@ const privateRoutes: RouteObject[] = [
 	{ path: "/doctors/cabinet/:id", element: page(() => import(`@/pages/DoctorCabinet`), AppLayout) },
 	{ path: "/users", element: page(() => import(`@/pages/Users`), AppLayout) },
 	{ path: "/services", element: page(() => import(`@/pages/Services`), AppLayout) },
+	{ path: "/appointments", element: page(() => import(`@/pages/Appointments`), AppLayout) },
 	{ path: "/finances", element: page(() => import(`@/pages/Finances`), AppLayout) },
 	{
 		path: "/settings", element: page(() => import(`@/pages/Settings`), AppLayout),

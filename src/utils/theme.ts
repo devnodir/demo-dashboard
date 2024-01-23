@@ -8,6 +8,7 @@ export const baseColors = {
     success: "#52c41a",
     red: "#FF2E2E",
     blue: "#0073cf",
+    yellow: "#faad14",
 };
 
 export const colors = {

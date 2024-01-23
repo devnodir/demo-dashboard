@@ -1,6 +1,6 @@
 import type { MenuProps } from 'antd';
 import { BsGridFill } from "react-icons/bs";
-import { FaChartLine, FaGear, FaHammer, FaHospitalUser, FaUserDoctor, FaUserGear } from "react-icons/fa6";
+import { FaCalendarCheck, FaChartLine, FaClipboardList, FaFlaskVial, FaGear, FaHammer, FaHospitalUser, FaUserDoctor, FaUserGear, FaWarehouse } from "react-icons/fa6";
 
 export type MenuItem = Required<MenuProps>['items'][number];
 
@@ -31,6 +31,26 @@ const items: MenuItem[] = [
 		icon: <FaHammer />
 	},
 	{
+		label: "appointments",
+		key: "/appointments",
+		icon: <FaCalendarCheck />
+	},
+	{
+		label: "warehouse",
+		key: "/warehouse",
+		icon: <FaWarehouse />
+	},
+	{
+		label: "tasks",
+		key: "/tasks",
+		icon: <FaClipboardList />
+	},
+	{
+		label: "laboratory",
+		key: "/laboratory",
+		icon: <FaFlaskVial />
+	},
+	{
 		label: "finances",
 		key: "/finances",
 		icon: <FaChartLine />
@@ -40,26 +60,6 @@ const items: MenuItem[] = [
 		key: "/settings",
 		icon: <FaGear />
 	},
-	// {
-	// 	label: "branches",
-	// 	key: "/branches",
-	// 	icon: <FaCity />
-	// },
-	// {
-	// 	label: "templates",
-	// 	key: "/templates",
-	// 	icon: <FaBookOpen />
-	// },
-	// {
-	// 	label: "tasks",
-	// 	key: "/tasks",
-	// 	icon: <FaClipboardList />
-	// },
-	// {
-	// 	label: "laboratory",
-	// 	key: "/laboratory",
-	// 	icon: <FaFlaskVial />
-	// },
 
 ];
 
