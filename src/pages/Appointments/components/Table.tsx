@@ -2,6 +2,7 @@ import MyTable from "@/components/antd/MyTable";
 import { SERVICES } from "@/components/endpoints";
 import ActionButtons from "@/components/shared/TableComponents/ActionButtons";
 import TableStages from "@/components/shared/TableComponents/TableStages";
+import TableUsersList from "@/components/shared/TableComponents/TableUsersList";
 import { INIT_PAGE_PARAMS } from "@/components/variables";
 import useApi from "@/hooks/useApi";
 import useApiMutationID from "@/hooks/useApiMutationID";
@@ -64,6 +65,7 @@ const AppointmentsTable: React.FC = () => {
 		{
 			title: t("responsible_users"),
 			dataIndex: 'responsible_users',
+			render: TableUsersList
 		},
 		{
 			title: '',
@@ -79,6 +81,7 @@ const AppointmentsTable: React.FC = () => {
 
 	const mockData = [
 		{
+			key: 1,
 			appointment_stage: "new",
 			patient: "Abdunazarov Nodirbek",
 			doctor: "Dilshodbek Ismoilov",
@@ -92,6 +95,7 @@ const AppointmentsTable: React.FC = () => {
 			is_active: true
 		},
 		{
+			key: 2,
 			appointment_stage: "waiting",
 			patient: "Abdunazarov Nodirbek",
 			doctor: "Dilshodbek Ismoilov",
@@ -105,6 +109,7 @@ const AppointmentsTable: React.FC = () => {
 			is_active: true
 		},
 		{
+			key: 3,
 			appointment_stage: "done",
 			patient: "Abdunazarov Nodirbek",
 			doctor: "Dilshodbek Ismoilov",

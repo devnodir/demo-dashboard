@@ -10,7 +10,7 @@ import useTableData from "@/hooks/useTableData";
 import { Tag } from "antd";
 import React from 'react';
 
-const ServicesTable: React.FC = () => {
+const WarehouseTable: React.FC = () => {
 
 	const t = useT()
 
@@ -29,18 +29,6 @@ const ServicesTable: React.FC = () => {
 			dataIndex: 'name',
 		},
 		{
-			title: t("price"),
-			dataIndex: 'price',
-		},
-		{
-			title: t("parent_service"),
-			dataIndex: 'parent',
-		},
-		{
-			title: t("branches"),
-			dataIndex: 'branch',
-		},
-		{
 			title: t("status"),
 			dataIndex: 'status',
 			render: (text: string) => (
@@ -54,62 +42,20 @@ const ServicesTable: React.FC = () => {
 			render: () => <ActionButtons
 				onDelete={() => { }}
 				onUpdate={() => { }}
-				onMessage={() => { }}
 			/>
 		},
 	];
 
-	const mockData = [
-		{
-			name: "Health care",
-			price: "2,000,000 UZS",
-			parent: "-",
-			branch: "Yakkasaroy filiali",
-			status: "active",
-			key: "1"
-		},
-		{
-			name: "Health care",
-			price: "2,000,000 UZS",
-			parent: "-",
-			branch: "Yakkasaroy filiali",
-			status: "inactive",
-			key: "2"
-		},
-		{
-			name: "Health care",
-			price: "2,000,000 UZS",
-			parent: "-",
-			branch: "Yakkasaroy filiali",
-			status: "active",
-			key: "3"
-		},
-		{
-			name: "Health care",
-			price: "2,000,000 UZS",
-			parent: "-",
-			branch: "Yakkasaroy filiali",
-			status: "active",
-			key: "4"
-		},
-		{
-			name: "Health care",
-			price: "2,000,000 UZS",
-			parent: "-",
-			branch: "Yakkasaroy filiali",
-			status: "active",
-			key: "5"
-		},
-	]
+
 
 
 	return (
 		<MyTable
 			columns={columns}
-			dataSource={mockData}
+			dataSource={[]}
 			rowSelection={{ type: "checkbox" }}
 		/>
 	);
 };
 
-export default ServicesTable;
+export default WarehouseTable;

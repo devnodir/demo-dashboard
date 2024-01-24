@@ -47,7 +47,7 @@ const items: MenuItem[] = [
 	},
 	{
 		label: "laboratory",
-		key: "/laboratory",
+		key: "/labs",
 		icon: <FaFlaskVial />
 	},
 	{

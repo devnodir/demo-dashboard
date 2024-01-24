@@ -10,7 +10,7 @@ import useTableData from "@/hooks/useTableData";
 import { Tag } from "antd";
 import React from 'react';
 
-const ServicesTable: React.FC = () => {
+const TasksTable: React.FC = () => {
 
 	const t = useT()
 
@@ -112,4 +112,4 @@ const ServicesTable: React.FC = () => {
 	);
 };
 
-export default ServicesTable;
+export default TasksTable;

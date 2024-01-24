@@ -14,6 +14,17 @@ const privateRoutes: RouteObject[] = [
 	{ path: "/doctors/cabinet/:id", element: page(() => import(`@/pages/DoctorCabinet`), AppLayout) },
 	{ path: "/users", element: page(() => import(`@/pages/Users`), AppLayout) },
 	{ path: "/services", element: page(() => import(`@/pages/Services`), AppLayout) },
+	{
+		path: "/warehouse", element: page(() => import(`@/pages/Warehouse`), AppLayout),
+		children: [
+			{ path: "/warehouse/products", element: page(() => import(`@/pages/Warehouse/Products`)) },
+			{ path: "/warehouse/categories", element: page(() => import(`@/pages/Warehouse/Categories`)) },
+			{ path: "/warehouse/sells", element: page(() => import(`@/pages/Warehouse/Sells`)) },
+			{ path: "/warehouse", element: redirectTo("/warehouse/products", true) },
+		]
+	},
+	{ path: "/tasks", element: page(() => import(`@/pages/Tasks`), AppLayout) },
+	{ path: "/labs", element: page(() => import(`@/pages/Labs`), AppLayout) },
 	{ path: "/appointments", element: page(() => import(`@/pages/Appointments`), AppLayout) },
 	{ path: "/finances", element: page(() => import(`@/pages/Finances`), AppLayout) },
 	{
