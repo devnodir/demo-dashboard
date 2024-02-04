@@ -1,5 +1,3 @@
-import { DOCTORS, SERVICES } from '@/components/endpoints'
-import SelectApi from '@/components/shared/Form/SelectApi'
 import useT from '@/hooks/useT'
 import { phoneFormatter } from '@/utils/formatter'
 import { Col, Form, Input, InputNumber, Row } from 'antd'
