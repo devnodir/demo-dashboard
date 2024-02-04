@@ -1,10 +1,5 @@
-import TableDate from "@/components/shared/TableComponents/TableDate";
-import TableIsDone from "@/components/shared/TableComponents/TableIsDone";
-import TableNameRecord from "@/components/shared/TableComponents/TableNameRecord";
-import TablePatientStatus from "@/components/shared/TableComponents/TablePatientStatus";
-import TableUsersList from "@/components/shared/TableComponents/TableUsersList";
+import TableStages from "@/components/shared/TableComponents/TableStages";
 import useColumnStructure from "@/components/shared/structurs/useColumnStructure";
-import { STATUS_PRIORITY } from "@/components/variables";
 import useT from "@/hooks/useT";
 import { ISetState } from "@/types/helper.type";
 
