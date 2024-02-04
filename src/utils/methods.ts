@@ -11,12 +11,15 @@ export const toCapitalize = (str: string) => {
 };
 
 export const mapTableData = (data: any[]) => {
-    return data?.map((item) => {
-        return {
-            key: item._id,
-            ...item,
-        };
-    });
+    if (data) {
+        return data?.map((item) => {
+            return {
+                key: item._id,
+                ...item,
+            };
+        });
+    }
+    return [];
 };
 
 export const mapSelectData = (data: any, key: string = "data") => {

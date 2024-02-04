@@ -9,7 +9,7 @@ const useComlums = (endpoint: string, setId: ISetState<string | null>) => {
 		{
 			title: t("appointment_stage"),
 			dataIndex: 'appointment_stage',
-			render: TableStages
+			// render: TableStages
 		},
 		{
 			title: t("patient"),

@@ -22,6 +22,7 @@
 	"finances": "Финансы",
 	"branches": "Филиалы",
 	"templates": "Шаблоны",
+	"template": "Шаблон",
 	"tasks": "Задачи",
 	"warehouse": "Склад",
 	"laboratory": "Лаборатория",
@@ -112,5 +113,14 @@
 	"low": "Low",
 	"medium": "Medium",
 	"high": "High",
-	"extreme": "Extreme"
+	"extreme": "Extreme",
+	"paid": "Оплачено",
+	"not_paid": "Не оплачено",
+	"add_finance": "Add finance",
+	"new_payment": "Новая оплата",
+	"edit_payment": "Редактировать платеж",
+	"name": "Название",
+	"add_labs": "Add labs",
+	"new_labs": "New labs",
+	"edit_labs": "Edit labs"
 }

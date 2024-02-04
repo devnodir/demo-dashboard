@@ -12,7 +12,7 @@ const Warehouse: React.FC = () => {
 	const t = useT()
 	const [isOpen, toggle] = useToggleState(false)
 	return (
-		<div className='services'>
+		<div className='product_sells'>
 			<Button
 				onClick={toggle}
 				icon={<PlusOutlined />}
@@ -20,7 +20,8 @@ const Warehouse: React.FC = () => {
 				type="primary"
 				className="text-uppercase float-right"
 			>
-				{t("add_service")}
+				{/* @ts-ignore */}
+				{t("add_sell")}
 			</Button>
 			<WarehouseTable />
 			<Drawer

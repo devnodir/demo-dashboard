@@ -25,15 +25,12 @@ const WarehouseTable: React.FC = () => {
 
 	const columns = [
 		{
-			title: t("service_name"),
+			title: t("name_category"),
 			dataIndex: 'name',
 		},
 		{
-			title: t("status"),
-			dataIndex: 'status',
-			render: (text: string) => (
-				<Tag color={text === "active" ? "green" : "red"} className="text-capitalize">{text}</Tag>
-			)
+			title: t("parent_category"),
+			dataIndex: 'parent',
 		},
 		{
 			title: '',

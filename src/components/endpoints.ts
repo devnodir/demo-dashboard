@@ -9,3 +9,6 @@ export const DOCTORS = "/doctors";
 export const PATIENTS = "/patients";
 export const TAGS = "/tags";
 export const TASKS = "/tasks";
+export const APPOINTMENTS = "/appointments";
+export const FINANCES = "/finances";
+export const LABS = "/labs";

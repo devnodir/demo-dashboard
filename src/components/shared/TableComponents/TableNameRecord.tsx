@@ -1,3 +1,3 @@
-const TableNameRecord = (role: any) => role.name
+const TableNameRecord = (role: any) => role?.name
 
 export default TableNameRecord

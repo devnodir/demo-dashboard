@@ -22,6 +22,7 @@
 	"finances": "Moliya",
 	"branches": "Filiallar",
 	"templates": "Shablonlar",
+	"template": "Shablon",
 	"tasks": "Vazifalar",
 	"warehouse": "Ombor",
 	"laboratory": "Labaratoriya",
@@ -112,5 +113,14 @@
 	"low": "Low",
 	"medium": "Medium",
 	"high": "High",
-	"extreme": "Extreme"
+	"extreme": "Extreme",
+	"paid": "To'langan",
+	"not_paid": "To'lanmagan",
+	"add_finance": "Add finance",
+	"new_payment": "Yangi to'lov",
+	"edit_payment": "To'lovni tahrirlash",
+	"name": "Nomi",
+	"add_labs": "Add labs",
+	"new_labs": "New labs",
+	"edit_labs": "Edit labs"
 }
