@@ -8,6 +8,7 @@ import ErrorBoundary from '@/components/shared/ErrorBoundary'
 import { useTranslation } from 'react-i18next'
 import useMainStore from '@/store/main'
 import useDetectLang from './hooks/useDetectLang'
+import ProjectProvider from './providers/ProjectProvider'
 
 const App: React.FC = () => {
 
@@ -23,9 +24,11 @@ const App: React.FC = () => {
     <ThemeProvider>
       <Suspense fallback={<ScreenLoader />}>
         <ErrorBoundary>
-          <AuthProvider>
-            <RenderRoutes routes={routes} key={i18n.language} />
-          </AuthProvider>
+          <ProjectProvider>
+            <AuthProvider>
+              <RenderRoutes routes={routes} key={i18n.language} />
+            </AuthProvider>
+          </ProjectProvider>
         </ErrorBoundary>
       </Suspense>
     </ThemeProvider>

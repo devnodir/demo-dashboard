@@ -25,7 +25,7 @@ interface IProps {
 	onFinish: IVoid
 }
 
-const TasksAction: React.FC<IProps> = ({ id, onFinish }) => {
+const TasksAction: React.FC<IProps> = ({ id }) => {
 
 	const t = useT()
 
