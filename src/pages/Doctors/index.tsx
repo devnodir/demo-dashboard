@@ -1,16 +1,35 @@
 import Button from '@/components/antd/MyButton'
-import useToggleState from '@/hooks/useToggleState'
-import { PlusOutlined } from '@ant-design/icons'
-import React from 'react'
-import DoctorsTable from './components/Table'
-import { Drawer } from 'antd'
-import DoctorAction from './components/Action'
-import { colors } from '@/utils/theme'
+import { DOCTORS } from '@/components/endpoints'
 import useT from '@/hooks/useT'
+import useToggleState from '@/hooks/useToggleState'
+import { queryClient } from '@/utils/props'
+import { colors } from '@/utils/theme'
+import { PlusOutlined } from '@ant-design/icons'
+import { Drawer } from 'antd'
+import qs from "qs"
+import React, { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import DoctorAction from './components/Action'
+import DoctorsTable from './components/Table'
 
 const Doctors: React.FC = () => {
 	const t = useT()
 	const [isOpen, toggle] = useToggleState(false)
+	const [id, setId] = useState<string | null>(null)
+
+	const [search] = useSearchParams()
+
+	const closeModal = () => {
+		toggle()
+		if (id) setId(null)
+	}
+
+	const onActionFinish = () => {
+		setId(null)
+		toggle()
+		queryClient.refetchQueries([DOCTORS, qs.parse(search.toString())])
+	}
+
 	return (
 		<div className='doctors'>
 			<Button
@@ -22,16 +41,16 @@ const Doctors: React.FC = () => {
 			>
 				{t("add_doctor")}
 			</Button>
-			<DoctorsTable />
+			<DoctorsTable setId={(val) => { setId(val); toggle() }} />
 			<Drawer
 				open={isOpen}
-				onClose={toggle}
-				title={t("new_doctor")}
+				onClose={closeModal}
+				title={t(id ? "edit_doctor" : "new_doctor")}
 				destroyOnClose
 				width={480}
 
 			>
-				<DoctorAction />
+				<DoctorAction id={id} onFinish={onActionFinish} />
 			</Drawer>
 		</div>
 	)

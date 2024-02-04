@@ -1,8 +1,7 @@
 import { convertHex } from "@/utils/convertor";
-import styled from "styled-components";
+import { getToken, styledToken } from "@/utils/theme";
 import { Layout } from "antd";
-import { colors, getToken, styledToken } from "@/utils/theme";
-import { media } from "@/styles/media";
+import styled from "styled-components";
 const { Sider } = Layout;
 
 export default styled(Sider)`

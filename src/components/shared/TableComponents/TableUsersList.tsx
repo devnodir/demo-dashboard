@@ -8,12 +8,9 @@ flex-direction: column;
 
 const TableUsersList = (users: any[]) => {
 
-
-
-
 	return (
 		<List>
-			{users.map((item, i) => <li key={i}>{item}</li>)}
+			{users.map((item, i) => <li key={i}>{item.name}</li>)}
 		</List>
 	)
 }

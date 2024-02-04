@@ -14,6 +14,7 @@ const Appointments: React.FC = () => {
 	const [id, setId] = useState<string | null>(null)
 
 
+
 	return (
 		<div className='appointments'>
 			<Button

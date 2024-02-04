@@ -14,12 +14,12 @@ const TableAdditionalContact = (additional_contact: any[]) => {
 				case "email":
 					return <p className="d-flex align-items-center" key={index}>
 						<FaEnvelope className="mr-2" />
-						{phoneFormatter(item.value)}
+						{item.value}
 					</p>
 				case "telegram":
 					return <p className="d-flex align-items-center" key={index}>
 						<FaTelegram className="mr-2" />
-						{phoneFormatter(item.value)}
+						{item.value}
 					</p>
 			}
 		})

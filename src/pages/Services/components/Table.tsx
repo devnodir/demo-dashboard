@@ -1,16 +1,22 @@
 import MyTable from "@/components/antd/MyTable";
 import { SERVICES } from "@/components/endpoints";
 import ActionButtons from "@/components/shared/TableComponents/ActionButtons";
+import TableDate from "@/components/shared/TableComponents/TableDate";
 import { INIT_PAGE_PARAMS } from "@/components/variables";
 import useApi from "@/hooks/useApi";
 import useApiMutationID from "@/hooks/useApiMutationID";
 import { useQueryParams } from "@/hooks/useQueryParams";
 import useT from "@/hooks/useT";
 import useTableData from "@/hooks/useTableData";
-import { Tag } from "antd";
+import { ISetState } from "@/types/helper.type";
+import { message } from "antd";
 import React from 'react';
 
-const ServicesTable: React.FC = () => {
+interface Props {
+	setId: ISetState<string | null>
+}
+
+const ServicesTable: React.FC<Props> = ({ setId }) => {
 
 	const t = useT()
 
@@ -18,7 +24,7 @@ const ServicesTable: React.FC = () => {
 
 	const { data, refetch, isLoading, isRefetching } = useApi(SERVICES, {}, query)
 
-	const { records, pagination } = useTableData("services", data, query, setQuery)
+	const { records, pagination } = useTableData(data, query, setQuery)
 
 	const { mutate, isLoading: isDeleting } = useApiMutationID("delete", SERVICES)
 
@@ -31,83 +37,44 @@ const ServicesTable: React.FC = () => {
 		{
 			title: t("price"),
 			dataIndex: 'price',
+			render: (price: any) => new Intl.NumberFormat().format(price)
 		},
 		{
-			title: t("parent_service"),
-			dataIndex: 'parent',
+			title: t("currency"),
+			dataIndex: 'currency',
+			render: (currency: string) => currency.toUpperCase()
 		},
 		{
-			title: t("branches"),
-			dataIndex: 'branch',
-		},
-		{
-			title: t("status"),
-			dataIndex: 'status',
-			render: (text: string) => (
-				<Tag color={text === "active" ? "green" : "red"} className="text-capitalize">{text}</Tag>
-			)
+			title: t("date"),
+			dataIndex: 'createdAt',
+			render: TableDate
 		},
 		{
 			title: '',
-			dataIndex: 'actions',
-			key: 'actions',
-			render: () => <ActionButtons
-				onDelete={() => { }}
-				onUpdate={() => { }}
-				onMessage={() => { }}
+			dataIndex: '_id',
+			render: (id: string) => <ActionButtons
+				onDelete={() => deleteItem(id)}
+				onUpdate={() => setId(id)}
 			/>
 		},
 	];
 
-	const mockData = [
-		{
-			name: "Health care",
-			price: "2,000,000 UZS",
-			parent: "-",
-			branch: "Yakkasaroy filiali",
-			status: "active",
-			key: "1"
-		},
-		{
-			name: "Health care",
-			price: "2,000,000 UZS",
-			parent: "-",
-			branch: "Yakkasaroy filiali",
-			status: "inactive",
-			key: "2"
-		},
-		{
-			name: "Health care",
-			price: "2,000,000 UZS",
-			parent: "-",
-			branch: "Yakkasaroy filiali",
-			status: "active",
-			key: "3"
-		},
-		{
-			name: "Health care",
-			price: "2,000,000 UZS",
-			parent: "-",
-			branch: "Yakkasaroy filiali",
-			status: "active",
-			key: "4"
-		},
-		{
-			name: "Health care",
-			price: "2,000,000 UZS",
-			parent: "-",
-			branch: "Yakkasaroy filiali",
-			status: "active",
-			key: "5"
-		},
-	]
-
+	const deleteItem = (id: string) => {
+		mutate({ id }, {
+			onSuccess: () => refetch(),
+			onError: (err) => {
+				message.error(err?.message)
+			}
+		})
+	}
 
 	return (
 		<MyTable
 			columns={columns}
-			dataSource={mockData}
+			dataSource={records}
 			rowSelection={{ type: "checkbox" }}
+			pagination={pagination}
+			loading={isLoading || isRefetching || isDeleting}
 		/>
 	);
 };

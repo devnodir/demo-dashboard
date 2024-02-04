@@ -19,6 +19,11 @@ const Users: React.FC = () => {
 	const [id, setId] = useState<string | null>(null)
 	const [search] = useSearchParams()
 
+	const closeModal = () => {
+		toggle()
+		if (id) setId(null)
+	}
+
 	const onActionFinish = () => {
 		setId(null)
 		toggle()
@@ -39,7 +44,7 @@ const Users: React.FC = () => {
 			<UsersTable setId={(val) => { setId(val); toggle() }} />
 			<Drawer
 				open={isOpen}
-				onClose={toggle}
+				onClose={closeModal}
 				title={t(id ? "edit_user" : "new_user")}
 				destroyOnClose
 				width={480}

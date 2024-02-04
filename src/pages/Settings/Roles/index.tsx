@@ -2,6 +2,7 @@ import MyButton from "@/components/antd/MyButton";
 import MyTable from "@/components/antd/MyTable";
 import { ROLES } from "@/components/endpoints";
 import ActionButtons from "@/components/shared/TableComponents/ActionButtons";
+import TableDate from "@/components/shared/TableComponents/TableDate";
 import useApi from "@/hooks/useApi";
 import useApiMutation from "@/hooks/useApiMutation";
 import useApiMutationID from "@/hooks/useApiMutationID";
@@ -33,7 +34,7 @@ const Roles: React.FC = () => {
 		{
 			title: t("date"),
 			dataIndex: 'createdAt',
-			render: (date: string) => dayjs(date).format("DD.MM.YYYY")
+			render: TableDate
 		},
 		{
 			title: '',

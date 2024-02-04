@@ -1,5 +1,7 @@
 import { formatIncompletePhoneNumber } from "libphonenumber-js";
 
 export const phoneFormatter = (val?: string | number) => {
-    return val ? formatIncompletePhoneNumber(`+${val}`) : "";
+    if (!val) return "";
+    val = `${val}`;
+    return formatIncompletePhoneNumber(val.startsWith("+") ? val : `+${val}`);
 };

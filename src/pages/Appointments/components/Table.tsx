@@ -19,7 +19,7 @@ const AppointmentsTable: React.FC = () => {
 
 	const { data, refetch, isLoading, isRefetching } = useApi(SERVICES, {}, query)
 
-	const { records, pagination } = useTableData("services", data, query, setQuery)
+	const { records, pagination } = useTableData(data, query, setQuery)
 
 	const { mutate, isLoading: isDeleting } = useApiMutationID("delete", SERVICES)
 
@@ -65,7 +65,7 @@ const AppointmentsTable: React.FC = () => {
 		{
 			title: t("responsible_users"),
 			dataIndex: 'responsible_users',
-			render: TableUsersList
+			// render: TableUsersList
 		},
 		{
 			title: '',

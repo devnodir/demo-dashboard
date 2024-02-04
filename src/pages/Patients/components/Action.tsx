@@ -1,127 +1,159 @@
-import MyButton from '@/components/antd/MyButton'
+import { PATIENTS, USERS } from '@/components/endpoints'
+import AdditionalContact from '@/components/shared/Form/AdditionalContact'
+import SelectApi from '@/components/shared/Form/SelectApi'
+import { STATUS_PATIENT } from '@/components/variables'
+import useApi from '@/hooks/useApi'
+import useApiMutation from '@/hooks/useApiMutation'
+import useApiMutationID from '@/hooks/useApiMutationID'
 import useT from '@/hooks/useT'
+import { IVoid } from '@/types/helper.type'
 import { phoneFormatter } from '@/utils/formatter'
-import { R_PHONE, R_REQUIRED } from '@/utils/rules'
-import { colors } from '@/utils/theme'
-import { PlusOutlined } from '@ant-design/icons'
-import { Button, Col, DatePicker, Form, Input, InputNumber, Row, Select, Typography } from 'antd'
-import React, { Fragment } from 'react'
+import { R_PASSWORD, R_PHONE, R_REQUIRED } from '@/utils/rules'
+import { Button, DatePicker, Form, Input, InputNumber, Select, Spin, message } from 'antd'
+import dayjs from 'dayjs'
+import _ from 'lodash'
+import React, { useEffect } from 'react'
 import { BsCalendarFill } from 'react-icons/bs'
-import { FaLocationDot, FaPhone, FaTrash, FaUser } from 'react-icons/fa6'
+import { FaEye, FaEyeSlash, FaLocationDot, FaLock, FaPhone, FaUser } from 'react-icons/fa6'
 
-const tags = [
-	{ label: "VIP", value: "vip", color: "red" },
-	{ label: "50%", value: "50" },
-	{ label: "70%", value: "70" }
-]
+interface IProps {
+	id: string | null
+	onFinish: IVoid
+}
 
-const PatientAction: React.FC = () => {
+interface IFormData {
+	name: string
+	phone_number: number
+	additional_contact: any[]
+	address: string
+	birthday: Date
+	password: string
+	status: string
+	responsible_users: string[]
+}
+
+const PatientAction: React.FC<IProps> = ({ id, onFinish }) => {
 
 	const t = useT()
 
+	const [form] = Form.useForm<IFormData>()
+
+
+	const { data, isLoading } = useApi(`${PATIENTS}/${id}`, { enabled: Boolean(id), cacheTime: 0 })
+	const { mutate: createMutate, isLoading: createLoading } = useApiMutation(PATIENTS)
+	const { mutate: editMutate, isLoading: editLoading } = useApiMutationID("patch", PATIENTS)
+
+	useEffect(() => {
+		if (data) {
+			const record = data?.data
+			form.setFieldsValue(_.pick(record, ["name", "address", "additional_contact", "phone_number", "status", "responsible_users"]))
+			if (record.birthday) form.setFieldValue("birthday", dayjs(record.birthday))
+		}
+	}, [data])
+
+	const submit = (data: IFormData) => {
+		const formData: any = {
+			...data,
+			phone_number: data.phone_number.toString()
+		}
+		if (id) editMutate({ data: formData, id }, responses)
+		else createMutate(formData, responses)
+	}
+
+	const responses = {
+		onSuccess: () => onFinish(),
+		onError: (err: any) => {
+			message.error(err.message)
+		}
+	}
+
 	return (
-		<Form
-			layout="vertical"
-			initialValues={{
-				addtion_phones: [{}]
-			}}
-		>
-			<Form.Item
-				label={t("full_name")}
-				name="name"
-				rules={[R_REQUIRED]}
+		<Spin spinning={isLoading}>
+			<Form
+				layout="vertical"
+				form={form}
+				onFinish={submit}
 			>
-				<Input
-					addonBefore={<FaUser />}
-				/>
-			</Form.Item>
-			<Form.Item
-				label={t("l_phone")}
-				name="phone"
-				rules={[R_REQUIRED, R_PHONE]}
-				validateFirst
-			>
-				<InputNumber
-					placeholder="+998 ** *** ** **"
-					formatter={phoneFormatter}
-					addonBefore={<FaPhone />}
-				/>
-			</Form.Item>
-			<Form.Item
-				label={t("address")}
-				name="address"
-				rules={[R_REQUIRED]}
-			>
-				<Input
-					addonBefore={<FaLocationDot />}
-				/>
-			</Form.Item>
-			<Form.Item
-				label={t("tags")}
-				name="tags"
-			>
-				<Select
-					mode="multiple"
-					allowClear
-					options={tags}
-				/>
-			</Form.Item>
-			<Form.Item
-				label={t("birthday")}
-				name="birthday"
-			>
-				<DatePicker
-					format="DD.MM.YYYY"
-					style={{ width: "100%" }}
-					suffixIcon={<BsCalendarFill />}
-				/>
-			</Form.Item>
-			<Form.List
-				name="addtion_phones"
-			>
-				{(fields, { add, remove }) => (
-					<Fragment>
-						<Typography.Text className='mb-2 d-inline-block'>{t("addtional_contact")}</Typography.Text>
-						{
-							fields.map(({ key, name }) => (
-								<Form.Item
-									name={[name, "additional_phone"]}
-									rules={[R_PHONE]}
-									validateFirst
-									key={key}
-								>
-									<Row
-										gutter={4}
-									>
-										<Col span={20}>
-											<InputNumber
-												placeholder="+998 ** *** ** **"
-												formatter={phoneFormatter}
-												addonBefore={<FaPhone />}
-											/>
-										</Col>
-										<Col span={4}>
-											<Button danger disabled={fields.length === 1} type="text" className='float-right' onClick={() => remove(name)}>
-												<FaTrash />
-											</Button>
-										</Col>
-									</Row>
-								</Form.Item>
-							))
-						}
-						<MyButton color={colors.success} shape="circle" className='mb-4 float-right' type="primary" onClick={add}>
-							<PlusOutlined />
-						</MyButton>
-					</Fragment>
-				)}
+				<Form.Item
+					label={t("full_name")}
+					name="name"
+					rules={[R_REQUIRED]}
+				>
+					<Input
+						addonBefore={<FaUser />}
+					/>
+				</Form.Item>
+				<Form.Item
+					label={t("l_phone")}
+					name="phone_number"
+					rules={[R_REQUIRED, R_PHONE]}
+					validateFirst
+				>
+					<InputNumber
+						placeholder="+998 ** *** ** **"
+						formatter={phoneFormatter}
+						addonBefore={<FaPhone />}
+					/>
+				</Form.Item>
+				<Form.Item
+					label={t("address")}
+					name="address"
+				>
+					<Input
+						addonBefore={<FaLocationDot />}
+					/>
+				</Form.Item>
+				<Form.Item
+					label={t("birthday")}
+					name="birthday"
+				>
+					<DatePicker
+						format="DD.MM.YYYY"
+						style={{ width: "100%" }}
+						suffixIcon={<BsCalendarFill />}
+					/>
+				</Form.Item>
+				<Form.Item
+					label={t("responsible_users")}
+					name="responsible_users"
+				>
+					<SelectApi
+						mode="multiple"
+						allowClear
+						showSearch
+						endpoint={USERS}
+					/>
+				</Form.Item>
 
-			</Form.List>
+				<Form.Item
+					label={t("status")}
+					name="status"
+					rules={[R_REQUIRED]}
 
+				>
+					<Select
+						options={STATUS_PATIENT}
+					/>
+				</Form.Item>
+				<Form.Item
+					label={t("l_password")}
+					name="password"
+					validateFirst
+					rules={[R_PASSWORD]}
+				>
+					<Input.Password
+						addonBefore={<FaLock />}
+						iconRender={(visible) => (visible ? <FaEye /> : <FaEyeSlash />)}
+						placeholder="********"
+					/>
+				</Form.Item>
 
-			<Button block type="primary" htmlType="submit" className="text-uppercase">
-				{t("create")}
-			</Button>
-		</Form>
+				<AdditionalContact form={form} />
+				<Button block type="primary" htmlType="submit" className="text-uppercase" loading={createLoading || editLoading}>
+					{t(id ? "save" : "create")}
+				</Button>
+			</Form>
+		</Spin>
 	)
 }
 

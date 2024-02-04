@@ -1,130 +1,114 @@
 import MyTable from "@/components/antd/MyTable";
+import { DOCTORS } from "@/components/endpoints";
 import ActionButtons from "@/components/shared/TableComponents/ActionButtons";
-import UserAvatar from "@/components/shared/TableComponents/UserAvatar";
+import TableAdditionalContact from "@/components/shared/TableComponents/TableAdditionalContact";
+import TableDate from "@/components/shared/TableComponents/TableDate";
+import TableIsActive from "@/components/shared/TableComponents/TableIsActive";
+import TablePhone from "@/components/shared/TableComponents/TablePhone";
+import { INIT_PAGE_PARAMS } from "@/components/variables";
+import useApi from "@/hooks/useApi";
+import useApiMutationID from "@/hooks/useApiMutationID";
+import { useQueryParams } from "@/hooks/useQueryParams";
 import useT from "@/hooks/useT";
-import { Tag } from "antd";
+import useTableData from "@/hooks/useTableData";
+import { ISetState } from "@/types/helper.type";
+import { message } from "antd";
+import dayjs from "dayjs";
 import React from 'react';
 import { Link } from "react-router-dom";
 
-const DoctorsTable: React.FC = () => {
+interface Props {
+	setId: ISetState<string | null>
+}
+
+const DoctorsTable: React.FC<Props> = ({ setId }) => {
 
 	const t = useT()
 
+	const [query, setQuery] = useQueryParams(INIT_PAGE_PARAMS)
+
+	const { data, refetch, isLoading, isRefetching } = useApi(DOCTORS, {}, query)
+
+	const { records, pagination } = useTableData(data, query, setQuery)
+
+	const { mutate, isLoading: isDeleting } = useApiMutationID("delete", DOCTORS)
+
 	const columns = [
-		{
-			title: t('image'),
-			dataIndex: 'image',
-			render: (val: any) => <UserAvatar img={val} />
-		},
 		{
 			title: t('full_name'),
 			dataIndex: 'name',
-			render: (name: string, order: any) => <Link to={`/doctors/cabinet/${order.id}`} className="py-3">
+			render: (name: string, order: any) => <Link to={`/doctors/cabinet/${order._id}`} className="py-3">
 				{name}
 			</Link>
 		},
 		{
 			title: t('l_phone'),
-			dataIndex: 'phone',
+			dataIndex: 'phone_number',
+			render: TablePhone
 		},
 		{
 			title: t('specialty'),
-			dataIndex: 'specialty',
+			dataIndex: 'role',
+		},
+		{
+			title: t('branch'),
+			dataIndex: 'branch_name',
 		},
 		{
 			title: t('working_experience'),
 			dataIndex: 'experience',
+			render: (experience: string) => experience ? `${experience} ${t("years")}` : ""
 		},
 		{
 			title: t('working_time'),
 			dataIndex: 'time',
+			render: (_: any, order: any) => {
+				return `${dayjs(order.start_of_working_day).format("HH:mm")} - ${dayjs(order.end_of_working_day).format("HH:mm")}`
+			}
 		},
 		{
 			title: t('birthday'),
 			dataIndex: 'birthday',
+			render: TableDate
+		},
+		{
+			title: t("addtional_contact"),
+			dataIndex: 'additional_contact',
+			render: TableAdditionalContact
 		},
 		{
 			title: t('status'),
-			dataIndex: 'status',
-			render: (text: string) => (
-				<Tag color={text === "active" ? "green" : "red"} className="text-capitalize">{text}</Tag>
-			)
+			dataIndex: 'is_active',
+			render: TableIsActive
 		},
 		{
 			title: '',
-			dataIndex: 'actions',
-			key: 'actions',
-			render: () => <ActionButtons
-				onDelete={() => { }}
-				onUpdate={() => { }}
-				onMessage={() => { }}
+			dataIndex: '_id',
+			render: (id: string) => <ActionButtons
+				onDelete={() => deleteItem(id)}
+				onUpdate={() => setId(id)}
 			/>
 		},
 	];
 
-	const data = [
-		{
-			image: "https://randomuser.me/api/portraits/men/6.jpg",
-			name: "Nodirek Abdunazarov",
-			phone: "+998 (99) 008-27-35",
-			birthday: "01.03.2022",
-			specialty: "Physical therapy",
-			experience: "10 years",
-			time: "08:00 - 20:00",
-			status: "active",
-			key: "1"
-		},
-		{
-			image: "https://randomuser.me/api/portraits/men/7.jpg",
-			name: "Nodirek Abdunazarov",
-			phone: "+998 (99) 008-27-35",
-			birthday: "01.03.2022",
-			specialty: "Physical therapy",
-			experience: "10 years",
-			time: "08:00 - 20:00",
-			status: "inactive",
-			key: "2"
-		},
-		{
-			image: "https://randomuser.me/api/portraits/men/8.jpg",
-			name: "Nodirek Abdunazarov",
-			phone: "+998 (99) 008-27-35",
-			birthday: "01.03.2022",
-			specialty: "Physical therapy",
-			experience: "10 years",
-			time: "08:00 - 20:00",
-			status: "active",
-			key: "3"
-		},
-		{
-			image: "https://randomuser.me/api/portraits/men/9.jpg",
-			name: "Nodirek Abdunazarov",
-			phone: "+998 (99) 008-27-35",
-			birthday: "01.03.2022",
-			specialty: "Physical therapy",
-			experience: "10 years",
-			time: "08:00 - 20:00",
-			status: "active",
-			key: "4"
-		},
-		{
-			image: "https://randomuser.me/api/portraits/men/10.jpg",
-			name: "Nodirek Abdunazarov",
-			phone: "+998 (99) 008-27-35",
-			birthday: "01.03.2022",
-			specialty: "Physical therapy",
-			experience: "10 years",
-			time: "08:00 - 20:00",
-			status: "active",
-			key: "5"
-		},
-	]
+	const deleteItem = (id: string) => {
+		mutate({ id }, {
+			onSuccess: () => refetch(),
+			onError: (err) => {
+				message.error(err?.message)
+			}
+		})
+	}
+
+
 
 	return (
 		<MyTable
 			columns={columns}
-			dataSource={data}
+			dataSource={records}
 			rowSelection={{ type: "checkbox" }}
+			pagination={pagination}
+			loading={isLoading || isRefetching || isDeleting}
 		/>
 	);
 };

@@ -4,7 +4,6 @@ import ActionButtons from "@/components/shared/TableComponents/ActionButtons";
 import TableAdditionalContact from "@/components/shared/TableComponents/TableAdditionalContact";
 import TableDate from "@/components/shared/TableComponents/TableDate";
 import TableIsActive from "@/components/shared/TableComponents/TableIsActive";
-import TableNameRecord from "@/components/shared/TableComponents/TableNameRecord";
 import TablePhone from "@/components/shared/TableComponents/TablePhone";
 import { INIT_PAGE_PARAMS } from "@/components/variables";
 import useApi from "@/hooks/useApi";
@@ -28,16 +27,11 @@ const UsersTable: React.FC<Props> = ({ setId }) => {
 
 	const { data, refetch, isLoading, isRefetching } = useApi(USERS, {}, query)
 
-	const { records, pagination } = useTableData("users", data, query, setQuery)
+	const { records, pagination } = useTableData(data, query, setQuery)
 
 	const { mutate, isLoading: isDeleting } = useApiMutationID("delete", USERS)
 
 	const columns = [
-		// {
-		// 	title: t("image"),
-		// 	dataIndex: 'image',
-		// 	render: (val: any) => <UserAvatar img={val} />
-		// },
 		{
 			title: t("full_name"),
 			dataIndex: 'name',
@@ -49,13 +43,7 @@ const UsersTable: React.FC<Props> = ({ setId }) => {
 		},
 		{
 			title: t("role"),
-			dataIndex: 'role',
-			render: TableNameRecord
-		},
-		{
-			title: t("branch"),
-			dataIndex: 'branch',
-			render: TableNameRecord
+			dataIndex: 'role_name',
 		},
 		{
 			title: t("birthday"),

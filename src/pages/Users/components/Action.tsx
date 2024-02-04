@@ -1,5 +1,6 @@
 import MyButton from '@/components/antd/MyButton'
 import { BRANCH, ROLES, USERS } from '@/components/endpoints'
+import AdditionalContact from '@/components/shared/Form/AdditionalContact'
 import { STATUS } from '@/components/variables'
 import useApi from '@/hooks/useApi'
 import useApiMutation from '@/hooks/useApiMutation'
@@ -65,7 +66,7 @@ const UsersAction: React.FC<IProps> = ({ onFinish, id }) => {
 			phone_number: data.phone_number.toString()
 		}
 		if (data.birthday) {
-			formData.birthday = dayjs(data.birthday).format("DD.MM.YYYY")
+			formData.birthday = dayjs(data.birthday).toISOString()
 		}
 		if (id) editMutate({ data, id }, responses)
 		else createMutate(formData, responses)
@@ -159,80 +160,7 @@ const UsersAction: React.FC<IProps> = ({ onFinish, id }) => {
 						placeholder="********"
 					/>
 				</Form.Item>
-				<Form.List
-					name="additional_contact"
-				>
-					{(fields, { add, remove }) => (
-						<Fragment>
-							<Typography.Text className='mb-2 d-inline-block'>{t("addtional_contact")}</Typography.Text>
-							{
-								fields.map(({ key, name }) => {
-									const type = form.getFieldValue("additional_contact")[name]?.type
-									return (
-										<Row
-											gutter={2}
-											key={key}
-										>
-											<Col span={21}>
-												{
-													type === "phone_number" &&
-													<Form.Item
-														name={[name, "value"]}
-														rules={[R_REQUIRED, R_PHONE]}
-														validateFirst
-														key={key}
-													>
-														<InputNumber
-															placeholder="+998 ** *** ** **"
-															formatter={phoneFormatter}
-															addonBefore={<FaPhone />}
-														/>
-
-
-													</Form.Item>
-												}
-												{
-													type === "email" &&
-													<Form.Item
-														name={[name, "value"]}
-														rules={[R_REQUIRED, R_EMAIL]}
-														validateFirst
-														key={key}
-													>
-														<Input
-															placeholder="example@gmail.com"
-															addonBefore={<FaEnvelope />}
-														/>
-													</Form.Item>
-												}
-												{
-													type === "telegram" &&
-													<Form.Item
-														name={[name, "value"]}
-														rules={[R_REQUIRED]}
-														validateFirst
-														key={key}
-													>
-														<Input
-															placeholder="@example"
-															addonBefore={<FaTelegram />}
-														/>
-													</Form.Item>
-												}
-											</Col>
-											<Col span={3}>
-												<Button danger type="text" className='float-right' onClick={() => remove(name)}>
-													<FaTrash />
-												</Button>
-											</Col>
-										</Row>
-									)
-								})
-							}
-							<AddButton onClick={({ key }) => add({ type: key })} />
-						</Fragment>
-					)}
-				</Form.List>
+				<AdditionalContact form={form} />
 				<Button block type="primary" htmlType="submit" className='mt-2 text-uppercase' loading={createLoading || editLoading}>
 					{t(id ? "save" : "create")}
 				</Button>
@@ -242,22 +170,3 @@ const UsersAction: React.FC<IProps> = ({ onFinish, id }) => {
 }
 
 export default UsersAction
-
-const AddButton = ({ onClick }: { onClick: MenuProps["onClick"] }) => {
-
-	const t = useT()
-
-	const items: MenuProps["items"] = [
-		{ label: t("l_phone"), icon: <FaPhone />, key: "phone_number" },
-		{ label: "Email", icon: <FaEnvelope />, key: "email" },
-		{ label: "Telegram", icon: <FaTelegram />, key: "telegram" },
-	]
-
-	return (
-		<Dropdown menu={{ items, onClick }} trigger={["click"]} overlayStyle={{ width: 200 }} arrow >
-			<MyButton color={colors.success} shape="circle" className='mb-4 float-right' type="primary">
-				<PlusOutlined />
-			</MyButton>
-		</Dropdown>
-	)
-}
