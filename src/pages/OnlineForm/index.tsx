@@ -45,7 +45,7 @@ const OnlineForm: React.FC = () => {
 					step === 3 ?
 						<StepResult onClick={() => setStep(0)} /> :
 						<Fragment>
-							<Steps current={step} items={steps} />
+							<Steps current={step} items={steps} direction="horizontal" responsive={false} />
 							<Card className={`step-${step + 1}`}>
 								{steps[step].content}
 							</Card>

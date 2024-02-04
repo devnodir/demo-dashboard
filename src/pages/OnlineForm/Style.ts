@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 export default styled.div`
     position: relative;
+    padding: 16px;
     .content {
         display: flex;
         flex-direction: column;
@@ -15,6 +16,10 @@ export default styled.div`
         h2 {
             margin-top: 80px;
             margin-bottom: 40px;
+            ${media("sm")`
+                    margin-top: 60px;
+                    margin-bottom: 20px;
+                `}
         }
         .ant-card {
             width: 100%;
@@ -28,12 +33,14 @@ export default styled.div`
             margin-left: auto;
             margin-top: 16px;
             min-width: 200px;
+            ${media("md")`
+                   width:100%;
+                `}
         }
     }
     .action-buttons {
         display: flex;
         gap: 8px;
-        padding: 0 32px;
         top: 32px;
         right: 32px;
         position: absolute;
@@ -58,8 +65,11 @@ export default styled.div`
             }
         }
         ${media("md")`
-                    padding:0 12px;
                     gap: 8px;
+                `}
+        ${media("sm")`
+                     top: 16px;
+                     right: 16px;
                 `}
     }
     .ant-steps .ant-steps-item-title {

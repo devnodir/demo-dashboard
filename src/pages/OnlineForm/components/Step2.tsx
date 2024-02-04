@@ -9,8 +9,8 @@ const Step2 = () => {
 		<Form
 			layout="vertical"
 		>
-			<Row gutter={[20, 20]}>
-				<Col xl={12}>
+			<Row gutter={20}>
+				<Col span={24} xl={12}>
 					<Form.Item
 						label={t("service")}
 					>
@@ -21,7 +21,7 @@ const Step2 = () => {
 						/>
 					</Form.Item>
 				</Col>
-				<Col xl={12}>
+				<Col span={24} xl={12}>
 					<Form.Item
 						label={t("doctor")}
 					>

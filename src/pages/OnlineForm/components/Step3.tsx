@@ -12,7 +12,7 @@ const Step3 = () => {
 			layout="vertical"
 		>
 			<Row gutter={20}>
-				<Col xl={12}>
+				<Col span={24} xl={12}>
 					<Form.Item
 						label="First name"
 						name="name"
@@ -20,7 +20,7 @@ const Step3 = () => {
 						<Input />
 					</Form.Item>
 				</Col>
-				<Col xl={12}>
+				<Col span={24} xl={12}>
 					<Form.Item
 						label="Last name"
 						name="name2"
@@ -28,7 +28,7 @@ const Step3 = () => {
 						<Input />
 					</Form.Item>
 				</Col>
-				<Col xl={12}>
+				<Col span={24} xl={12}>
 					<Form.Item
 						label={t("l_phone")}
 						name="phone_number"
