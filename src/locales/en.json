@@ -133,5 +133,9 @@
 	"add_category": "Add category",
 	"new_category": "New category",
 	"edit_category": "Edit category",
-	"parent_category": "Parent category"
+	"parent_category": "Parent category",
+	"logo": "Logo",
+	"is_sms_active": "Is sms active?",
+	"stock": "Stock",
+	"is_refund": "Is refund"
 }

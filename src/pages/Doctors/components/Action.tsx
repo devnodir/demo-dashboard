@@ -131,6 +131,7 @@ const DoctorAction: React.FC<IProps> = ({ id, onFinish }) => {
 				<Form.Item
 					label={t("working_experience")}
 					name="experience"
+					rules={[R_REQUIRED]}
 				>
 					<InputNumber type="number" className='w-100' />
 				</Form.Item>

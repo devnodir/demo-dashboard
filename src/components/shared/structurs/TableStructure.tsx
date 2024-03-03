@@ -8,11 +8,12 @@ import React from 'react';
 
 interface Props {
 	setId: ISetState<string | null>
-	useComlums: (endpoint: string, setId: ISetState<string | null>) => any
+	useComlums: (endpoint: string, setId: ISetState<string | null>, ...props: any) => any
 	endpoint: string
+	[props: string]: any;
 }
 
-const TableStructure: React.FC<Props> = ({ setId, useComlums, endpoint }) => {
+const TableStructure: React.FC<Props> = ({ setId, useComlums, endpoint, ...props }) => {
 
 	const [query, setQuery] = useQueryParams(INIT_PAGE_PARAMS)
 
@@ -20,7 +21,7 @@ const TableStructure: React.FC<Props> = ({ setId, useComlums, endpoint }) => {
 
 	const { records, pagination } = useTableData(data, query, setQuery)
 
-	const { columns, isDeleting } = useComlums(endpoint, setId)
+	const { columns, isDeleting } = useComlums(endpoint, setId, props)
 
 	return (
 		<MyTable

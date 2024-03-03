@@ -1,58 +1,22 @@
-import MyTable from "@/components/antd/MyTable";
-import { SERVICES } from "@/components/endpoints";
-import ActionButtons from "@/components/shared/TableComponents/ActionButtons";
-import { INIT_PAGE_PARAMS } from "@/components/variables";
-import useApi from "@/hooks/useApi";
-import useApiMutationID from "@/hooks/useApiMutationID";
-import { useQueryParams } from "@/hooks/useQueryParams";
-import useT from "@/hooks/useT";
-import useTableData from "@/hooks/useTableData";
-import { Tag } from "antd";
+import { WAREHOUSE_SELLS } from "@/components/endpoints";
+import TableStructure from "@/components/shared/structurs/TableStructure";
+import { ISetState } from "@/types/helper.type";
 import React from 'react';
+import useComlums from "./useColumns";
 
-const WarehouseTable: React.FC = () => {
+interface Props {
+	setId: ISetState<string | null>
+}
 
-	const t = useT()
-
-	const [query, setQuery] = useQueryParams(INIT_PAGE_PARAMS)
-
-	const { data, refetch, isLoading, isRefetching } = useApi(SERVICES, {}, query)
-
-	const { records, pagination } = useTableData(data, query, setQuery)
-
-	const { mutate, isLoading: isDeleting } = useApiMutationID("delete", SERVICES)
-
-
-	const columns = [
-		{
-			title: t("patient"),
-			dataIndex: 'patient',
-		},
-		{
-			title: t("quantity"),
-			dataIndex: 'quantity',
-		},
-		{
-			title: '',
-			dataIndex: 'actions',
-			key: 'actions',
-			render: () => <ActionButtons
-				onDelete={() => { }}
-				onUpdate={() => { }}
-			/>
-		},
-	];
-
-
-
+const ProductTable: React.FC<Props> = ({ setId }) => {
 
 	return (
-		<MyTable
-			columns={columns}
-			dataSource={[]}
-			rowSelection={{ type: "checkbox" }}
+		<TableStructure
+			setId={setId}
+			endpoint={WAREHOUSE_SELLS}
+			useComlums={useComlums}
 		/>
 	);
 };
 
-export default WarehouseTable;
+export default ProductTable;

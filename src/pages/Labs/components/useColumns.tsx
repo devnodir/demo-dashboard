@@ -2,7 +2,8 @@ import useColumnStructure from "@/components/shared/structurs/useColumnStructure
 import useT from "@/hooks/useT";
 import { ISetState } from "@/types/helper.type";
 
-const useComlums = (endpoint: string, setId: ISetState<string | null>) => {
+const useComlums = (endpoint: string, setId: ISetState<string | null>, options?: Record<string, any>) => {
+
 	const t = useT()
 	const columns = [
 		{
@@ -11,23 +12,15 @@ const useComlums = (endpoint: string, setId: ISetState<string | null>) => {
 		},
 		{
 			title: t("patient"),
-			dataIndex: 'patient',
-		},
-		{
-			title: t("template"),
-			dataIndex: 'template',
-		},
-		{
-			title: t("services"),
-			dataIndex: 'services',
-		},
-		{
-			title: t("status"),
-			dataIndex: 'status',
+			dataIndex: 'patient_name',
 		},
 	];
 
-	return useColumnStructure(columns, endpoint, setId)
+	return useColumnStructure(columns, endpoint, setId, {
+		onComplateTemplate: (id: string) => {
+
+		}
+	})
 }
 
 export default useComlums

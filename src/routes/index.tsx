@@ -18,7 +18,6 @@ const privateRoutes: RouteObject[] = [
 		path: "/warehouse", element: page(() => import(`@/pages/Warehouse`), AppLayout),
 		children: [
 			{ path: "/warehouse/products", element: page(() => import(`@/pages/Warehouse/Products`)) },
-			{ path: "/warehouse/categories", element: page(() => import(`@/pages/Warehouse/Categories`)) },
 			{ path: "/warehouse/sells", element: page(() => import(`@/pages/Warehouse/Sells`)) },
 			{ path: "/warehouse", element: redirectTo("/warehouse/products", true) },
 		]

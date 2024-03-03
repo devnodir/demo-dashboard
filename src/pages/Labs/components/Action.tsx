@@ -1,23 +1,21 @@
-import { PATIENTS, SERVICES, TASKS } from '@/components/endpoints'
+import { LABS, PATIENTS, PROTOCOL_LABS, SERVICES } from '@/components/endpoints'
 import SelectApi from '@/components/shared/Form/SelectApi'
-import { STATUS } from '@/components/variables'
 import useApi from '@/hooks/useApi'
 import useApiMutation from '@/hooks/useApiMutation'
 import useApiMutationID from '@/hooks/useApiMutationID'
 import useT from '@/hooks/useT'
 import { IVoid } from '@/types/helper.type'
 import { R_REQUIRED } from '@/utils/rules'
-import { Button, Form, Input, Select, Spin } from 'antd'
+import { Button, Form, Input, Spin, message } from 'antd'
 import dayjs from 'dayjs'
 import _ from 'lodash'
 import React, { useEffect } from 'react'
 
 interface IFormData {
 	name: string
-	patient: string
-	template: string
+	protocol_template: string
+	patient_id: string
 	services: string
-	status: string
 }
 
 interface IProps {
@@ -25,21 +23,21 @@ interface IProps {
 	onFinish: IVoid
 }
 
-const TasksAction: React.FC<IProps> = ({ id }) => {
+const LabsAction: React.FC<IProps> = ({ id, onFinish }) => {
 
 	const t = useT()
 
 	const [form] = Form.useForm<IFormData>()
 
 
-	const { data, isLoading } = useApi(`${TASKS}/${id}`, { enabled: Boolean(id), cacheTime: 0 })
-	const { mutate: createMutate, isLoading: createLoading } = useApiMutation(TASKS)
-	const { mutate: editMutate, isLoading: editLoading } = useApiMutationID("patch", TASKS)
+	const { data, isLoading } = useApi(`${LABS}/${id}`, { enabled: Boolean(id), cacheTime: 0 })
+	const { mutate: createMutate, isLoading: createLoading } = useApiMutation(LABS)
+	const { mutate: editMutate, isLoading: editLoading } = useApiMutationID("patch", LABS)
 
 	useEffect(() => {
 		if (data) {
 			const record = data?.data
-			form.setFieldsValue(_.pick(record, ["responsible_users", "patient_id", "is_done", "text", "status", "priority"]))
+			form.setFieldsValue(_.pick(record, ["name", "protocol_template", "patient_id", "service"]))
 			if (record.deadline) form.setFieldValue("deadline", dayjs(record.deadline))
 		}
 	}, [data])
@@ -50,10 +48,10 @@ const TasksAction: React.FC<IProps> = ({ id }) => {
 	}
 
 	const responses = {
-		// onSuccess: () => onFinish(),
-		// onError: (err: any) => {
-		// 	message.error(err.message)
-		// }
+		onSuccess: () => onFinish(),
+		onError: (err: any) => {
+			message.error(err.message)
+		}
 	}
 
 	return (
@@ -83,34 +81,24 @@ const TasksAction: React.FC<IProps> = ({ id }) => {
 				</Form.Item>
 				<Form.Item
 					label={t("template")}
-					name="template"
+					name="protocol_template"
 					rules={[R_REQUIRED]}
 				>
-					<Select
+					<SelectApi
+						endpoint={PROTOCOL_LABS}
 						showSearch
 						allowClear
-						options={[]}
 					/>
 				</Form.Item>
 				<Form.Item
 					label={t("services")}
-					name="services"
+					name="service"
 					rules={[R_REQUIRED]}
 				>
 					<SelectApi
 						endpoint={SERVICES}
 						showSearch
 						allowClear
-						mode="multiple"
-					/>
-				</Form.Item>
-				<Form.Item
-					label={t("status")}
-					name="status"
-					rules={[R_REQUIRED]}
-				>
-					<Select
-						options={STATUS}
 					/>
 				</Form.Item>
 				<Button block type="primary" htmlType="submit" className='mt-2' loading={createLoading || editLoading}>
@@ -121,4 +109,4 @@ const TasksAction: React.FC<IProps> = ({ id }) => {
 	)
 }
 
-export default TasksAction
+export default LabsAction

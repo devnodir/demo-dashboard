@@ -24,10 +24,6 @@ const Warehouse: React.FC = () => {
 			key: "products",
 		},
 		{
-			label: t("categories"),
-			key: "categories",
-		},
-		{
 			label: t("sells"),
 			key: "sells",
 		},

@@ -1,4 +1,4 @@
-import { PATIENTS, USERS } from '@/components/endpoints'
+import { BRANCH, PATIENTS, USERS } from '@/components/endpoints'
 import AdditionalContact from '@/components/shared/Form/AdditionalContact'
 import SelectApi from '@/components/shared/Form/SelectApi'
 import { STATUS_PATIENT } from '@/components/variables'
@@ -8,6 +8,7 @@ import useApiMutationID from '@/hooks/useApiMutationID'
 import useT from '@/hooks/useT'
 import { IVoid } from '@/types/helper.type'
 import { phoneFormatter } from '@/utils/formatter'
+import { mapSelectData } from '@/utils/methods'
 import { R_PASSWORD, R_PHONE, R_REQUIRED } from '@/utils/rules'
 import { Button, DatePicker, Form, Input, InputNumber, Select, Spin, message } from 'antd'
 import dayjs from 'dayjs'
@@ -28,6 +29,7 @@ interface IFormData {
 	address: string
 	birthday: Date
 	password: string
+	branch: string
 	status: string
 	responsible_users: string[]
 }
@@ -42,11 +44,13 @@ const PatientAction: React.FC<IProps> = ({ id, onFinish }) => {
 	const { data, isLoading } = useApi(`${PATIENTS}/${id}`, { enabled: Boolean(id), cacheTime: 0 })
 	const { mutate: createMutate, isLoading: createLoading } = useApiMutation(PATIENTS)
 	const { mutate: editMutate, isLoading: editLoading } = useApiMutationID("patch", PATIENTS)
+	const { data: branchData, isLoading: branchLoading } = useApi(BRANCH)
+
 
 	useEffect(() => {
 		if (data) {
-			const record = data?.data
-			form.setFieldsValue(_.pick(record, ["name", "address", "additional_contact", "phone_number", "status", "responsible_users"]))
+			const record = data?.patient
+			form.setFieldsValue(_.pick(record, ["name", "address", "additional_contact", "phone_number", "status", "responsible_users", "branch"]))
 			if (record.birthday) form.setFieldValue("birthday", dayjs(record.birthday))
 		}
 	}, [data])
@@ -111,6 +115,18 @@ const PatientAction: React.FC<IProps> = ({ id, onFinish }) => {
 						format="DD.MM.YYYY"
 						style={{ width: "100%" }}
 						suffixIcon={<BsCalendarFill />}
+					/>
+				</Form.Item>
+				<Form.Item
+					label={t("branches")}
+					name="branch"
+					rules={[R_REQUIRED]}
+
+				>
+					<Select
+						options={mapSelectData(branchData)}
+						mode="multiple"
+						loading={branchLoading}
 					/>
 				</Form.Item>
 				<Form.Item

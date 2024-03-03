@@ -1,4 +1,7 @@
-import TableStages from "@/components/shared/TableComponents/TableStages";
+import TableDate from "@/components/shared/TableComponents/TableDate";
+import TableNameRecord from "@/components/shared/TableComponents/TableNameRecord";
+import TablePriceCurrency from "@/components/shared/TableComponents/TablePriceCurrency";
+import TableUsersList from "@/components/shared/TableComponents/TableUsersList";
 import useColumnStructure from "@/components/shared/structurs/useColumnStructure";
 import useT from "@/hooks/useT";
 import { ISetState } from "@/types/helper.type";
@@ -7,46 +10,38 @@ const useComlums = (endpoint: string, setId: ISetState<string | null>) => {
 	const t = useT()
 	const columns = [
 		{
-			title: t("appointment_stage"),
-			dataIndex: 'appointment_stage',
-			// render: TableStages
-		},
-		{
 			title: t("patient"),
 			dataIndex: 'patient',
+			render: TableNameRecord
 		},
 		{
 			title: t("doctor"),
 			dataIndex: 'doctor',
+			render: TableNameRecord
 		},
 		{
 			title: t("service"),
 			dataIndex: 'service',
+			render: TableNameRecord
 		},
 		{
 			title: t("price"),
 			dataIndex: 'price',
-		},
-		{
-			title: t("note"),
-			dataIndex: 'note',
+			render: TablePriceCurrency
 		},
 		{
 			title: t("date"),
-			dataIndex: 'date',
+			dataIndex: 'appointment_date',
+			render: TableDate
 		},
 		{
 			title: t("time"),
-			dataIndex: 'time',
-		},
-		{
-			title: t("duration"),
-			dataIndex: 'duration',
+			dataIndex: 'appointment_time',
 		},
 		{
 			title: t("responsible_users"),
 			dataIndex: 'responsible_users',
-			// render: TableUsersList
+			render: TableUsersList
 		},
 	];
 

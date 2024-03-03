@@ -1,57 +1,91 @@
+import { WAREHOUSE_CATEGORY } from '@/components/endpoints'
+import SelectApi from '@/components/shared/Form/SelectApi'
+import useApi from '@/hooks/useApi'
+import useApiMutation from '@/hooks/useApiMutation'
+import useApiMutationID from '@/hooks/useApiMutationID'
 import useT from '@/hooks/useT'
+import { IVoid } from '@/types/helper.type'
 import { R_REQUIRED } from '@/utils/rules'
-import { Button, Form, Input, InputNumber, Select } from 'antd'
-import React from 'react'
+import { Button, Form, Input, InputNumber, Spin, message } from 'antd'
+import _ from 'lodash'
+import React, { useEffect } from 'react'
 
-const WarehouseAction: React.FC = () => {
+interface IProps {
+	id: string | null
+	onFinish: IVoid
+}
+
+const WarehouseAction: React.FC<IProps> = ({ id, onFinish }) => {
 
 	const t = useT()
 
+	const [form] = Form.useForm()
+
+
+	const { data, isLoading } = useApi(`${WAREHOUSE_CATEGORY}/${id}`, { enabled: Boolean(id), cacheTime: 0 })
+	const { mutate: createMutate, isLoading: createLoading } = useApiMutation(WAREHOUSE_CATEGORY)
+	const { mutate: editMutate, isLoading: editLoading } = useApiMutationID("patch", WAREHOUSE_CATEGORY)
+
+	useEffect(() => {
+		if (data) {
+			const record = data?.data
+			form.setFieldsValue(_.pick(record, ["name", "parent_category"]))
+		}
+	}, [data])
+
+	const submit = (data: any) => {
+		if (id) editMutate({ data, id }, responses)
+		else createMutate(data, responses)
+	}
+
+	const responses = {
+		onSuccess: () => {
+			onFinish()
+		},
+		onError: (err: any) => {
+			message.error(err.message)
+		}
+	}
+
 	return (
-		<Form
-			layout="vertical"
-		>
-			<Form.Item
-				label={t("name_product")}
-				name="name"
-				rules={[R_REQUIRED]}
+		<Spin spinning={isLoading}>
+			<Form
+				layout="vertical"
+				form={form}
+				onFinish={submit}
 			>
-				<Input />
-			</Form.Item>
-			<Form.Item
-				label={t("price")}
-				name="price"
-				rules={[R_REQUIRED]}
-			>
-				<InputNumber className='w-100' />
-			</Form.Item>
-			<Form.Item
-				label={t("category")}
-				name="category"
-			>
-				<Select
-					options={[]}
-				/>
-			</Form.Item>
-			<Form.Item
-				label={t("service")}
-				name="service"
-			>
-				<Select
-					options={[]}
-				/>
-			</Form.Item>
-			<Form.Item
-				label={t("quantity")}
-				name="quantity"
-				rules={[R_REQUIRED]}
-			>
-				<InputNumber className='w-100' />
-			</Form.Item>
-			<Button block type="primary" htmlType="submit" className='mt-2'>
-				{t("create")}
-			</Button>
-		</Form>
+				<Form.Item
+					label={t("name_category")}
+					name="name"
+					rules={[R_REQUIRED]}
+				>
+					<Input />
+				</Form.Item>
+				{
+					id ?
+						<Form.Item
+							label={t("stock")}
+							name="stock"
+						>
+							<InputNumber style={{ width: "100%" }} />
+						</Form.Item>
+						:
+						<Form.Item
+							label={t("parent_category")}
+							name="parent_category"
+						>
+							<SelectApi
+								endpoint={WAREHOUSE_CATEGORY}
+								showSearch
+								allowClear
+							/>
+						</Form.Item>
+				}
+				<Button block type="primary" htmlType="submit" className='mt-2' loading={createLoading || editLoading}>
+					{t(id ? "save" : "create")}
+				</Button>
+			</Form>
+		</Spin>
 	)
 }
 
