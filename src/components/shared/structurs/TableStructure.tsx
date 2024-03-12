@@ -10,18 +10,19 @@ interface Props {
 	setId: ISetState<string | null>
 	useComlums: (endpoint: string, setId: ISetState<string | null>, ...props: any) => any
 	endpoint: string
+	noPagination?: boolean;
 	[props: string]: any;
 }
 
-const TableStructure: React.FC<Props> = ({ setId, useComlums, endpoint, ...props }) => {
+const TableStructure: React.FC<Props> = ({ setId, useComlums, endpoint, noPagination, ...props }) => {
 
-	const [query, setQuery] = useQueryParams(INIT_PAGE_PARAMS)
+	const [query, setQuery] = useQueryParams(noPagination ? {} : INIT_PAGE_PARAMS)
 
 	const { data, isLoading, isRefetching } = useApi(endpoint, {}, query)
 
 	const { records, pagination } = useTableData(data, query, setQuery)
 
-	const { columns, isDeleting } = useComlums(endpoint, setId, props)
+	const { columns, isDeleting } = useComlums(endpoint, setId, ...[props])
 
 	return (
 		<MyTable

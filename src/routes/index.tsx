@@ -10,6 +10,7 @@ const publicRoutes: RouteObject[] = [
 const privateRoutes: RouteObject[] = [
 	{ path: "/dashboard", element: page(() => import(`@/pages/Dashboard`), AppLayout) },
 	{ path: "/patients", element: page(() => import(`@/pages/Patients`), AppLayout) },
+	{ path: "/patients/cabinet/:id", element: page(() => import(`@/pages/PatientCabinet`), AppLayout) },
 	{ path: "/doctors", element: page(() => import(`@/pages/Doctors`), AppLayout) },
 	{ path: "/doctors/cabinet/:id", element: page(() => import(`@/pages/DoctorCabinet`), AppLayout) },
 	{ path: "/users", element: page(() => import(`@/pages/Users`), AppLayout) },
@@ -37,6 +38,7 @@ const privateRoutes: RouteObject[] = [
 			{ path: "/settings/sms-template", element: page(() => import(`@/pages/Settings/Sms`)) },
 			{ path: "/settings/intergrations", element: page(() => import(`@/pages/Settings/Intergrations`)) },
 			{ path: "/settings/billing", element: page(() => import(`@/pages/Settings/Billing`)) },
+			{ path: "/settings/bonus", element: page(() => import(`@/pages/Settings/Bonus`)) },
 			{ path: "/settings", element: redirectTo("/settings/main", true) },
 		]
 	},

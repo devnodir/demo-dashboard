@@ -6,7 +6,7 @@ import TablePhone from "@/components/shared/TableComponents/TablePhone";
 import useApiMutationID from "@/hooks/useApiMutationID";
 import useT from "@/hooks/useT";
 import { message } from "antd";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import qs from "qs"
 import { ISetState } from "@/types/helper.type";
 import { queryClient } from "@/utils/props";
@@ -21,6 +21,9 @@ const useComlums = (endpoint: string, setId: ISetState<string | null>) => {
 		{
 			title: t("full_name"),
 			dataIndex: 'name',
+			render: (name: string, order: any) => <Link to={`/patients/cabinet/${order._id}`} className="py-3">
+				{name}
+			</Link>
 		},
 		{
 			title: t("l_phone"),

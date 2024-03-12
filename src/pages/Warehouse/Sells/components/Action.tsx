@@ -6,7 +6,7 @@ import useApiMutationID from '@/hooks/useApiMutationID'
 import useT from '@/hooks/useT'
 import { IVoid } from '@/types/helper.type'
 import { R_REQUIRED } from '@/utils/rules'
-import { Button, Checkbox, Form, Input, InputNumber, Spin, message } from 'antd'
+import { Button, Checkbox, Form, InputNumber, Spin, message } from 'antd'
 import _ from 'lodash'
 import React, { useEffect } from 'react'
 
@@ -29,7 +29,7 @@ const WarehouseAction: React.FC<IProps> = ({ id, onFinish }) => {
 	useEffect(() => {
 		if (data) {
 			const record = data?.data
-			form.setFieldsValue(_.pick(record, ["storage_category", "amount", "stock", "patient"]))
+			form.setFieldsValue(_.pick(record, ["storage_category", "amount", "stock", "patient", "is_refund"]))
 		}
 	}, [data])
 

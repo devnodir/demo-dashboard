@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react'
 import Style from './Style'
 import { Tabs } from 'antd'
-import { FaCity, FaCodeFork, FaCoins, FaFileLines, FaMessage, FaSquare, FaUsersGear } from 'react-icons/fa6'
+import { FaCity, FaCodeFork, FaCoins, FaFileLines, FaMessage, FaMoneyBill, FaSquare, FaUsersGear } from 'react-icons/fa6'
 import { BsUiChecks } from 'react-icons/bs'
 import { useNavigate, Outlet, useLocation } from 'react-router-dom'
 import PageLoader from '@/components/shared/Loaders/PageLoader'
@@ -29,7 +29,8 @@ const Settings: React.FC = () => {
 		{ label: <><BsUiChecks />{t("protocols")}</>, key: "protocols" },
 		{ label: <><FaMessage /> {t("sms_template")}</>, key: "sms-template" },
 		{ label: <><FaCodeFork />{t("intergrations")}</>, key: "intergrations" },
-		{ label: <><FaCoins /> {t("billing")}</>, key: "billing" },
+		{ label: <><FaMoneyBill /> {t("billing")}</>, key: "billing" },
+		{ label: <><FaCoins /> {t("bonus")}</>, key: "bonus" },
 	]
 
 

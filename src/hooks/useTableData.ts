@@ -6,16 +6,19 @@ const useTableData: any = (
     query: IQueryParams,
     setQuery: ISetState<IQueryParams>
 ) => {
-    return {
-        records: data ? mapTableData(data?.data) : [],
-        pagination: {
-            showSizeChanger: true,
-            pageSize: Number(query.limit),
-            current: Number(query.page),
-            total: data?.pagination?.total || 1,
-            onChange: (page: number, limit: number) =>
-                setQuery({ page, limit }),
-        },
-    };
+    const records = data ? mapTableData(data?.data) : [];
+    if (data?.pagination)
+        return {
+            records,
+            pagination: {
+                showSizeChanger: true,
+                pageSize: Number(query.limit),
+                current: Number(query.page),
+                total: data?.pagination.total || 1,
+                onChange: (page: number, limit: number) =>
+                    setQuery({ page, limit }),
+            },
+        };
+    else return { records };
 };
 export default useTableData;

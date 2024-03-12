@@ -34,7 +34,7 @@ const useColumnStructure = (columns: any[], endpoint: string, setId: ISetState<s
 			}
 		})
 	}
-	return { isDeleting, columns }
+	return { isDeleting, columns, props }
 }
 
 export default useColumnStructure

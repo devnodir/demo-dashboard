@@ -137,5 +137,10 @@
 	"logo": "Logotip",
 	"is_sms_active": "Is sms active?",
 	"stock": "Stock",
-	"is_refund": "Is refund"
+	"is_refund": "Is refund",
+	"text": "Text",
+	"bonus": "Bonus",
+	"description": "Description",
+	"from": "From",
+	"to": "To"
 }

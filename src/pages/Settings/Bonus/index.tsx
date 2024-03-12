@@ -1,18 +1,18 @@
-import { LABS } from '@/components/endpoints'
+import { BONUS } from '@/components/endpoints'
 import PageStructure from '@/components/shared/structurs/PageStructure'
 import React from 'react'
 import TasksAction from './components/Action'
 import TasksTable from './components/Table'
 
-const Tasks: React.FC = () => {
+const Bonus: React.FC = () => {
 	return (
 		<PageStructure
 			Table={TasksTable}
 			Action={TasksAction}
-			langKey='labs'
-			endpoint={LABS}
+			langKey='bonus'
+			endpoint={BONUS}
 		/>
 	)
 }
 
-export default Tasks
+export default Bonus

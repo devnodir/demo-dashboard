@@ -11,17 +11,19 @@ import React, { Fragment, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 interface IProps {
-	Table: React.FC<{ setId: ISetState<string | null> }>,
+	Table: React.FC<{ setId: ISetState<string | null>, noPagination?: boolean }>,
 	Action: React.FC<{ id: string | null, onFinish: IVoid }>
 	endpoint: string
-	langKey: string
+	langKey: string,
+	noPagination?: boolean
 }
 
 const PageStructure: React.FC<IProps> = ({
 	Table,
 	Action,
 	endpoint,
-	langKey
+	langKey,
+	noPagination
 }) => {
 	const t = useT()
 	const [isOpen, toggle] = useToggleState(false)
@@ -52,7 +54,7 @@ const PageStructure: React.FC<IProps> = ({
 				{/*  @ts-ignore */}
 				{t(`add_${langKey}`)}
 			</MyButton>
-			<Table setId={(val) => { setId(val); toggle() }} />
+			<Table setId={(val) => { setId(val); toggle() }} noPagination={noPagination} />
 			<Drawer
 				open={isOpen}
 				onClose={closeModal}
