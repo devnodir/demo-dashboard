@@ -44,7 +44,7 @@ const useComlums = (endpoint: string, setId: ISetState<string | null>) => {
 			render: TableUsersList
 		},
 	];
-
+	// @ts-ignore
 	return useColumnStructure(columns, endpoint, setId, (id: string, record: any) => {
 		return {
 			allowMessage: true,
