@@ -84,9 +84,14 @@ const DoctorsTable: React.FC<Props> = ({ setId }) => {
 		{
 			title: '',
 			dataIndex: '_id',
-			render: (id: string) => <ActionButtons
+			render: (id: string, record: any) => <ActionButtons
 				onDelete={() => deleteItem(id)}
 				onUpdate={() => setId(id)}
+				allowMessage
+				users={[{
+					name: record.name,
+					phone: record.phone_number
+				}]}
 			/>
 		},
 	];

@@ -45,7 +45,12 @@ const useComlums = (endpoint: string, setId: ISetState<string | null>) => {
 		},
 	];
 
-	return useColumnStructure(columns, endpoint, setId)
+	return useColumnStructure(columns, endpoint, setId, (id: string, record: any) => {
+		return {
+			allowMessage: true,
+			users: [record.patient, record.doctor]
+		}
+	})
 }
 
 export default useComlums

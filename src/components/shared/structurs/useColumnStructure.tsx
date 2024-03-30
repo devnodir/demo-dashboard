@@ -6,7 +6,7 @@ import { message } from "antd";
 import qs from "qs";
 import { useSearchParams } from "react-router-dom";
 
-const useColumnStructure = (columns: any[], endpoint: string, setId: ISetState<string | null>, ...props: any) => {
+const useColumnStructure = (columns: any[], endpoint: string, setId: ISetState<string | null>, addAction?: any, ...props: any) => {
 
 	const [search] = useSearchParams()
 	const { mutate, isLoading: isDeleting } = useApiMutationID("delete", endpoint)
@@ -16,10 +16,11 @@ const useColumnStructure = (columns: any[], endpoint: string, setId: ISetState<s
 		{
 			title: '',
 			dataIndex: '_id',
-			render: (id: string) => <ActionButtons
+			render: (id: string, record: any) => <ActionButtons
 				onDelete={() => deleteItem(id)}
 				onUpdate={() => setId(id)}
 				id={id}
+				{...(addAction ? addAction(id, record) : {})}
 			/>
 		}
 	)

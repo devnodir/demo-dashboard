@@ -142,5 +142,7 @@
 	"bonus": "Bonus",
 	"description": "Description",
 	"from": "From",
-	"to": "To"
+	"to": "To",
+	"send_message": "Send message",
+	"send": "Send"
 }

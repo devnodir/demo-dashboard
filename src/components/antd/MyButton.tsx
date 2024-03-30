@@ -18,7 +18,7 @@ const MyButton: React.FC<ButtonProps> = ({ color, icon, ...props }) => {
 				}
 			} : undefined}
 		>
-			<Button {...props} icon={icon} />
+			<Button icon={icon} {...props} />
 		</ConfigProvider>
 	)
 }

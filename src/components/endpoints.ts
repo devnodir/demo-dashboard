@@ -23,3 +23,4 @@ export const WAREHOUSE_CATEGORY = "/storage/category";
 export const WAREHOUSE_SELLS = "/storage";
 export const SMS_TEMPLATES = "/sms/template";
 export const BONUS = "/loyalty";
+export const SMS_SEND = "/sms/bulk/send";
