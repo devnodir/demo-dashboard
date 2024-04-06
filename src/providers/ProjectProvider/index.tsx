@@ -9,8 +9,7 @@ interface Props {
 
 const ProjectProvider: React.FC<Props> = ({ children }) => {
 
-	// const isFrom = window.location.hostname === "yd-form.devnodir.uz"
-	const isFrom = false
+	const isFrom = window.location.hostname === "yd-form.devnodir.uz"
 
 	return (
 		isFrom ? <RenderRoutes routes={formRotes} /> : children
