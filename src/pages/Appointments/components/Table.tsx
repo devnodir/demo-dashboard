@@ -8,7 +8,7 @@ interface Props {
 	setId: ISetState<string | null>
 }
 
-const AppointmentsTable: React.FC<Props> = ({ setId }) => {
+const AppointmentsTable: React.FC<Props> = ({ setId, ...props }) => {
 
 
 	return (
@@ -16,6 +16,7 @@ const AppointmentsTable: React.FC<Props> = ({ setId }) => {
 			setId={setId}
 			useComlums={useComlums}
 			endpoint={APPOINTMENTS}
+			tableProps={props}
 		/>
 	);
 };

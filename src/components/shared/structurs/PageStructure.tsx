@@ -5,10 +5,12 @@ import { ISetState, IVoid } from '@/types/helper.type'
 import { queryClient } from '@/utils/props'
 import { colors } from '@/utils/theme'
 import { PlusOutlined } from "@ant-design/icons"
-import { Drawer } from 'antd'
+import { Drawer, Flex } from 'antd'
 import qs from "qs"
 import React, { Fragment, useState } from 'react'
+import { FaMessage } from "react-icons/fa6"
 import { useSearchParams } from 'react-router-dom'
+import SendMessageStructure from "./SendMessageStructure"
 
 interface IProps {
 	Table: React.FC<{ setId: ISetState<string | null>, noPagination?: boolean }>,
@@ -16,6 +18,7 @@ interface IProps {
 	endpoint: string
 	langKey: string,
 	noPagination?: boolean
+	userFunc?: (data: any[]) => any[]
 }
 
 const PageStructure: React.FC<IProps> = ({
@@ -23,13 +26,18 @@ const PageStructure: React.FC<IProps> = ({
 	Action,
 	endpoint,
 	langKey,
-	noPagination
+	noPagination,
+	userFunc
 }) => {
 	const t = useT()
 	const [isOpen, toggle] = useToggleState(false)
 	const [id, setId] = useState<string | null>(null)
+	const [isOpenMessage, toggleMessage] = useToggleState(false)
+
 
 	const [search] = useSearchParams()
+
+	const [selectedKeys, setSelectedKeys] = useState([])
 
 	const closeModal = () => {
 		toggle()
@@ -44,17 +52,39 @@ const PageStructure: React.FC<IProps> = ({
 
 	return (
 		<Fragment>
-			<MyButton
-				color={colors.success}
-				type="primary"
-				onClick={toggle}
-				icon={<PlusOutlined />}
-				className="text-uppercase float-right"
+			<Flex
+				justify="flex-end"
+				gap={8}
 			>
-				{/*  @ts-ignore */}
-				{t(`add_${langKey}`)}
-			</MyButton>
-			<Table setId={(val) => { setId(val); toggle() }} noPagination={noPagination} />
+				{(selectedKeys.length > 0 && userFunc) && <MyButton
+					color={colors.secondary}
+					type="primary"
+					icon={<FaMessage />}
+					onClick={toggleMessage}
+				>
+					{t("send_message")}
+				</MyButton>}
+				<MyButton
+					color={colors.success}
+					type="primary"
+					onClick={toggle}
+					icon={<PlusOutlined />}
+					className="text-uppercase"
+				>
+					{/*  @ts-ignore */}
+					{t(`add_${langKey}`)}
+				</MyButton>
+			</Flex>
+			<Table
+				setId={(val) => { setId(val); toggle() }}
+				noPagination={noPagination}
+				// @ts-ignore
+				rowSelection={{
+					type: "checkbox",
+					onChange: setSelectedKeys,
+					selectedRowKeys: selectedKeys
+				}}
+			/>
 			<Drawer
 				open={isOpen}
 				onClose={closeModal}
@@ -65,6 +95,11 @@ const PageStructure: React.FC<IProps> = ({
 			>
 				<Action id={id} onFinish={onActionFinish} />
 			</Drawer>
+			{(isOpenMessage && userFunc) && <SendMessageStructure
+				endpoint={endpoint}
+				toggle={toggleMessage}
+				userFunc={userFunc}
+			/>}
 		</Fragment>
 	)
 }

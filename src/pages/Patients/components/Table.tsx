@@ -8,13 +8,16 @@ interface Props {
 	setId: ISetState<string | null>
 }
 
-const PatientsTable: React.FC<Props> = ({ setId }) => {
+const PatientsTable: React.FC<Props> = ({ setId, ...props }) => {
+
+	console.log(props);
 
 	return (
 		<TableStructure
 			useComlums={useComlums}
 			setId={setId}
 			endpoint={PATIENTS}
+			tableProps={props}
 		/>
 	);
 };

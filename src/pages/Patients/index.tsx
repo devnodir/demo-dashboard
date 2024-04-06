@@ -1,8 +1,7 @@
-import PageStructure from '@/components/shared/structurs/PageStructure'
-import React from 'react'
-import PatientsTable from './components/Table'
-import PatientAction from './components/Action'
 import { PATIENTS } from '@/components/endpoints'
+import PageStructure from '@/components/shared/structurs/PageStructure'
+import PatientAction from './components/Action'
+import PatientsTable from './components/Table'
 
 const Patient = () => {
 	return (
@@ -11,6 +10,14 @@ const Patient = () => {
 			Action={PatientAction}
 			endpoint={PATIENTS}
 			langKey="patient"
+			userFunc={(data) => {
+				return data.map(item => {
+					return {
+						name: item.name,
+						phone: item.phone_number
+					}
+				})
+			}}
 		/>
 	)
 }

@@ -11,6 +11,9 @@ const Appointments: React.FC = () => {
 			Action={TasksAction}
 			langKey='appointments'
 			endpoint={APPOINTMENTS}
+			userFunc={(data) => {
+				return data.map(item => item.patient)
+			}}
 		/>
 	)
 }

@@ -24,7 +24,6 @@ interface Props {
 const ActionButtons: React.FC<Props> = ({ id, users, allowMessage, onDelete, onUpdate, onCancel, onDownload, onComplateTemplate }) => {
 
 	const [isOpen, toggle] = useToggleState(false)
-	console.log(isOpen);
 
 	return (
 		<Fragment>

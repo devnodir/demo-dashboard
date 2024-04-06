@@ -12,14 +12,15 @@ import { useQueryParams } from "@/hooks/useQueryParams";
 import useT from "@/hooks/useT";
 import useTableData from "@/hooks/useTableData";
 import { ISetState } from "@/types/helper.type";
-import { message } from "antd";
+import { TableProps, message } from "antd";
 import React from 'react';
 
 interface Props {
-	setId: ISetState<string | null>
+	setId: ISetState<string | null>,
+	tableProps: TableProps<any>
 }
 
-const UsersTable: React.FC<Props> = ({ setId }) => {
+const UsersTable: React.FC<Props> = ({ setId, tableProps }) => {
 
 	const t = useT()
 
@@ -91,6 +92,7 @@ const UsersTable: React.FC<Props> = ({ setId }) => {
 			rowSelection={{ type: "checkbox" }}
 			pagination={pagination}
 			loading={isLoading || isRefetching || isDeleting}
+			{...tableProps}
 		/>
 	);
 };

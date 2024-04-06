@@ -4,6 +4,7 @@ import useApi from "@/hooks/useApi";
 import { useQueryParams } from "@/hooks/useQueryParams";
 import useTableData from "@/hooks/useTableData";
 import { ISetState } from "@/types/helper.type";
+import { TableProps } from "antd";
 import React from 'react';
 
 interface Props {
@@ -11,10 +12,11 @@ interface Props {
 	useComlums: (endpoint: string, setId: ISetState<string | null>, ...props: any) => any
 	endpoint: string
 	noPagination?: boolean;
+	tableProps?: TableProps<any>
 	[props: string]: any;
 }
 
-const TableStructure: React.FC<Props> = ({ setId, useComlums, endpoint, noPagination, ...props }) => {
+const TableStructure: React.FC<Props> = ({ setId, useComlums, endpoint, noPagination, tableProps, ...props }) => {
 
 	const [query, setQuery] = useQueryParams(noPagination ? {} : INIT_PAGE_PARAMS)
 
@@ -31,6 +33,7 @@ const TableStructure: React.FC<Props> = ({ setId, useComlums, endpoint, noPagina
 			rowSelection={{ type: "checkbox" }}
 			pagination={pagination}
 			loading={isLoading || isRefetching || isDeleting}
+			{...tableProps}
 		/>
 	);
 };
