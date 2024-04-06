@@ -4,17 +4,18 @@ import { Select, SelectProps } from 'antd'
 import React from 'react'
 
 interface IProps {
-	endpoint: string
+	endpoint: string,
+	query?: any
 }
 
-const SelectApi: React.FC<IProps & SelectProps> = ({ endpoint, ...props }) => {
+const SelectApi: React.FC<IProps & SelectProps> = ({ endpoint, query = {}, ...props }) => {
 
-	const { data, isLoading } = useApi(endpoint)
+	const { data, isLoading, isRefetching } = useApi(endpoint, {}, query)
 
 	return (
 		<Select
 			options={mapSelectData(data)}
-			loading={isLoading}
+			loading={isLoading || isRefetching}
 			{...props}
 		/>
 	)
