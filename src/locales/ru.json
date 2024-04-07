@@ -149,5 +149,9 @@
 	"send": "Send",
 	"search": "Search",
 	"withdraw": "Withdraw",
-	"payment": "Payment"
+	"payment": "Payment",
+	"expense": "Expense",
+	"add_paymnet": "Add payment",
+	"refund": "Refund",
+	"refunded": "Refunded"
 }

@@ -10,8 +10,9 @@ export const STATUS = [
     { label: i18n.t("inactive"), value: false },
 ];
 export const CATEGORY_PAYMENT = [
-    { label: i18n.t("withdraw"), value: true },
-    { label: i18n.t("payment"), value: false },
+    { label: i18n.t("withdraw"), value: "withdraw" },
+    { label: i18n.t("payment"), value: "payment" },
+    { label: i18n.t("expense"), value: "expense" },
 ];
 
 export const STATUS_PATIENT = [
