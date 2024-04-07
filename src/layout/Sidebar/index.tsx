@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import StyleWrapper from "./Style";
 import useMainStore from '@/store/main';
+import { getLocalStorage } from '@/utils/localStorage';
 
 const Sidebar: React.FC = () => {
 
@@ -14,8 +15,11 @@ const Sidebar: React.FC = () => {
 	const { t } = useTranslation()
 	const { isMobileMenu, setMobileMenu, allowedMenus } = useMainStore()
 
+	const userType = getLocalStorage("userType")
+
 	const itemsLocale: MenuItem[] = items
 		.filter(item => {
+			if (userType === "doctor") return item?.key === "/appointments"
 			const menu = allowedMenus.find(el => el.url === item?.key)
 			if (!menu) return false
 			return menu.roles[0].isAllowed

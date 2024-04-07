@@ -1,3 +1,5 @@
+import { ANALYTICS_LAST_WEEK } from '@/components/endpoints';
+import useApi from '@/hooks/useApi';
 import Box from '@/styles/Box';
 import { Column, ColumnConfig } from '@ant-design/plots';
 import { Typography } from 'antd';
@@ -7,41 +9,24 @@ import { useTranslation } from 'react-i18next';
 const ClinicWorkload: React.FC = () => {
 
 	const { t } = useTranslation()
+	const { data, isLoading } = useApi(ANALYTICS_LAST_WEEK)
+	const records = data?.data
 
-	const data = [
-		{
-			type: t("mon"),
-			sales: 38,
-		},
-		{
-			type: t("tue"),
-			sales: 52,
-		},
-		{
-			type: t("wed"),
-			sales: 61,
-		},
-		{
-			type: t("thu"),
-			sales: 145,
-		},
-		{
-			type: t("fri"),
-			sales: 48,
-		},
-		{
-			type: t("sat"),
-			sales: 38,
-		},
-		{
-			type: t("sun"),
-			sales: 38,
-		},
-	];
+	const mapData = (data: any[]) => {
+		return data?.map(item => {
+			return {
+				...item,
+				// @ts-ignore
+				weekday: t(`day-${item.weekday}`)
+			}
+		}) || []
+	}
+
+
 	const config: ColumnConfig = {
-		data,
-		xField: 'type',
-		yField: 'sales',
+		data: mapData(records),
+		xField: 'weekday',
+		yField: 'count',
 		xAxis: {
 			grid: null,
 			line: null,
@@ -51,7 +36,7 @@ const ClinicWorkload: React.FC = () => {
 			grid: null
 		},
 		meta: {
-			sales: {
+			count: {
 				alias: t("patients"),
 			},
 		},
@@ -63,7 +48,7 @@ const ClinicWorkload: React.FC = () => {
 	};
 
 	return (
-		<Box className='chart-box'>
+		<Box className='chart-box' loading={isLoading}>
 			<Typography.Title level={5} className='chart-title'>{t("clinic_workload")}</Typography.Title>
 			<Column {...config} height={150} />
 		</Box>

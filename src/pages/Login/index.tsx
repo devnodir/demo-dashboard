@@ -1,17 +1,17 @@
 import doctor from "@/assets/lottie/doctor.json";
+import { LOGIN_USER } from "@/components/endpoints";
+import { USER_ID, USER_TOKEN } from "@/components/variables";
 import useApiMutation from '@/hooks/useApiMutation';
+import useMainStore from "@/store/main";
+import { phoneFormatter } from "@/utils/formatter";
 import { setLocalStorage } from '@/utils/localStorage';
-import { Button, Form, Input, InputNumber, message } from 'antd';
+import { R_PASSWORD, R_PHONE, R_REQUIRED } from "@/utils/rules";
+import { Button, Form, Input, InputNumber, Tabs, TabsProps, message } from 'antd';
 import Lottie from "lottie-react";
-import React from 'react';
+import React, { useState } from 'react';
 import { FaEye, FaEyeSlash, FaLock, FaPhone } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
 import StyleWrapper from './Style';
-import { phoneFormatter } from "@/utils/formatter";
-import { R_PASSWORD, R_PHONE, R_REQUIRED } from "@/utils/rules";
-import useMainStore from "@/store/main";
-import { LOGIN_USER } from "@/components/endpoints";
-import { USER_ID, USER_TOKEN } from "@/components/variables";
 
 interface IFormData {
 	phone_number: string
@@ -21,10 +21,13 @@ interface IFormData {
 const Login: React.FC = () => {
 
 	const navigate = useNavigate()
+
+	const [type, setType] = useState("admin")
+
 	const [messageApi, contextHolder] = message.useMessage();
 	const { mode, setIsAuth, setUserData } = useMainStore()
 
-	const { mutateAsync, isLoading } = useApiMutation(LOGIN_USER)
+	const { mutateAsync, isLoading } = useApiMutation(`${LOGIN_USER}${type === "doctor" ? "/doctor" : ""}`)
 
 	const [form] = Form.useForm();
 
@@ -46,14 +49,22 @@ const Login: React.FC = () => {
 				setLocalStorage(USER_TOKEN, res.token)
 				setLocalStorage(USER_ID, res.userId)
 				setUserData(res)
-				setIsAuth(true)
+				// setIsAuth(true)
 				navigate("/", { replace: true })
+				setLocalStorage("userType", type)
+				window.location.reload()
 			},
 			onError: err => {
 				messageApi.error(err?.message)
 			}
 		})
 	}
+
+	const items: TabsProps['items'] = [
+		{ key: 'admin', label: 'Admin', },
+		{ key: 'doctor', label: 'Doctor', }
+	];
+
 
 	return (
 		<StyleWrapper className='login'>
@@ -65,6 +76,12 @@ const Login: React.FC = () => {
 				<div className="login-content-logo">
 					<img src={`/assets/logo-${mode}.svg`} alt="" />
 				</div>
+				<Tabs
+					items={items}
+					size="large"
+					activeKey={type}
+					onChange={setType}
+				/>
 				<Form
 					layout="vertical"
 					className="login-form"

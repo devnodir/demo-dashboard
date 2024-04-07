@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useEffect } from 'react'
 import ThemeProvider from '@/providers/ThemeProvider/index.tsx'
 import { publicRoutes, privateRoutes } from '@/routes'
 import RenderRoutes from '@/components/shared/RenderRoutes'
@@ -20,7 +20,6 @@ const App: React.FC = () => {
   const routes = isAuth ? filterAllowedMenus(privateRoutes, allowedMenus) : publicRoutes
 
   const { i18n } = useTranslation()
-
 
   return (
     <ThemeProvider>

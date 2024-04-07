@@ -16,6 +16,7 @@ const token = getLocalStorage(USER_TOKEN)
 
 const AuthProvider: React.FC<Props> = ({ children }) => {
 
+
 	const { setIsAuth, setUserData, setAllowedMenus } = useMainStore()
 
 	const [messageApi, contextHolder] = message.useMessage();

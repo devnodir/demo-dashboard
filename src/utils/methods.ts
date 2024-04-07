@@ -1,4 +1,6 @@
 import { RouteObject } from "react-router-dom";
+import { getLocalStorage } from "./localStorage";
+import { redirectTo } from "@/routes/generator";
 
 export const isDevelopment = () => {
     return process.env.NODE_ENV === "development";
@@ -78,14 +80,25 @@ export const filterAllowedMenus = (routes: RouteObject[], menus: any[]) => {
         "/doctors/cabinet/:id",
     ];
 
-    console.log(routes);
-    console.log(menus);
+    return routes
+        .filter((item) => {
+            // @ts-ignore
+            if (excludedRoutes.includes(item.path)) return true;
+            const userType = getLocalStorage("userType");
+            if (userType === "doctor") return item?.path === "/appointments";
 
-    return routes.filter((item) => {
-        // @ts-ignore
-        if (excludedRoutes.includes(item.path)) return true;
-        const menu = menus.find((el) => el.url === item.path);
-        if (!menu) return false;
-        return menu.roles[0].isAllowed;
-    });
+            const menu = menus.find((el) => el.url === item.path);
+            if (!menu) return false;
+            return menu.roles[0].isAllowed;
+        })
+        .map((item) => {
+            const userType = getLocalStorage("userType");
+            if (userType === "doctor" && item.path === "/") {
+                return {
+                    ...item,
+                    element: redirectTo("/appointments", true),
+                };
+            }
+            return item;
+        });
 };
