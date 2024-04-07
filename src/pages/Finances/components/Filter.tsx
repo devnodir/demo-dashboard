@@ -4,7 +4,7 @@ import FilterRenderer from '@/components/shared/FilterRenderer'
 import { CATEGORY_PAYMENT } from '@/components/variables'
 import useT from '@/hooks/useT'
 import useToggleState from '@/hooks/useToggleState'
-import { IVoid } from '@/types/helper.type'
+import { ISetState, IVoid } from '@/types/helper.type'
 import { colors } from '@/utils/theme'
 import { DownloadOutlined } from '@ant-design/icons'
 import { DatePicker, Drawer, Flex, Select } from 'antd'
@@ -14,9 +14,10 @@ import { FaFilter } from 'react-icons/fa6'
 
 interface Props {
 	toggle: IVoid
+	setType: ISetState<string>
 }
 
-const FinanceFilter: React.FC<Props> = ({ toggle }) => {
+const FinanceFilter: React.FC<Props> = ({ toggle, setType }) => {
 	const t = useT()
 	const [isOpen, toggleFilter] = useToggleState(false)
 
@@ -66,7 +67,8 @@ const FinanceFilter: React.FC<Props> = ({ toggle }) => {
 					<MyButton color={colors.success} icon={<DownloadOutlined />}>
 						{window.innerWidth > 576 && <span>Скачать Excel</span>}
 					</MyButton>
-					<MyButton type="primary" onClick={toggle}>Создать счет</MyButton>
+					<MyButton type="primary" color={colors.yellow} onClick={() => { toggle(); setType("expence") }}>Создать расход</MyButton>
+					<MyButton type="primary" onClick={() => { toggle(); setType("withdraw") }}>Создать счет</MyButton>
 				</Flex>
 			</Flex>
 			<Drawer

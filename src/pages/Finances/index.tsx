@@ -16,6 +16,7 @@ const Finances: React.FC = () => {
 
 	const t = useT()
 	const [isOpen, toggle] = useToggleState(false)
+	const [type, setType] = useState("")
 	const [id, setId] = useState<string | null>(null)
 
 	const [search] = useSearchParams()
@@ -34,7 +35,7 @@ const Finances: React.FC = () => {
 	return (
 		<Style className='finances' id="finances">
 			<FinaceHead />
-			<FinanceFilter toggle={toggle} />
+			<FinanceFilter toggle={toggle} setType={setType} />
 			<FinanceTable setId={(val) => { setId(val); toggle() }} />
 			<Drawer
 				open={isOpen}
@@ -43,7 +44,7 @@ const Finances: React.FC = () => {
 				width={480}
 				destroyOnClose
 			>
-				<FinanceAction id={id} onFinish={onActionFinish} />
+				<FinanceAction id={id} onFinish={onActionFinish} type={type} />
 			</Drawer>
 		</Style>
 	)

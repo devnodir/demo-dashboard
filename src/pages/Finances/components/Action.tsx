@@ -1,33 +1,33 @@
-import { DOCTORS, FINANCES, PATIENTS, SERVICES, TASKS, USERS } from '@/components/endpoints'
+import { DOCTORS, FINANCES, PATIENTS, SERVICES } from '@/components/endpoints'
 import SelectApi from '@/components/shared/Form/SelectApi'
-import { STATUS_DONE, STATUS_PATIENT, STATUS_PRIORITY } from '@/components/variables'
 import useApi from '@/hooks/useApi'
 import useApiMutation from '@/hooks/useApiMutation'
 import useApiMutationID from '@/hooks/useApiMutationID'
 import useT from '@/hooks/useT'
 import { IVoid } from '@/types/helper.type'
 import { R_REQUIRED } from '@/utils/rules'
-import { Button, DatePicker, Form, Input, InputNumber, Select, Spin, message } from 'antd'
+import { Button, Form, InputNumber, Spin, message } from 'antd'
 import dayjs from 'dayjs'
 import _ from 'lodash'
 import React, { useEffect } from 'react'
-import { BsCalendarFill } from 'react-icons/bs'
 
 interface IFormData {
 	patient_id: string
 	doctor_ids: string[]
 	service_ids: string[]
 	paid_amount: number
-	isPayment: string
-	isWithdraw: string
+	isPayment: boolean
+	isWithdraw: boolean
+	isExpense: boolean
 }
 
 interface IProps {
 	id: string | null
 	onFinish: IVoid
+	type: string
 }
 
-const FinanceAction: React.FC<IProps> = ({ id, onFinish }) => {
+const FinanceAction: React.FC<IProps> = ({ id, onFinish, type }) => {
 
 	const t = useT()
 
@@ -47,8 +47,19 @@ const FinanceAction: React.FC<IProps> = ({ id, onFinish }) => {
 	}, [data])
 
 	const submit = (data: IFormData) => {
+
 		if (id) editMutate({ data, id }, responses)
-		else createMutate(data, responses)
+		else {
+			data.isPayment = false
+			if (type === "withdraw") {
+				data.isWithdraw = true
+				data.isExpense = false
+			} else {
+				data.isWithdraw = false
+				data.isExpense = true
+			}
+			createMutate(data, responses)
+		}
 	}
 
 	const responses = {
@@ -107,26 +118,6 @@ const FinanceAction: React.FC<IProps> = ({ id, onFinish }) => {
 					rules={[R_REQUIRED]}
 				>
 					<InputNumber className='w-100' />
-				</Form.Item>
-				<Form.Item
-					// @ts-ignore
-					label={t("isPayment")}
-					name="isPayment"
-					rules={[R_REQUIRED]}
-				>
-					<Select
-						options={STATUS_DONE}
-					/>
-				</Form.Item>
-				<Form.Item
-					// @ts-ignore
-					label={t("isWithdraw")}
-					name="isWithdraw"
-					rules={[R_REQUIRED]}
-				>
-					<Select
-						options={STATUS_DONE}
-					/>
 				</Form.Item>
 				<Button block type="primary" htmlType="submit" className='mt-2' loading={createLoading || editLoading}>
 					{t(id ? "save" : "create")}

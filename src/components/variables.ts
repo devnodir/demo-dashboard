@@ -11,7 +11,6 @@ export const STATUS = [
 ];
 export const CATEGORY_PAYMENT = [
     { label: i18n.t("withdraw"), value: "withdraw" },
-    { label: i18n.t("payment"), value: "payment" },
     { label: i18n.t("expense"), value: "expense" },
 ];
 
