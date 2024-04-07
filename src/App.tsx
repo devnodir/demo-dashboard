@@ -9,13 +9,15 @@ import { useTranslation } from 'react-i18next'
 import useMainStore from '@/store/main'
 import useDetectLang from './hooks/useDetectLang'
 import ProjectProvider from './providers/ProjectProvider'
+import { filterAllowedMenus } from './utils/methods'
 
 const App: React.FC = () => {
 
   useDetectLang()
 
-  const { isAuth } = useMainStore()
-  const routes = isAuth ? privateRoutes : publicRoutes
+  const { isAuth, allowedMenus } = useMainStore()
+
+  const routes = isAuth ? filterAllowedMenus(privateRoutes, allowedMenus) : publicRoutes
 
   const { i18n } = useTranslation()
 

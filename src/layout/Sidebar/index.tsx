@@ -12,14 +12,20 @@ const Sidebar: React.FC = () => {
 	const navigate = useNavigate()
 	const { active } = useActivePath(items)
 	const { t } = useTranslation()
-	const { isMobileMenu, setMobileMenu } = useMainStore()
+	const { isMobileMenu, setMobileMenu, allowedMenus } = useMainStore()
 
-	const itemsLocale: MenuItem[] = items.map((el: any) => {
-		return {
-			...el,
-			label: t(el.label)
-		}
-	})
+	const itemsLocale: MenuItem[] = items
+		.filter(item => {
+			const menu = allowedMenus.find(el => el.url === item?.key)
+			if (!menu) return false
+			return menu.roles[0].isAllowed
+		})
+		.map((el: any) => {
+			return {
+				...el,
+				label: t(el.label)
+			}
+		})
 
 	const menuRender = () => {
 		return <Menu

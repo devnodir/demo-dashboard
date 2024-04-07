@@ -4,6 +4,7 @@ export const LOGIN_DOCTOR = "/auth/login/doctor";
 export const USERS = "/users";
 export const BRANCH = "/branch";
 export const ROLES = "/roles";
+export const ROLES_ASSIGNS = "/roles/assigns";
 export const SERVICES = "/services";
 export const PUBLIC_SERVICES = "/services/public";
 export const DOCTORS = "/doctors";

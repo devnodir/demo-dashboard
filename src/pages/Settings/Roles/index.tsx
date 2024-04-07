@@ -12,8 +12,7 @@ import { IVoid } from "@/types/helper.type";
 import { R_REQUIRED } from "@/utils/rules";
 import { colors } from "@/utils/theme";
 import { PlusOutlined } from "@ant-design/icons";
-import { Button, Drawer, Form, Input, Spin, message } from "antd";
-import dayjs from "dayjs";
+import { Button, Drawer, Flex, Form, Input, Spin, Switch, Typography, message } from "antd";
 import React, { useEffect, useState } from 'react';
 
 
@@ -83,7 +82,10 @@ const Roles: React.FC = () => {
 			/>
 			<Drawer
 				open={isOpen}
-				onClose={toggle}
+				onClose={() => {
+					toggle()
+					setEditingItem(null)
+				}}
 				title={t(editingItem ? "edit_role" : "new_role")}
 				destroyOnClose
 			>
@@ -112,11 +114,14 @@ const Action: React.FC<IActionProps> = ({ onFinish, id }) => {
 
 	const { mutate, isLoading } = useApiMutation(ROLES)
 	const { mutate: editMutate, isLoading: editLoading } = useApiMutationID("patch", ROLES)
-	const { isLoading: getLoading, data } = useApi(`${ROLES}/${id}`, { enabled: Boolean(id), cacheTime: 0 })
+	const { isLoading: getLoading, data } = useApi(`${ROLES}/assigns/${id}`, { enabled: Boolean(id), cacheTime: 0 })
+
+	const record = data?.data
+	const menus = record?.menu
 
 	useEffect(() => {
-		if (data) {
-			form.setFieldValue("name", data?.data.name)
+		if (record) {
+			form.setFieldValue("name", record.name.name)
 		}
 	}, [data])
 
@@ -156,7 +161,39 @@ const Action: React.FC<IActionProps> = ({ onFinish, id }) => {
 				<Button block type="primary" htmlType="submit" className='mt-2' loading={isLoading || editLoading}>
 					{t(id ? "save" : "create")}
 				</Button>
+				<div className="d-flex flex-column mt-5" style={{ gap: 8 }}>
+					{
+						menus?.map((item: any, index: number) => <MenuItem key={index} item={item} />)
+					}
+				</div>
 			</Form>
 		</Spin>
 	)
+}
+
+const MenuItem = ({ item }: any) => {
+
+	const { mutate, isLoading } = useApiMutationID("patch", `${ROLES}/menu/status`)
+	const [checked, setChecked] = useState(item.roles[0]?.isAllowed)
+
+	const handleChange = (value: boolean) => {
+		setChecked(value)
+		mutate({
+			id: item._id, data: {
+				role_id: item.roles[0]?.role_id,
+				status: value
+			}
+		}, {
+			onError: (err) => {
+				message.error(err?.message)
+				setChecked(!checked)
+			}
+		})
+	}
+
+
+	return <label style={{ display: "flex", gap: 12 }}>
+		<Typography.Text style={{ width: 120 }}>{item.url}</Typography.Text>
+		<Switch loading={isLoading} checked={checked} onChange={handleChange} />
+	</label>
 }

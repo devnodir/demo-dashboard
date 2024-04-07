@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { USERS } from '@/components/endpoints'
-import { USER_ID, USER_TOKEN } from '@/components/variables'
+import { ROLES_ASSIGNS, USERS } from '@/components/endpoints'
+import { USER_TOKEN } from '@/components/variables'
 import useApi from '@/hooks/useApi'
 import useMainStore from '@/store/main'
 import { IChildren } from '@/types/helper.type'
@@ -12,18 +12,22 @@ interface Props {
 	children: IChildren
 }
 
-// const token = getLocalStorage(USER_TOKEN)
-const user_id = getLocalStorage(USER_ID)
+const token = getLocalStorage(USER_TOKEN)
 
 const AuthProvider: React.FC<Props> = ({ children }) => {
 
-	const [messageApi, contextHolder] = message.useMessage();
-	const { error } = useApi(`${USERS}/${user_id}`, { onSuccess, onError, enabled: false, suspense: true })
+	const { setIsAuth, setUserData, setAllowedMenus } = useMainStore()
 
-	const { setIsAuth, setUserData } = useMainStore()
+	const [messageApi, contextHolder] = message.useMessage();
+	const { error, isSuccess } = useApi(`${USERS}/me`, { onSuccess, onError, enabled: Boolean(token), suspense: true })
+	useApi(ROLES_ASSIGNS, { onSuccess: onSuccessRoles, enabled: isSuccess, suspense: true })
+
+	function onSuccessRoles(res: any) {
+		setAllowedMenus(res.data);
+	}
 
 	function onSuccess(res: any) {
-		setUserData(res.user)
+		setUserData(res.data)
 		setIsAuth(true)
 	}
 

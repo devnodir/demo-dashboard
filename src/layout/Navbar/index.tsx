@@ -48,7 +48,8 @@ export default Navbar
 
 
 const UserMenu: React.FC = () => {
-	const { setIsAuth } = useMainStore()
+	const { setIsAuth, userData } = useMainStore()
+
 	const t = useT()
 
 	const items: MenuProps["items"] = [
@@ -74,8 +75,8 @@ const UserMenu: React.FC = () => {
 		<Dropdown menu={{ items }} trigger={["click"]} overlayStyle={{ width: 200 }} placement="bottomRight">
 			<div className="user">
 				<div className='user-info'>
-					<Typography.Text>Nodirbek Abdunazarov</Typography.Text>
-					<Tag color={colors.success} className='mr-0'>ADMIN</Tag>
+					<Typography.Text>{userData?.name}</Typography.Text>
+					<Tag color={colors.success} className='mr-0'>{userData.role}</Tag>
 				</div>
 				<div className="user-img">
 					<FaUser />

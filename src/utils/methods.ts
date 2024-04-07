@@ -1,3 +1,5 @@
+import { RouteObject } from "react-router-dom";
+
 export const isDevelopment = () => {
     return process.env.NODE_ENV === "development";
 };
@@ -64,4 +66,26 @@ export const humanFileSize = (bytes: number, dp = 1) => {
     );
 
     return bytes.toFixed(dp) + " " + units[u];
+};
+
+export const filterAllowedMenus = (routes: RouteObject[], menus: any[]) => {
+    const excludedRoutes = [
+        "/404",
+        "/login",
+        "/",
+        "*",
+        "/patients/cabinet/:id",
+        "/doctors/cabinet/:id",
+    ];
+
+    console.log(routes);
+    console.log(menus);
+
+    return routes.filter((item) => {
+        // @ts-ignore
+        if (excludedRoutes.includes(item.path)) return true;
+        const menu = menus.find((el) => el.url === item.path);
+        if (!menu) return false;
+        return menu.roles[0].isAllowed;
+    });
 };

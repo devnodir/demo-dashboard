@@ -8,11 +8,13 @@ interface Store {
     isAuth: boolean;
     userData: any;
     mode: IMode;
+    allowedMenus: any[];
     isMobileMenu: boolean;
     setUserData: (userData: any) => void;
     setMode: (mode: IMode) => void;
     setIsAuth: (isAuth: boolean) => void;
     setMobileMenu: (isOpen: boolean) => void;
+    setAllowedMenus: (allowedMenus: any[]) => void;
 }
 
 const useMainStore = create<Store>((set) => ({
@@ -20,10 +22,12 @@ const useMainStore = create<Store>((set) => ({
     userData: null,
     mode: getInitMode(),
     isMobileMenu: false,
+    allowedMenus: [],
     setUserData: (userData) => set({ userData }),
     setMode: (mode) => set({ mode }),
     setIsAuth: (isAuth) => set({ isAuth }),
     setMobileMenu: (isMobileMenu) => set({ isMobileMenu }),
+    setAllowedMenus: (allowedMenus) => set({ allowedMenus }),
 }));
 
 export default useMainStore;
