@@ -6,16 +6,18 @@ import useApiMutationID from '@/hooks/useApiMutationID'
 import useT from '@/hooks/useT'
 import { IVoid } from '@/types/helper.type'
 import { R_REQUIRED } from '@/utils/rules'
-import { Button, Form, InputNumber, Spin, message } from 'antd'
+import { Button, Form, Input, InputNumber, Spin, message } from 'antd'
 import dayjs from 'dayjs'
 import _ from 'lodash'
-import React, { useEffect } from 'react'
+import React, { Fragment, useEffect } from 'react'
 
 interface IFormData {
 	patient_id: string
 	doctor_ids: string[]
 	service_ids: string[]
 	paid_amount: number
+	amount: number
+	memo: string
 	isPayment: boolean
 	isWithdraw: boolean
 	isExpense: boolean
@@ -41,8 +43,12 @@ const FinanceAction: React.FC<IProps> = ({ id, onFinish, type }) => {
 	useEffect(() => {
 		if (data) {
 			const record = data?.data
-			form.setFieldsValue(_.pick(record, ["patient_id", "doctor_ids", "service_ids", "paid_amount", "isPayment", "isWithdraw"]))
-			if (record.deadline) form.setFieldValue("deadline", dayjs(record.deadline))
+			if (type === "withdraw") {
+				form.setFieldsValue(_.pick(record, ["patient_id", "doctor_ids", "service_ids", "paid_amount",]))
+				if (record.deadline) form.setFieldValue("deadline", dayjs(record.deadline))
+			} else {
+				form.setFieldsValue(_.pick(record, ["amount", "memo"]))
+			}
 		}
 	}, [data])
 
@@ -76,49 +82,70 @@ const FinanceAction: React.FC<IProps> = ({ id, onFinish, type }) => {
 				form={form}
 				onFinish={submit}
 			>
-				<Form.Item
-					label={t("patient")}
-					name="patient_id"
-					rules={[R_REQUIRED]}
-				>
-					<SelectApi
-						endpoint={PATIENTS}
-						showSearch
-						allowClear
-					/>
-				</Form.Item>
-				<Form.Item
-					label={t("doctors")}
-					name="doctor_ids"
-					rules={[R_REQUIRED]}
-				>
-					<SelectApi
-						endpoint={DOCTORS}
-						showSearch
-						allowClear
-						mode="multiple"
-					/>
-				</Form.Item>
-				<Form.Item
-					label={t("services")}
-					name="service_ids"
-					rules={[R_REQUIRED]}
-				>
-					<SelectApi
-						endpoint={SERVICES}
-						showSearch
-						allowClear
-						mode="multiple"
-					/>
-				</Form.Item>
+				{
+					type === "withdraw" ?
+						<Fragment>
+							<Form.Item
+								label={t("patient")}
+								name="patient_id"
+								rules={[R_REQUIRED]}
+							>
+								<SelectApi
+									endpoint={PATIENTS}
+									showSearch
+									allowClear
+								/>
+							</Form.Item>
+							<Form.Item
+								label={t("doctors")}
+								name="doctor_ids"
+								rules={[R_REQUIRED]}
+							>
+								<SelectApi
+									endpoint={DOCTORS}
+									showSearch
+									allowClear
+									mode="multiple"
+								/>
+							</Form.Item>
+							<Form.Item
+								label={t("services")}
+								name="service_ids"
+								rules={[R_REQUIRED]}
+							>
+								<SelectApi
+									endpoint={SERVICES}
+									showSearch
+									allowClear
+									mode="multiple"
+								/>
+							</Form.Item>
 
-				<Form.Item
-					label={t("price")}
-					name="paid_amount"
-					rules={[R_REQUIRED]}
-				>
-					<InputNumber className='w-100' />
-				</Form.Item>
+							<Form.Item
+								label={t("price")}
+								name="paid_amount"
+								rules={[R_REQUIRED]}
+							>
+								<InputNumber className='w-100' />
+							</Form.Item>
+						</Fragment> :
+						<Fragment>
+							<Form.Item
+								label={t("price")}
+								name="amount"
+								rules={[R_REQUIRED]}
+							>
+								<InputNumber className='w-100' />
+							</Form.Item>
+							<Form.Item
+								label={t("text")}
+								name="memo"
+								rules={[R_REQUIRED]}
+							>
+								<Input.TextArea className='w-100' rows={3} />
+							</Form.Item>
+						</Fragment>
+				}
 				<Button block type="primary" htmlType="submit" className='mt-2' loading={createLoading || editLoading}>
 					{t(id ? "save" : "create")}
 				</Button>
