@@ -11,6 +11,7 @@ import React, { Fragment, useState } from 'react'
 import { FaMessage } from "react-icons/fa6"
 import { useSearchParams } from 'react-router-dom'
 import SendMessageStructure from "./SendMessageStructure"
+import FilterRenderer from "../FilterRenderer"
 
 interface IProps {
 	Table: React.FC<{ setId: ISetState<string | null>, noPagination?: boolean }>,
@@ -18,7 +19,8 @@ interface IProps {
 	endpoint: string
 	langKey: string,
 	noPagination?: boolean
-	userFunc?: (data: any[]) => any[]
+	userFunc?: (data: any[]) => any[],
+	filters?: any[]
 }
 
 const PageStructure: React.FC<IProps> = ({
@@ -27,7 +29,8 @@ const PageStructure: React.FC<IProps> = ({
 	endpoint,
 	langKey,
 	noPagination,
-	userFunc
+	userFunc,
+	filters
 }) => {
 	const t = useT()
 	const [isOpen, toggle] = useToggleState(false)
@@ -53,27 +56,35 @@ const PageStructure: React.FC<IProps> = ({
 	return (
 		<Fragment>
 			<Flex
-				justify="flex-end"
-				gap={8}
+				justify="space-between"
+				gap={12}
 			>
-				{(selectedKeys.length > 0 && userFunc) && <MyButton
-					color={colors.secondary}
-					type="primary"
-					icon={<FaMessage />}
-					onClick={toggleMessage}
+				{filters ?
+					<FilterRenderer gutter={[12, 12]} style={{ flexGrow: 1 }} filters={filters} /> :
+					<div />
+				}
+				<Flex
+					gap={8}
 				>
-					{t("send_message")}
-				</MyButton>}
-				<MyButton
-					color={colors.success}
-					type="primary"
-					onClick={toggle}
-					icon={<PlusOutlined />}
-					className="text-uppercase"
-				>
-					{/*  @ts-ignore */}
-					{t(`add_${langKey}`)}
-				</MyButton>
+					{(selectedKeys.length > 0 && userFunc) && <MyButton
+						color={colors.secondary}
+						type="primary"
+						icon={<FaMessage />}
+						onClick={toggleMessage}
+					>
+						{t("send_message")}
+					</MyButton>}
+					<MyButton
+						color={colors.success}
+						type="primary"
+						onClick={toggle}
+						icon={<PlusOutlined />}
+						className="text-uppercase"
+					>
+						{/*  @ts-ignore */}
+						{t(`add_${langKey}`)}
+					</MyButton>
+				</Flex>
 			</Flex>
 			<Table
 				setId={(val) => { setId(val); toggle() }}

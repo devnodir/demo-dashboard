@@ -69,6 +69,8 @@
 	"new_service": "Yangi xizmat",
 	"service_name": "Xizmat nomi",
 	"price": "Narxi",
+	"priceFrom": "Price from",
+	"priceTo": "Price to",
 	"parent_service": "Otasi",
 	"clinic_name": "Klinika nomi",
 	"working_days": "Ish kunlari",
@@ -144,5 +146,8 @@
 	"from": "From",
 	"to": "To",
 	"send_message": "Send message",
-	"send": "Send"
+	"send": "Send",
+	"search": "Search",
+	"withdraw": "Withdraw",
+	"payment": "Payment"
 }

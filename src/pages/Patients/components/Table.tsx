@@ -10,8 +10,6 @@ interface Props {
 
 const PatientsTable: React.FC<Props> = ({ setId, ...props }) => {
 
-	console.log(props);
-
 	return (
 		<TableStructure
 			useComlums={useComlums}

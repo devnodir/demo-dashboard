@@ -15,6 +15,8 @@ import UsersTable from './components/Table'
 import MyButton from '@/components/antd/MyButton'
 import { FaMessage } from 'react-icons/fa6'
 import SendMessageStructure from '@/components/shared/structurs/SendMessageStructure'
+import { BsSearch } from 'react-icons/bs'
+import FilterRenderer from '@/components/shared/FilterRenderer'
 
 const Users: React.FC = () => {
 	const t = useT()
@@ -38,28 +40,47 @@ const Users: React.FC = () => {
 
 	return (
 		<div className='users'>
-			<Flex
-				justify="flex-end"
-				gap={8}
-			>
-				{selectedKeys.length ? <MyButton
-					color={colors.secondary}
-					type="primary"
-					icon={<FaMessage />}
-					onClick={toggleMessage}
+			<Flex gap={12} justify="space-between">
+				<FilterRenderer
+					gutter={[12, 12]}
+					style={{ flexGrow: 1 }}
+					filters={[
+						{
+							key: "search",
+							span: 3,
+							lg: 5,
+							type: "input",
+							input: {
+								name: "search",
+								placeholder: t("search"),
+								prefix: < BsSearch />
+							}
+						},
+					]}
+				/>
+				<Flex
+					gap={8}
 				>
-					{t("send_message")}
-				</MyButton> : null}
-				<Button
-					onClick={toggle}
-					icon={<PlusOutlined />}
-					color={colors.success}
-					type="primary"
-					className="text-uppercase float-right"
-				>
-					{t("add_user")}
-				</Button>
+					{selectedKeys.length ? <MyButton
+						color={colors.secondary}
+						type="primary"
+						icon={<FaMessage />}
+						onClick={toggleMessage}
+					>
+						{t("send_message")}
+					</MyButton> : null}
+					<Button
+						onClick={toggle}
+						icon={<PlusOutlined />}
+						color={colors.success}
+						type="primary"
+						className="text-uppercase float-right"
+					>
+						{t("add_user")}
+					</Button>
+				</Flex>
 			</Flex>
+
 
 			<UsersTable
 				setId={(val) => { setId(val); toggle() }}

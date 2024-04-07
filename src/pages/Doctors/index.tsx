@@ -14,6 +14,8 @@ import DoctorsTable from './components/Table'
 import SendMessageStructure from '@/components/shared/structurs/SendMessageStructure'
 import MyButton from '@/components/antd/MyButton'
 import { FaMessage } from 'react-icons/fa6'
+import FilterRenderer from '@/components/shared/FilterRenderer'
+import { BsSearch } from 'react-icons/bs'
 
 const Doctors: React.FC = () => {
 	const t = useT()
@@ -40,26 +42,46 @@ const Doctors: React.FC = () => {
 	return (
 		<div className='doctors'>
 			<Flex
-				justify="flex-end"
-				gap={8}
+				justify="space-between"
 			>
-				{selectedKeys.length ? <MyButton
-					color={colors.secondary}
-					type="primary"
-					icon={<FaMessage />}
-					onClick={toggleMessage}
+				<FilterRenderer
+					gutter={[12, 12]}
+					style={{ flexGrow: 1 }}
+					filters={[
+						{
+							key: "search",
+							span: 3,
+							lg: 5,
+							type: "input",
+							input: {
+								name: "search",
+								placeholder: t("search"),
+								prefix: < BsSearch />
+							}
+						},
+					]}
+				/>
+				<Flex
+					gap={8}
 				>
-					{t("send_message")}
-				</MyButton> : null}
-				<Button
-					onClick={toggle}
-					icon={<PlusOutlined />}
-					color={colors.success}
-					type="primary"
-					className="text-uppercase float-right"
-				>
-					{t("add_doctor")}
-				</Button>
+					{selectedKeys.length ? <MyButton
+						color={colors.secondary}
+						type="primary"
+						icon={<FaMessage />}
+						onClick={toggleMessage}
+					>
+						{t("send_message")}
+					</MyButton> : null}
+					<Button
+						onClick={toggle}
+						icon={<PlusOutlined />}
+						color={colors.success}
+						type="primary"
+						className="text-uppercase float-right"
+					>
+						{t("add_doctor")}
+					</Button>
+				</Flex>
 			</Flex>
 
 			<DoctorsTable

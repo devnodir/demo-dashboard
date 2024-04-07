@@ -70,6 +70,8 @@
 	"edit_service": "Edit service",
 	"service_name": "Service name",
 	"price": "Price",
+	"priceFrom": "Price from",
+	"priceTo": "Price to",
 	"parent_service": "Parent",
 	"clinic_name": "Clinic name",
 	"working_days": "Working days",
@@ -144,5 +146,8 @@
 	"from": "From",
 	"to": "To",
 	"send_message": "Send message",
-	"send": "Send"
+	"send": "Send",
+	"search": "Search",
+	"withdraw": "Withdraw",
+	"payment": "Payment"
 }

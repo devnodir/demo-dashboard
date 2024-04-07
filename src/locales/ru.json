@@ -69,6 +69,8 @@
 	"new_service": "Новая услуга",
 	"service_name": "Название услуги",
 	"price": "Цена",
+	"priceFrom": "Price from",
+	"priceTo": "Price to",
 	"parent_service": "Родитель",
 	"clinic_name": "Название клиники",
 	"working_days": "Рабочие дни",
@@ -144,5 +146,8 @@
 	"from": "From",
 	"to": "To",
 	"send_message": "Send message",
-	"send": "Send"
+	"send": "Send",
+	"search": "Search",
+	"withdraw": "Withdraw",
+	"payment": "Payment"
 }
