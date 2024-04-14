@@ -1,7 +1,6 @@
 import { DOCTORS, ROLES } from '@/components/endpoints'
 import AdditionalContact from '@/components/shared/Form/AdditionalContact'
 import SelectApi from '@/components/shared/Form/SelectApi'
-import { STATUS } from '@/components/variables'
 import useApi from '@/hooks/useApi'
 import useApiMutation from '@/hooks/useApiMutation'
 import useApiMutationID from '@/hooks/useApiMutationID'
@@ -9,7 +8,7 @@ import useT from '@/hooks/useT'
 import { IVoid } from '@/types/helper.type'
 import { phoneFormatter } from '@/utils/formatter'
 import { R_PASSWORD, R_PHONE, R_REQUIRED } from '@/utils/rules'
-import { Button, DatePicker, Form, Input, InputNumber, Select, Spin, TimePicker, message } from 'antd'
+import { Button, Checkbox, DatePicker, Form, Input, InputNumber, Spin, TimePicker, message } from 'antd'
 import dayjs from 'dayjs'
 import _ from 'lodash'
 import React, { useEffect } from 'react'
@@ -46,7 +45,7 @@ const DoctorAction: React.FC<IProps> = ({ id, onFinish }) => {
 	useEffect(() => {
 		if (data) {
 			const record = data?.data.doctor
-			form.setFieldsValue(_.pick(record, ["name", "role_id", "additional_contact", "phone_number", "experience", "is_active"]))
+			form.setFieldsValue(_.pick(record, ["name", "role_id", "additional_contact", "phone_number", "experience", "is_active", "is_on_online_form"]))
 			if (record.birthday) form.setFieldValue("birthday", dayjs(record.birthday))
 			form.setFieldValue("time", [dayjs(record.start_of_working_day), dayjs(record.end_of_working_day)])
 		}
@@ -146,14 +145,6 @@ const DoctorAction: React.FC<IProps> = ({ id, onFinish }) => {
 						suffixIcon={<BsClockFill />}
 					/>
 				</Form.Item>
-				{/* <Form.Item
-					label={t("status")}
-					name="is_active"
-				>
-					<Select
-						options={STATUS}
-					/>
-				</Form.Item> */}
 				<Form.Item
 					label={t("l_password")}
 					name="password"
@@ -166,12 +157,18 @@ const DoctorAction: React.FC<IProps> = ({ id, onFinish }) => {
 						placeholder="********"
 					/>
 				</Form.Item>
+				<Form.Item
+					valuePropName="checked"
+					name="is_on_online_form"
+				>
+					<Checkbox>{t("is_on_online_form")}</Checkbox>
+				</Form.Item>
 				<AdditionalContact form={form} />
 				<Button block type="primary" htmlType="submit" className='mt-4 text-uppercase' loading={createLoading || editLoading}>
 					{t(id ? "save" : "create")}
 				</Button>
 			</Form>
-		</Spin>
+		</Spin >
 	)
 }
 

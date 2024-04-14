@@ -1,6 +1,5 @@
 import { BRANCH, ROLES, USERS } from '@/components/endpoints'
 import AdditionalContact from '@/components/shared/Form/AdditionalContact'
-import { STATUS } from '@/components/variables'
 import useApi from '@/hooks/useApi'
 import useApiMutation from '@/hooks/useApiMutation'
 import useApiMutationID from '@/hooks/useApiMutationID'
@@ -136,14 +135,6 @@ const UsersAction: React.FC<IProps> = ({ onFinish, id }) => {
 						suffixIcon={<BsCalendarFill />}
 					/>
 				</Form.Item>
-				{id && <Form.Item
-					label={t("status")}
-					name="is_active"
-				>
-					<Select
-						options={STATUS}
-					/>
-				</Form.Item>}
 				<Form.Item
 					label={t("l_password")}
 					name="password"
