@@ -45,7 +45,7 @@ const DoctorAction: React.FC<IProps> = ({ id, onFinish }) => {
 
 	useEffect(() => {
 		if (data) {
-			const record = data?.data
+			const record = data?.data.doctor
 			form.setFieldsValue(_.pick(record, ["name", "role_id", "additional_contact", "phone_number", "experience", "is_active"]))
 			if (record.birthday) form.setFieldValue("birthday", dayjs(record.birthday))
 			form.setFieldValue("time", [dayjs(record.start_of_working_day), dayjs(record.end_of_working_day)])
@@ -146,14 +146,14 @@ const DoctorAction: React.FC<IProps> = ({ id, onFinish }) => {
 						suffixIcon={<BsClockFill />}
 					/>
 				</Form.Item>
-				<Form.Item
+				{/* <Form.Item
 					label={t("status")}
 					name="is_active"
 				>
 					<Select
 						options={STATUS}
 					/>
-				</Form.Item>
+				</Form.Item> */}
 				<Form.Item
 					label={t("l_password")}
 					name="password"
