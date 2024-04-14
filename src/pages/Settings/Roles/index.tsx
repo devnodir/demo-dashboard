@@ -24,6 +24,7 @@ const Roles: React.FC = () => {
 	const { data, isLoading, isRefetching, refetch } = useApi(ROLES)
 	const { mutate, isLoading: deleteLoading } = useApiMutationID("delete", ROLES)
 	const [editingItem, setEditingItem] = useState<string | null>(null)
+	const { mutate: editMutate } = useApiMutationID("patch", ROLES)
 
 	const t = useT()
 
@@ -40,12 +41,14 @@ const Roles: React.FC = () => {
 		{
 			title: '',
 			dataIndex: '_id',
-			render: (id: string) => <ActionButtons
+			render: (id: string, record: any) => <ActionButtons
 				onDelete={() => deleteItem(id)}
 				onUpdate={() => {
 					setEditingItem(id)
 					toggle()
 				}}
+				onReload={() => reActivate(id)}
+				allowReload={!record.is_active}
 			/>
 		},
 	];
@@ -54,6 +57,17 @@ const Roles: React.FC = () => {
 		refetch()
 		toggle()
 		if (editingItem) setEditingItem(null)
+	}
+
+	const reActivate = (id: string) => {
+		editMutate({ id, data: { is_active: true } }, {
+			onSuccess: () => {
+				refetch()
+			},
+			onError: (err) => {
+				message.error(err?.message)
+			}
+		})
 	}
 
 	const deleteItem = (id: string) => {

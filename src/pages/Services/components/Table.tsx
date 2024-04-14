@@ -27,6 +27,7 @@ const ServicesTable: React.FC<Props> = ({ setId }) => {
 	const { records, pagination } = useTableData(data, query, setQuery)
 
 	const { mutate, isLoading: isDeleting } = useApiMutationID("delete", SERVICES)
+	const { mutate: editMutate } = useApiMutationID("patch", SERVICES)
 
 
 	const columns = [
@@ -52,9 +53,11 @@ const ServicesTable: React.FC<Props> = ({ setId }) => {
 		{
 			title: '',
 			dataIndex: '_id',
-			render: (id: string) => <ActionButtons
+			render: (id: string, record: any) => <ActionButtons
 				onDelete={() => deleteItem(id)}
 				onUpdate={() => setId(id)}
+				onReload={() => reActivate(id)}
+				allowReload={!record.is_active}
 			/>
 		},
 	];
@@ -62,6 +65,17 @@ const ServicesTable: React.FC<Props> = ({ setId }) => {
 	const deleteItem = (id: string) => {
 		mutate({ id }, {
 			onSuccess: () => refetch(),
+			onError: (err) => {
+				message.error(err?.message)
+			}
+		})
+	}
+
+	const reActivate = (id: string) => {
+		editMutate({ id, data: { is_active: true } }, {
+			onSuccess: () => {
+				refetch()
+			},
 			onError: (err) => {
 				message.error(err?.message)
 			}

@@ -21,6 +21,8 @@ export default styled.div`
                 margin-bottom: 24px;
                 img {
                     width: 165px;
+                    max-height: 80px;
+                    object-fit: contain;
                 }
             }
             ${media("sm")`

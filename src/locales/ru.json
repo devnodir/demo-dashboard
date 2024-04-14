@@ -159,5 +159,7 @@
 	"lab": "Lab",
 	"add_protocol": "Add protocol",
 	"upload": "Upload",
-	"is_on_online_form": "Is show on online form?"
+	"is_on_online_form": "Is show on online form?",
+	"comment": "Commnet",
+	"is_online_form_active": "Is online form active?"
 }

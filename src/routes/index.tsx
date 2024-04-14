@@ -42,6 +42,13 @@ const privateRoutes: RouteObject[] = [
 			{ path: "/settings", element: redirectTo("/settings/main", true) },
 		]
 	},
+	{
+		path: "/reports", element: page(() => import(`@/pages/Reports`), AppLayout),
+		children: [
+			{ path: "/reports/appointments", element: page(() => import(`@/pages/Reports/Appointments`)) },
+		]
+	},
+
 	{ path: "/404", element: page(() => import(`@/pages/404`), AppLayout) },
 	{ path: "/login", element: redirectTo("/dashboard", true) },
 	{ path: "/", element: redirectTo("/dashboard", true) },

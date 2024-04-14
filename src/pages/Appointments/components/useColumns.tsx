@@ -5,6 +5,7 @@ import TableUsersList from "@/components/shared/TableComponents/TableUsersList";
 import useColumnStructure from "@/components/shared/structurs/useColumnStructure";
 import useT from "@/hooks/useT";
 import { ISetState } from "@/types/helper.type";
+import { Link } from "react-router-dom";
 
 const useComlums = (endpoint: string, setId: ISetState<string | null>) => {
 	const t = useT()
@@ -12,7 +13,9 @@ const useComlums = (endpoint: string, setId: ISetState<string | null>) => {
 		{
 			title: t("patient"),
 			dataIndex: 'patient',
-			render: TableNameRecord
+			render: (patient: any, order: any) => <Link to={`/patients/cabinet/${order.patient_id}`} className="py-3">
+				{patient.name}
+			</Link>
 		},
 		{
 			title: t("doctor"),

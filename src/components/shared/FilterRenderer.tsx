@@ -5,9 +5,9 @@ import SelectApi from './Form/SelectApi'
 import dayjs from 'dayjs'
 
 
-const FilterRenderer: React.FC<any> = ({ filters, ...props }) => {
+const FilterRenderer: React.FC<any> = ({ filters, defaultValues, ...props }) => {
 
-	const [query, setQuery] = useQueryParams()
+	const [query, setQuery] = useQueryParams(defaultValues)
 	const [inputVal, setInputVal] = useState<any>({})
 	const [isMount, setIsMount] = useState(false)
 

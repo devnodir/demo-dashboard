@@ -1,40 +1,40 @@
 import MyButton from '@/components/antd/MyButton';
+import CompanyImage from '@/components/shared/CompanyImage';
 import FullScreenHandler from '@/components/shared/FullScreenHandler';
-import HeadSearch from '@/components/shared/HeadSearch';
 import LangSelect from '@/components/shared/LangSelect';
 import ModeHandler from '@/components/shared/ModeHandler';
-import Notifications from '@/components/shared/Notifications';
+import { USER_ID, USER_TOKEN } from '@/components/variables';
 import useT from '@/hooks/useT';
 import useMainStore from '@/store/main';
+import { removeLocalStorage } from '@/utils/localStorage';
 import { colors } from '@/utils/theme';
 import { MenuUnfoldOutlined } from '@ant-design/icons';
 import { Dropdown, MenuProps, Tag, Typography } from 'antd';
 import React from 'react';
-import { BsArrowLeftSquareFill, BsGearWide } from "react-icons/bs";
+import { BsArrowLeftSquareFill } from "react-icons/bs";
 import { FaUser } from "react-icons/fa6";
 import StyleWrapper from './Style';
-import { removeLocalStorage } from '@/utils/localStorage';
-import { USER_ID, USER_TOKEN } from '@/components/variables';
 
 const Navbar: React.FC = () => {
 
-	const { mode, setMobileMenu } = useMainStore()
+	const { setMobileMenu } = useMainStore()
 
 	return (
 		<StyleWrapper>
 			<div className='logo d-lg-flex'>
-				<img src={`/assets/logo-${mode}.svg`} alt='logo' />
+				<CompanyImage />
 			</div>
 			<div className='d-lg-none pl-2 menu-btn' onClick={() => setMobileMenu(true)}>
 				<MyButton type="primary" icon={<MenuUnfoldOutlined />} />
 			</div>
 			<div className='content'>
-				<HeadSearch />
+				{/* <HeadSearch /> */}
+				<div />
 				<div className="content-right">
 					<div className="buttons">
 						<ModeHandler />
 						<FullScreenHandler />
-						<Notifications />
+						{/* <Notifications /> */}
 						<LangSelect />
 					</div>
 					<UserMenu />
@@ -53,11 +53,11 @@ const UserMenu: React.FC = () => {
 	const t = useT()
 
 	const items: MenuProps["items"] = [
-		{
-			key: "settings",
-			label: t("settings"),
-			icon: <BsGearWide />,
-		},
+		// {
+		// 	key: "settings",
+		// 	label: t("settings"),
+		// 	icon: <BsGearWide />,
+		// },
 		{
 			key: "logout",
 			label: t("logout"),

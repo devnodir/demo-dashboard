@@ -31,6 +31,7 @@ const Protocols = () => {
 	const [id, setId] = useState<string | null>(null)
 	const [isOpen, toggle] = useToggleState(false)
 
+
 	const [search] = useSearchParams()
 	const selected = items.find(el => el.value === query.type)
 

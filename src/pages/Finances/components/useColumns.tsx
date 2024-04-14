@@ -46,15 +46,17 @@ const useComlums = (endpoint: string, setId: ISetState<string | null>) => {
 		{
 			title: t("price"),
 			dataIndex: 'services',
-			render: (service: any[]) => (
-				<Timeline
-					items={service.map((el) => {
-						return {
-							children: el.price,
-							dot: <FaMoneyBill />
-						}
-					})}
-				/>
+			render: (service: any[], order: any) => (
+				order.isExpense ?
+					TablePriceCurrency(order.amount)
+					: <Timeline
+						items={service.map((el) => {
+							return {
+								children: el.price,
+								dot: <FaMoneyBill />
+							}
+						})}
+					/>
 			)
 		},
 		{
@@ -83,6 +85,10 @@ const useComlums = (endpoint: string, setId: ISetState<string | null>) => {
 			render: TableTime
 		},
 		{
+			title: t("comment"),
+			dataIndex: 'memo',
+		},
+		{
 			title: t("status"),
 			dataIndex: 'isPayment',
 			render: TableIsPayment
@@ -90,7 +96,7 @@ const useComlums = (endpoint: string, setId: ISetState<string | null>) => {
 		{
 			title: "",
 			dataIndex: '_id',
-			render: (id: any) => <AddPaymnet id={id} />
+			render: (id: any, order: any) => !order.isExpense && <AddPaymnet id={id} />
 		},
 	];
 

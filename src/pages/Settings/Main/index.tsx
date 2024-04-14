@@ -32,6 +32,7 @@ const MainSettings = () => {
             form.setFieldValue("working_times", [dayjs(record.start_of_working_day), dayjs(record.end_of_working_day)])
             form.setFieldValue("is_sms_active", record.is_sms_active)
             form.setFieldValue("logo", record.logo)
+            form.setFieldValue("is_online_form_active", record.is_online_form_active)
             setFiles([{ url: record.logo }])
         }
 
@@ -113,12 +114,20 @@ const MainSettings = () => {
                                 </Upload>
                             </Form.Item>
                         </Col>
-                        <Col md={12} span={8}>
+                        <Col md={6} span={4}>
                             <Form.Item
                                 name="is_sms_active"
                                 valuePropName="checked"
                             >
                                 <Checkbox>{t("is_sms_active")}</Checkbox>
+                            </Form.Item>
+                        </Col>
+                        <Col md={6} span={4}>
+                            <Form.Item
+                                name="is_online_form_active"
+                                valuePropName="checked"
+                            >
+                                <Checkbox>{t("is_online_form_active")}</Checkbox>
                             </Form.Item>
                         </Col>
                     </Row>

@@ -16,8 +16,6 @@ import { PlusOutlined } from "@ant-design/icons";
 import { Button, Drawer, Flex, Form, Input, Spin, message } from "antd";
 import dayjs from "dayjs";
 import React, { useEffect, useState } from 'react';
-import { BsSearch } from "react-icons/bs";
-import { FaMessage } from "react-icons/fa6";
 
 
 const Branches: React.FC = () => {
@@ -26,6 +24,7 @@ const Branches: React.FC = () => {
 	const { data, isLoading, isRefetching, refetch } = useApi(BRANCH)
 	const { mutate, isLoading: deleteLoading } = useApiMutationID("delete", BRANCH)
 	const [editingItem, setEditingItem] = useState<string | null>(null)
+	const { mutate: editMutate } = useApiMutationID("patch", BRANCH)
 
 	const t = useT()
 
@@ -42,12 +41,14 @@ const Branches: React.FC = () => {
 		{
 			title: '',
 			dataIndex: '_id',
-			render: (id: string) => <ActionButtons
+			render: (id: string, record: any) => <ActionButtons
 				onDelete={() => deleteItem(id)}
 				onUpdate={() => {
 					setEditingItem(id)
 					toggle()
 				}}
+				onReload={() => reActivate(id)}
+				allowReload={!record.is_active}
 			/>
 		},
 	];
@@ -61,6 +62,17 @@ const Branches: React.FC = () => {
 	const deleteItem = (id: string) => {
 		mutate({ id }, {
 			onSuccess: () => refetch(),
+			onError: (err) => {
+				message.error(err?.message)
+			}
+		})
+	}
+
+	const reActivate = (id: string) => {
+		editMutate({ id, data: { is_active: true } }, {
+			onSuccess: () => {
+				refetch()
+			},
 			onError: (err) => {
 				message.error(err?.message)
 			}

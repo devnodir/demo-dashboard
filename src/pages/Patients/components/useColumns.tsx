@@ -58,8 +58,8 @@ const useComlums = (endpoint: string, setId: ISetState<string | null>) => {
 				onDelete={() => deleteItem(id)}
 				onUpdate={() => setId(id)}
 				onReload={() => reActivate(id)}
-				allowMessage
 				allowReload={!record.is_active}
+				allowMessage
 				users={[{
 					name: record.name,
 					phone: record.phone_number

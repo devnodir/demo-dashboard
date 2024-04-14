@@ -10,6 +10,7 @@ const useColumnStructure = (columns: any[], endpoint: string, setId: ISetState<s
 
 	const [search] = useSearchParams()
 	const { mutate, isLoading: isDeleting } = useApiMutationID("delete", endpoint)
+	const { mutate: editMutate } = useApiMutationID("patch", endpoint)
 
 
 	columns.push(
@@ -19,11 +20,24 @@ const useColumnStructure = (columns: any[], endpoint: string, setId: ISetState<s
 			render: (id: string, record: any) => <ActionButtons
 				onDelete={() => deleteItem(id)}
 				onUpdate={() => setId(id)}
+				onReload={() => reActivate(id)}
+				allowReload={!record.is_active}
 				id={id}
 				{...(addAction ? addAction(id, record) : {})}
 			/>
 		}
 	)
+
+	const reActivate = (id: string) => {
+		editMutate({ id, data: { is_active: true } }, {
+			onSuccess: () => {
+				queryClient.refetchQueries([endpoint, qs.parse(search.toString())])
+			},
+			onError: (err) => {
+				message.error(err?.message)
+			}
+		})
+	}
 
 	const deleteItem = (id: string) => {
 		mutate({ id }, {

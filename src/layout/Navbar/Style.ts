@@ -28,7 +28,7 @@ export default styled(Header)`
         align-items: center;
         padding: 0 16px;
         img {
-            width: 80%;
+            height: 40px;
             object-fit: contain;
         }
     }

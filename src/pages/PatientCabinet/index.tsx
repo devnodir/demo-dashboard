@@ -8,8 +8,8 @@ import { phoneFormatter } from '@/utils/formatter'
 import { EditOutlined } from '@ant-design/icons'
 import { Button, Col, Divider, Drawer, Flex, Row, Spin, Typography } from 'antd'
 import dayjs from 'dayjs'
-import React from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import PatientAction from '../Patients/components/Action'
 import Style from './Style'
 import Protocols from "./components/Protocols"
@@ -21,11 +21,19 @@ const PatientCabinet: React.FC = () => {
 
 	const { id } = useParams()
 	const [isOpen, toggle] = useToggleState(false)
+	const navigate = useNavigate()
 
-	const { data, refetch, isRefetching } = useApi(`${PATIENTS}/${id}`, { suspense: true })
-	const record = data.patient || {}
-	const protocols = data.protocols || []
-	const files = data.files || []
+	const { data, refetch, isRefetching, isError } = useApi(`${PATIENTS}/${id}`, {
+		suspense: true,
+	})
+	const record = data?.patient || {}
+	const protocols = data?.protocols || []
+	const files = data?.files || []
+
+
+	useEffect(() => {
+		navigate("/404")
+	}, [isError])
 
 	const onActionFinish = () => {
 		refetch()

@@ -1,4 +1,4 @@
-import { APPOINTMENTS, DOCTORS, PATIENTS, SERVICES, USERS } from '@/components/endpoints'
+import { APPOINTMENTS, BONUS, DOCTORS, PATIENTS, SERVICES, USERS } from '@/components/endpoints'
 import SelectApi from '@/components/shared/Form/SelectApi'
 import useApi from '@/hooks/useApi'
 import useApiMutation from '@/hooks/useApiMutation'
@@ -102,6 +102,17 @@ const AppointmentsAction: React.FC<Props> = ({ id, onFinish }) => {
 				>
 					<SelectApi
 						endpoint={SERVICES}
+						showSearch
+						allowClear
+					/>
+				</Form.Item>
+				<Form.Item
+					label={t("bonus")}
+					name="loyalty_id"
+
+				>
+					<SelectApi
+						endpoint={`${BONUS}?limit=99999`}
 						showSearch
 						allowClear
 					/>

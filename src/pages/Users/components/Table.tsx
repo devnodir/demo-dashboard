@@ -31,6 +31,8 @@ const UsersTable: React.FC<Props> = ({ setId, tableProps }) => {
 	const { records, pagination } = useTableData(data, query, setQuery)
 
 	const { mutate, isLoading: isDeleting } = useApiMutationID("delete", USERS)
+	const { mutate: editMutate } = useApiMutationID("patch", USERS)
+
 
 	const columns = [
 		{
@@ -67,6 +69,8 @@ const UsersTable: React.FC<Props> = ({ setId, tableProps }) => {
 			render: (id: string, record: any) => <ActionButtons
 				onDelete={() => deleteItem(id)}
 				onUpdate={() => setId(id)}
+				onReload={() => reActivate(id)}
+				allowReload={!record.is_active}
 				allowMessage
 				users={[{
 					name: record.name,
@@ -75,6 +79,17 @@ const UsersTable: React.FC<Props> = ({ setId, tableProps }) => {
 			/>,
 		},
 	];
+
+	const reActivate = (id: string) => {
+		editMutate({ id, data: { is_active: true } }, {
+			onSuccess: () => {
+				refetch()
+			},
+			onError: (err) => {
+				message.error(err?.message)
+			}
+		})
+	}
 
 	const deleteItem = (id: string) => {
 		mutate({ id }, {

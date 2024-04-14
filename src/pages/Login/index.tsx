@@ -12,6 +12,7 @@ import React, { useState } from 'react';
 import { FaEye, FaEyeSlash, FaLock, FaPhone } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
 import StyleWrapper from './Style';
+import CompanyImage from "@/components/shared/CompanyImage";
 
 interface IFormData {
 	phone_number: string
@@ -25,7 +26,7 @@ const Login: React.FC = () => {
 	const [type, setType] = useState("admin")
 
 	const [messageApi, contextHolder] = message.useMessage();
-	const { mode, setIsAuth, setUserData } = useMainStore()
+	const { setUserData } = useMainStore()
 
 	const { mutateAsync, isLoading } = useApiMutation(`${LOGIN_USER}${type === "doctor" ? "/doctor" : ""}`)
 
@@ -74,7 +75,7 @@ const Login: React.FC = () => {
 			</div>
 			<div className='login-content'>
 				<div className="login-content-logo">
-					<img src={`/assets/logo-${mode}.svg`} alt="" />
+					<CompanyImage />
 				</div>
 				<Tabs
 					items={items}

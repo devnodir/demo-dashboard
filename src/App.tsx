@@ -10,6 +10,7 @@ import useMainStore from '@/store/main'
 import useDetectLang from './hooks/useDetectLang'
 import ProjectProvider from './providers/ProjectProvider'
 import { filterAllowedMenus } from './utils/methods'
+import CheckCompanyProvider from './providers/CheckCompanyProvider'
 
 const App: React.FC = () => {
 
@@ -25,11 +26,13 @@ const App: React.FC = () => {
     <ThemeProvider>
       <Suspense fallback={<ScreenLoader />}>
         <ErrorBoundary>
-          <ProjectProvider>
-            <AuthProvider>
-              <RenderRoutes routes={routes} key={i18n.language} />
-            </AuthProvider>
-          </ProjectProvider>
+          <CheckCompanyProvider>
+            <ProjectProvider>
+              <AuthProvider>
+                <RenderRoutes routes={routes} key={i18n.language} />
+              </AuthProvider>
+            </ProjectProvider>
+          </CheckCompanyProvider>
         </ErrorBoundary>
       </Suspense>
     </ThemeProvider>

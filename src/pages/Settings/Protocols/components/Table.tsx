@@ -21,6 +21,7 @@ const ProtocolsTable: React.FC<Props> = ({ query, setQuery, setId }) => {
 	const { records, pagination } = useTableData(data, query, setQuery)
 
 	const { mutate, isLoading: isDeleting } = useApiMutationID("delete", PROTOCOLS)
+	const { mutate: editMutate } = useApiMutationID("patch", PROTOCOLS)
 
 
 	const columns = [
@@ -31,12 +32,25 @@ const ProtocolsTable: React.FC<Props> = ({ query, setQuery, setId }) => {
 		{
 			title: '',
 			dataIndex: '_id',
-			render: (id: string) => <ActionButtons
+			render: (id: string, record: any) => <ActionButtons
 				onDelete={() => deleteItem(id)}
 				onUpdate={() => setId(id)}
+				onReload={() => reActivate(id)}
+				allowReload={!record.is_active}
 			/>
 		},
 	];
+
+	const reActivate = (id: string) => {
+		editMutate({ id, data: { is_active: true } }, {
+			onSuccess: () => {
+				refetch()
+			},
+			onError: (err) => {
+				message.error(err?.message)
+			}
+		})
+	}
 
 	const deleteItem = (id: string) => {
 		mutate({ id }, {

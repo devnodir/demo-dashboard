@@ -15,7 +15,6 @@ import { ISetState } from "@/types/helper.type";
 import { TableProps, message } from "antd";
 import dayjs from "dayjs";
 import React from 'react';
-import { Link } from "react-router-dom";
 
 interface Props {
 	setId: ISetState<string | null>,
@@ -33,14 +32,12 @@ const DoctorsTable: React.FC<Props> = ({ setId, tableProps }) => {
 	const { records, pagination } = useTableData(data, query, setQuery)
 
 	const { mutate, isLoading: isDeleting } = useApiMutationID("delete", DOCTORS)
+	const { mutate: editMutate } = useApiMutationID("patch", DOCTORS)
 
 	const columns = [
 		{
 			title: t('full_name'),
 			dataIndex: 'name',
-			// render: (name: string, order: any) => <Link to={`/doctors/cabinet/${order._id}`} className="py-3">
-			// 	{name}
-			// </Link>
 		},
 		{
 			title: t('l_phone'),
@@ -88,6 +85,8 @@ const DoctorsTable: React.FC<Props> = ({ setId, tableProps }) => {
 			render: (id: string, record: any) => <ActionButtons
 				onDelete={() => deleteItem(id)}
 				onUpdate={() => setId(id)}
+				onReload={() => reActivate(id)}
+				allowReload={!record.is_active}
 				allowMessage
 				users={[{
 					name: record.name,
@@ -96,6 +95,18 @@ const DoctorsTable: React.FC<Props> = ({ setId, tableProps }) => {
 			/>
 		},
 	];
+
+	const reActivate = (id: string) => {
+		editMutate({ id, data: { is_active: true } }, {
+			onSuccess: () => {
+				refetch()
+			},
+			onError: (err) => {
+				message.error(err?.message)
+			}
+		})
+	}
+
 
 	const deleteItem = (id: string) => {
 		mutate({ id }, {

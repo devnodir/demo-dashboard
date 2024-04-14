@@ -75,9 +75,6 @@ const FinanceFilter: React.FC<Props> = ({ toggle, setType }) => {
 				/>
 				<MyButton color={colors.primary} className='d-lg-none' icon={<FaFilter />} onClick={toggleFilter}>Фильтр</MyButton>
 				<Flex gap={8} className=''>
-					<MyButton color={colors.success} icon={<DownloadOutlined />}>
-						{window.innerWidth > 576 && <span>Скачать Excel</span>}
-					</MyButton>
 					<MyButton type="primary" color={colors.yellow} onClick={() => { toggle(); setType("expence") }}>Создать расход</MyButton>
 					<MyButton type="primary" onClick={() => { toggle(); setType("withdraw") }}>Создать счет</MyButton>
 				</Flex>
