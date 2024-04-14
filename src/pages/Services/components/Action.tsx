@@ -7,7 +7,7 @@ import useT from '@/hooks/useT'
 import { IVoid } from '@/types/helper.type'
 import { mapSelectData } from '@/utils/methods'
 import { R_REQUIRED } from '@/utils/rules'
-import { Button, Form, Input, InputNumber, Select, Spin, message } from 'antd'
+import { Button, Checkbox, Form, Input, InputNumber, Select, Spin, message } from 'antd'
 import _ from 'lodash'
 import React, { useEffect } from 'react'
 
@@ -93,6 +93,12 @@ const ServiceAction: React.FC<IProps> = ({ id, onFinish }) => {
 					<Select
 						options={CURRENCIES}
 					/>
+				</Form.Item>
+				<Form.Item
+					valuePropName="checked"
+					name="is_on_online_form"
+				>
+					<Checkbox>{t("is_on_online_form")}</Checkbox>
 				</Form.Item>
 				<Button block type="primary" htmlType="submit" className='mt-2' loading={createLoading || editLoading}>
 					{t(id ? "save" : "create")}
