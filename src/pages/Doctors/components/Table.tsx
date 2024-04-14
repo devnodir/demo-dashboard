@@ -38,9 +38,9 @@ const DoctorsTable: React.FC<Props> = ({ setId, tableProps }) => {
 		{
 			title: t('full_name'),
 			dataIndex: 'name',
-			render: (name: string, order: any) => <Link to={`/doctors/cabinet/${order._id}`} className="py-3">
-				{name}
-			</Link>
+			// render: (name: string, order: any) => <Link to={`/doctors/cabinet/${order._id}`} className="py-3">
+			// 	{name}
+			// </Link>
 		},
 		{
 			title: t('l_phone'),

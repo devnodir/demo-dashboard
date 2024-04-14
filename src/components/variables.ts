@@ -6,8 +6,8 @@ export const USER_ID = "user_id";
 export const INIT_PAGE_PARAMS = { page: "1", limit: "20" };
 
 export const STATUS = [
-    { label: i18n.t("active"), value: true },
-    { label: i18n.t("inactive"), value: false },
+    { label: i18n.t("active"), value: "true" },
+    { label: i18n.t("inactive"), value: "false" },
 ];
 export const CATEGORY_PAYMENT = [
     { label: i18n.t("withdraw"), value: "withdraw" },
@@ -20,8 +20,8 @@ export const STATUS_PATIENT = [
 ];
 
 export const STATUS_DONE = [
-    { label: i18n.t("yes"), value: true },
-    { label: i18n.t("no"), value: false },
+    { label: i18n.t("yes"), value: "true" },
+    { label: i18n.t("no"), value: "false" },
 ];
 export const STATUS_PRIORITY = [
     { label: i18n.t("low"), value: "low" },

@@ -1,5 +1,5 @@
 import MyButton from '@/components/antd/MyButton'
-import { INIT_PAGE_PARAMS } from "@/components/variables"
+import { INIT_PAGE_PARAMS, STATUS } from "@/components/variables"
 import { useQueryParams } from '@/hooks/useQueryParams'
 import useToggleState from '@/hooks/useToggleState'
 import { colors } from '@/utils/theme'
@@ -14,6 +14,8 @@ import { queryClient } from '@/utils/props'
 import qs from "qs"
 import { PROTOCOLS } from '@/components/endpoints'
 import { useSearchParams } from 'react-router-dom'
+import FilterRenderer from '@/components/shared/FilterRenderer'
+import useT from '@/hooks/useT'
 
 const items = [
 	{ label: 'Protocol', value: 'default', icon: <BarsOutlined /> },
@@ -21,6 +23,8 @@ const items = [
 ]
 
 const Protocols = () => {
+
+	const t = useT()
 
 	const [query, setQuery] = useQueryParams({ ...INIT_PAGE_PARAMS, type: items[0].value })
 
@@ -44,12 +48,31 @@ const Protocols = () => {
 	return (
 		<Style>
 			<Flex justify="space-between" className='mb-2'>
-				<Segmented
-					value={query.type}
-					size="large"
-					options={items}
-					onChange={(type) => setQuery({ ...query, type })}
-				/>
+				<Flex gap={24}>
+					<Segmented
+						value={query.type}
+						size="large"
+						options={items}
+						onChange={(type) => setQuery({ ...query, type })}
+					/>
+					<FilterRenderer
+						gutter={[12, 12]}
+						style={{ flexGrow: 1 }}
+						filters={[
+							{
+								key: "isactive",
+								span: 24,
+								lg: 24,
+								type: "select",
+								input: {
+									name: "isactive",
+									options: STATUS,
+									placeholder: t("active")
+								}
+							},
+						]}
+					/>
+				</Flex>
 				<MyButton
 					icon={<PlusOutlined />}
 					color={colors.success}

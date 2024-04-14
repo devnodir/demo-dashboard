@@ -1,8 +1,10 @@
 import MyButton from "@/components/antd/MyButton";
 import MyTable from "@/components/antd/MyTable";
 import { ROLES } from "@/components/endpoints";
+import FilterRenderer from "@/components/shared/FilterRenderer";
 import ActionButtons from "@/components/shared/TableComponents/ActionButtons";
 import TableDate from "@/components/shared/TableComponents/TableDate";
+import { STATUS } from "@/components/variables";
 import useApi from "@/hooks/useApi";
 import useApiMutation from "@/hooks/useApiMutation";
 import useApiMutationID from "@/hooks/useApiMutationID";
@@ -65,15 +67,37 @@ const Roles: React.FC = () => {
 
 	return (
 		<div>
-			<MyButton
-				onClick={toggle}
-				icon={<PlusOutlined />}
-				color={colors.success}
-				type="primary"
-				className="text-uppercase float-right"
+			<Flex
+				justify="space-between"
 			>
-				{t("add_role")}
-			</MyButton>
+				<FilterRenderer
+					gutter={[12, 12]}
+					style={{ flexGrow: 1 }}
+					filters={[
+						{
+							key: "isactive",
+							span: 3,
+							lg: 3,
+							type: "select",
+							input: {
+								name: "isactive",
+								options: STATUS,
+								placeholder: t("active")
+							}
+						},
+					]}
+				/>
+				<MyButton
+					onClick={toggle}
+					icon={<PlusOutlined />}
+					color={colors.success}
+					type="primary"
+					className="text-uppercase float-right"
+				>
+					{t("add_role")}
+				</MyButton>
+			</Flex>
+
 			<MyTable
 				columns={columns}
 				dataSource={data?.data}

@@ -1,7 +1,7 @@
 import MyButton from '@/components/antd/MyButton'
 import { PATIENTS } from '@/components/endpoints'
 import FilterRenderer from '@/components/shared/FilterRenderer'
-import { CATEGORY_PAYMENT } from '@/components/variables'
+import { CATEGORY_PAYMENT, STATUS } from '@/components/variables'
 import useT from '@/hooks/useT'
 import useToggleState from '@/hooks/useToggleState'
 import { ISetState, IVoid } from '@/types/helper.type'
@@ -58,6 +58,17 @@ const FinanceFilter: React.FC<Props> = ({ toggle, setType }) => {
 								name: "category",
 								placeholder: t("category"),
 								options: CATEGORY_PAYMENT
+							}
+						},
+						{
+							key: "isactive",
+							span: 4,
+							lg: 4,
+							type: "select",
+							input: {
+								name: "isactive",
+								options: STATUS,
+								placeholder: t("active")
 							}
 						},
 					]}

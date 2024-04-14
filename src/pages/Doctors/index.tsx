@@ -16,6 +16,7 @@ import MyButton from '@/components/antd/MyButton'
 import { FaMessage } from 'react-icons/fa6'
 import FilterRenderer from '@/components/shared/FilterRenderer'
 import { BsSearch } from 'react-icons/bs'
+import { STATUS } from '@/components/variables'
 
 const Doctors: React.FC = () => {
 	const t = useT()
@@ -57,6 +58,17 @@ const Doctors: React.FC = () => {
 								name: "search",
 								placeholder: t("search"),
 								prefix: < BsSearch />
+							}
+						},
+						{
+							key: "isactive",
+							span: 3,
+							lg: 3,
+							type: "select",
+							input: {
+								name: "isactive",
+								options: STATUS,
+								placeholder: t("active")
 							}
 						},
 					]}

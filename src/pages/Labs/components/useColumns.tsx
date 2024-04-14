@@ -26,6 +26,7 @@ const useComlums = (endpoint: string, setId: ISetState<string | null>, props: an
 				}} />
 			)
 		},
+
 	];
 
 	return useColumnStructure(columns, endpoint, setId)

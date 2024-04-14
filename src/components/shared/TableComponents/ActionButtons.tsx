@@ -1,7 +1,7 @@
 import { IVoid } from '@/types/helper.type'
 import { colors } from '@/utils/theme'
 import { Flex, Form, Input, Modal, message } from 'antd'
-import { FaDownload, FaEye, FaMessage, FaPen, FaTrash, FaXmark } from 'react-icons/fa6'
+import { FaArrowsRotate, FaDownload, FaEye, FaMessage, FaPen, FaTrash, FaXmark } from 'react-icons/fa6'
 import MyButton from '../../antd/MyButton'
 import { Fragment } from 'react'
 import useToggleState, { Toggle } from '@/hooks/useToggleState'
@@ -15,13 +15,15 @@ interface Props {
 	onUpdate?: IVoid
 	onCancel?: IVoid
 	onDownload?: IVoid
+	onReload?: IVoid
 	onComplateTemplate?: (id?: string) => void
 	allowMessage?: boolean
+	allowReload?: boolean
 	id?: string
 	users?: any[]
 }
 
-const ActionButtons: React.FC<Props> = ({ id, users, allowMessage, onDelete, onUpdate, onCancel, onDownload, onComplateTemplate }) => {
+const ActionButtons: React.FC<Props> = ({ id, users, allowMessage, allowReload, onDelete, onUpdate, onCancel, onReload, onDownload, onComplateTemplate }) => {
 
 	const [isOpen, toggle] = useToggleState(false)
 
@@ -32,8 +34,9 @@ const ActionButtons: React.FC<Props> = ({ id, users, allowMessage, onDelete, onU
 				{onComplateTemplate && <MyButton type="text" color={colors.success} icon={<FaEye size="20" />} onClick={() => onComplateTemplate(id)} />}
 				{onDownload && <MyButton type="text" color={colors.success} icon={<FaDownload size="20" />} onClick={onDownload} />}
 				{onUpdate && <MyButton type="text" color={colors.blue} icon={<FaPen size="16" />} onClick={onUpdate} />}
-				{onDelete && <MyButton type="text" color={colors.red} icon={<FaTrash size="16" />} onClick={onDelete} />}
+				{!allowReload && onDelete && <MyButton type="text" color={colors.red} icon={<FaTrash size="16" />} onClick={onDelete} />}
 				{onCancel && <MyButton type="text" color={colors.red} icon={<FaXmark size="20" onClick={onCancel} />} />}
+				{allowReload && onReload && <MyButton type="text" color={colors.success} icon={<FaArrowsRotate size="20" onClick={onReload} />} />}
 			</Flex>
 			{isOpen && allowMessage && <MessageSender toggle={toggle} users={users} />}
 		</Fragment>

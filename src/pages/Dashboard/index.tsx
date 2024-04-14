@@ -19,11 +19,6 @@ const Dashboard: React.FC = () => {
 	return (
 		<Style className='dashboard'>
 			<Row gutter={[{ xs: 12, sm: 12, md: 24 }, { xs: 12, sm: 12, md: 24 }]}>
-				<Col span={24}>
-					<Box>
-						<DatePicker.RangePicker className='filter-date' format="DD.MM.YYYY" suffixIcon={<BsCalendarFill />} />
-					</Box>
-				</Col>
 				<Col lg={8} md={12} sm={12} span={24}>
 					<ClinicWorkload />
 				</Col>

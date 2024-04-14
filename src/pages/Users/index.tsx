@@ -17,6 +17,7 @@ import { FaMessage } from 'react-icons/fa6'
 import SendMessageStructure from '@/components/shared/structurs/SendMessageStructure'
 import { BsSearch } from 'react-icons/bs'
 import FilterRenderer from '@/components/shared/FilterRenderer'
+import { STATUS } from '@/components/variables'
 
 const Users: React.FC = () => {
 	const t = useT()
@@ -54,6 +55,17 @@ const Users: React.FC = () => {
 								name: "search",
 								placeholder: t("search"),
 								prefix: < BsSearch />
+							}
+						},
+						{
+							key: "isactive",
+							span: 3,
+							lg: 3,
+							type: "select",
+							input: {
+								name: "isactive",
+								options: STATUS,
+								placeholder: t("active")
 							}
 						},
 					]}

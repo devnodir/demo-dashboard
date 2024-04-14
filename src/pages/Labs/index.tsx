@@ -5,6 +5,7 @@ import TasksAction from './components/Action'
 import TasksTable from './components/Table'
 import useT from '@/hooks/useT'
 import { BsSearch } from 'react-icons/bs'
+import { STATUS } from '@/components/variables'
 
 const Tasks: React.FC = () => {
 	const t = useT()
@@ -35,6 +36,17 @@ const Tasks: React.FC = () => {
 						name: "patient",
 						placeholder: t("patient"),
 						endpoint: PATIENTS
+					}
+				},
+				{
+					key: "isactive",
+					span: 3,
+					lg: 3,
+					type: "select",
+					input: {
+						name: "isactive",
+						options: STATUS,
+						placeholder: t("active")
 					}
 				},
 			]}

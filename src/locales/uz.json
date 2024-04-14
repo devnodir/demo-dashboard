@@ -153,5 +153,10 @@
 	"expense": "Expense",
 	"add_paymnet": "Add payment",
 	"refund": "Refund",
-	"refunded": "Refunded"
+	"refunded": "Refunded",
+	"protocol": "Protocol",
+	"type": "Type",
+	"lab": "Lab",
+	"add_protocol": "Add protocol",
+	"upload": "Upload"
 }

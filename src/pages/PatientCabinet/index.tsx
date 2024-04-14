@@ -6,12 +6,14 @@ import useToggleState from '@/hooks/useToggleState'
 import Box from '@/styles/Box'
 import { phoneFormatter } from '@/utils/formatter'
 import { EditOutlined } from '@ant-design/icons'
-import { Button, Col, Drawer, Flex, Row, Spin, Typography } from 'antd'
+import { Button, Col, Divider, Drawer, Flex, Row, Spin, Typography } from 'antd'
 import dayjs from 'dayjs'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import PatientAction from '../Patients/components/Action'
 import Style from './Style'
+import Protocols from "./components/Protocols"
+import Files from './components/Files'
 
 const PatientCabinet: React.FC = () => {
 
@@ -22,6 +24,8 @@ const PatientCabinet: React.FC = () => {
 
 	const { data, refetch, isRefetching } = useApi(`${PATIENTS}/${id}`, { suspense: true })
 	const record = data.patient || {}
+	const protocols = data.protocols || []
+	const files = data.files || []
 
 	const onActionFinish = () => {
 		refetch()
@@ -73,8 +77,11 @@ const PatientCabinet: React.FC = () => {
 							<Button type="primary" className='float-right' icon={<EditOutlined />} onClick={toggle}>Редактировать</Button>
 						</Col>
 					</Row>
-
 				</Box>
+				<Divider />
+				<Protocols data={protocols} refetch={refetch} />
+				<Divider />
+				<Files data={files} refetch={refetch} />
 			</Spin>
 			<Drawer
 				open={isOpen}

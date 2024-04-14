@@ -13,6 +13,7 @@ import { SERVICES } from '@/components/endpoints'
 import qs from "qs"
 import FilterRenderer from '@/components/shared/FilterRenderer'
 import { BsSearch } from 'react-icons/bs'
+import { STATUS } from '@/components/variables'
 
 const Users: React.FC = () => {
 	const t = useT()
@@ -48,6 +49,17 @@ const Users: React.FC = () => {
 								name: "search",
 								placeholder: t("search"),
 								prefix: <BsSearch />
+							}
+						},
+						{
+							key: "isactive",
+							span: 3,
+							lg: 3,
+							type: "select",
+							input: {
+								name: "isactive",
+								options: STATUS,
+								placeholder: t("active")
 							}
 						},
 					]}

@@ -33,3 +33,4 @@ export const SMS_SEND = "/sms/bulk/send";
 export const ANALYTICS_LAST_WEEK = "/analytics/last-week";
 export const ANALYTICS_PAYMENTS = "/analytics/payments/completion";
 export const ANALYTICS_FINANCE = "/analytics/finances";
+export const UPLOAD_FILE = "/files/upload";

@@ -5,6 +5,7 @@ import TasksAction from './components/Action'
 import TasksTable from './components/Table'
 import useT from '@/hooks/useT'
 import { BsSearch } from 'react-icons/bs'
+import { STATUS } from '@/components/variables'
 
 const Appointments: React.FC = () => {
 	const t = useT()
@@ -70,6 +71,17 @@ const Appointments: React.FC = () => {
 						name: "responsibleUsers",
 						placeholder: t("responsible_users"),
 						endpoint: USERS,
+					}
+				},
+				{
+					key: "isactive",
+					span: 3,
+					lg: 3,
+					type: "select",
+					input: {
+						name: "isactive",
+						options: STATUS,
+						placeholder: t("active")
 					}
 				},
 				{

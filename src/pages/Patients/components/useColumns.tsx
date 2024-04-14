@@ -16,6 +16,8 @@ const useComlums = (endpoint: string, setId: ISetState<string | null>) => {
 	const t = useT()
 	const [search] = useSearchParams()
 	const { mutate, isLoading: isDeleting } = useApiMutationID("delete", endpoint)
+	const { mutate: editMutate } = useApiMutationID("patch", endpoint)
+
 
 	const columns = [
 		{
@@ -55,7 +57,9 @@ const useComlums = (endpoint: string, setId: ISetState<string | null>) => {
 			render: (id: string, record: any) => <ActionButtons
 				onDelete={() => deleteItem(id)}
 				onUpdate={() => setId(id)}
+				onReload={() => reActivate(id)}
 				allowMessage
+				allowReload={!record.is_active}
 				users={[{
 					name: record.name,
 					phone: record.phone_number
@@ -63,6 +67,17 @@ const useComlums = (endpoint: string, setId: ISetState<string | null>) => {
 			/>
 		},
 	];
+
+	const reActivate = (id: string) => {
+		editMutate({ id, data: { is_active: true } }, {
+			onSuccess: () => {
+				queryClient.refetchQueries([endpoint, qs.parse(search.toString())])
+			},
+			onError: (err) => {
+				message.error(err?.message)
+			}
+		})
+	}
 
 	const deleteItem = (id: string) => {
 		mutate({ id }, {
